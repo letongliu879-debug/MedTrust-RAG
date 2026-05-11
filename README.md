@@ -99,8 +99,9 @@ python main.py index --all --force
 # 命令行问答
 python main.py query "全身酸痛是不是流感"
 
-# Web UI
-streamlit run app/app.py
+# Web UI（FastAPI）
+.venv/Scripts/python -m uvicorn app.main:app --host 0.0.0.0 --port 8501
+# 访问 http://localhost:8501
 ```
 
 ## 配置
@@ -120,7 +121,13 @@ streamlit run app/app.py
 ## 项目结构
 
 ```
-├── app/                    # Streamlit Web UI
+├── app/                    # FastAPI Web UI
+│   ├── main.py             # 入口
+│   ├── schemas.py          # Pydantic 模型
+│   ├── routers/            # API 路由
+│   │   └── query.py
+│   └── templates/           # HTML 模板
+│       └── index.html
 ├── config/                 # 配置文件 & Prompt 模板
 │   ├── settings.yaml
 │   └── prompts.yaml

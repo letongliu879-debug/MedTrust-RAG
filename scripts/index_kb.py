@@ -208,6 +208,16 @@ class MedicalQAIndexer:
             f"新增 {total_chunks} 条, "
             f"跳过 {skipped} 条（已存在）"
         )
+
+        # ---- 预构建 BM25 pickle 缓存（下次查询直接走 Level 1）----
+        try:
+            from src.rag.hybrid_retriever import hybrid_retriever
+            logger.info(f"开始预构建 BM25 索引缓存: {collection_name} ...")
+            hybrid_retriever._ensure_bm25_index(collection_name)
+            logger.info(f"BM25 索引缓存预构建完成")
+        except Exception as e:
+            logger.warning(f"BM25 缓存预构建失败（不影响索引）: {e}")
+
         return total_chunks
 
     # ============ 便捷方法 ============

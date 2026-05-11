@@ -19,7 +19,9 @@ FlagEmbedding>=1.2.0
 datasets>=2.0.0
 
 # Web UI
-streamlit>=1.30.0
+fastapi>=0.110.0
+uvicorn>=0.27.0
+jinja2>=3.1.0
 
 # Utilities
 pyyaml>=6.0
