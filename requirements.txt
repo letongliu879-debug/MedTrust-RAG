@@ -1,12 +1,33 @@
-langchain>=0.1.0
+# Core LangChain
+langchain>=1.0.0
 langchain-openai>=0.1.0
 langchain-ollama>=0.2.0
 langchain-community>=0.1.0
+
+# Vector Store
 chromadb>=0.4.0
+
+# LLM
 openai>=1.0.0
-pyyaml>=6.0
-streamlit>=1.30.0
+
+# RAG
 rank-bm25>=0.2.0
 jieba>=0.42.0
 FlagEmbedding>=1.2.0
+
+# Evaluation & Data
 datasets>=2.0.0
+
+# Web UI
+streamlit>=1.30.0
+
+# Utilities
+pyyaml>=6.0
+tenacity>=8.0.0
+tiktoken>=0.5.0
+
+# Tracing
+langsmith>=0.1.0
+
+# Ollama client
+ollama>=0.1.0
