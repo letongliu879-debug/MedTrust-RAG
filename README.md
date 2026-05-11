@@ -5,9 +5,10 @@
 ## 核心特性
 
 - **混合检索**：BM25 关键词 + BGE-M3 向量语义双路检索，RRF 融合
+- **BM25 三级加载**：内存缓存 → 磁盘 pickle 缓存 → ChromaDB tokens 预分词字段（跳过 jieba）→ 全量 jieba 分词降级，冷启动从 ~196s 降至 ~1-2s
 - **智能子查询**：LLM 自动判断多跳问题，并行生成多个检索子查询
 - **BGE-Reranker 精排**：交叉编码器重排序，提升相关文档召回
-- **四 Agent 管线**：Retriever → Responder → SafetyChecker → Synthesizer 串行校验
+- **四 Agent 管线**：Retriever → Responder → SafetyChecker → Synthesizer 串行校验，带实时进度反馈
 - **医疗安全校验**：幻觉检测 + 危险建议识别 + 证据交叉验证
 
 ## 架构

@@ -34,6 +34,10 @@ from src.utils.config_loader import config
 from src.utils.logger import logger
 from src.utils.exec_log import get_log
 
+# BM25 磁盘缓存目录
+from pathlib import Path as _Path
+_BM25_CACHE_DIR = _Path(__file__).parent.parent.parent / "data" / "cache"
+
 
 class HybridRetriever:
     """
@@ -62,75 +66,149 @@ class HybridRetriever:
 
     def _ensure_bm25_index(self, collection_name: str):
         """
-        确保 BM25 索引已构建 —— 通用接口，直接传 ChromaDB collection 名。
+        确保 BM25 索引已构建 —— 三级加载策略：
 
-        适用场景：医疗 QA（med_all, med_心血管内科 等）或任意自定义 collection。
+        Level 0: 内存缓存（进程内二次查询直接命中）
+        Level 1: 磁盘 pickle 缓存（~1-2s 反序列化）
+        Level 2: ChromaDB metadata tokens 字段（跳过 jieba，~75s）
+        Level 3: 全量 jieba 分词（降级，~196s）
         """
-        if collection_name in self._bm25_indices:
-            return
-
+        from src.utils.trace import get_trace
+        trace_ctx = get_trace()
+        step_cm = trace_ctx.step("1a_bm25_index_build") if trace_ctx else None
+        step = None
         try:
-            collection = vector_store.client.get_collection(collection_name)
-        except Exception:
-            logger.warning(f"collection {collection_name} 不存在，BM25 索引不可用")
-            return
+            step = step_cm.__enter__() if step_cm else None
 
-        if collection.count() == 0:
-            logger.warning(f"collection {collection_name} 为空，BM25 索引不可用")
-            return
+            # Level 0: 内存缓存
+            if collection_name in self._bm25_indices:
+                if step:
+                    step.metadata["status"] = "memory_cache_hit"
+                return
 
-        # 从 ChromaDB 拉取所有文档（metadata + documents），分批获取避免SQL变量超限
-        SQL_VARIABLE_LIMIT = 999
-        total_count = collection.count()
-        documents = []
-        ids = []
-        for offset in range(0, total_count, SQL_VARIABLE_LIMIT):
-            batch_data = collection.get(
-                include=["documents", "metadatas"],
-                offset=offset,
-                limit=SQL_VARIABLE_LIMIT,
-            )
-            documents.extend(batch_data.get("documents", []))
-            ids.extend(batch_data.get("ids", []))
+            if step:
+                step.metadata["collection"] = collection_name
 
-        if not documents:
-            logger.warning(f"collection {collection_name} 无文档")
-            return
+            try:
+                collection = vector_store.client.get_collection(collection_name)
+            except Exception:
+                logger.warning(f"collection {collection_name} 不存在，BM25 索引不可用")
+                return
 
-        # 对中文文本分词
-        # 为什么用 jieba？
-        # 中文没有天然空格分隔，直接按字切会丢失"违约金"这种多字词。
-        # jieba 是中文 NLP 标配分词工具，轻量、无外部依赖。
-        try:
-            import jieba
-        except ImportError:
-            # 如果 jieba 没装，用单字 ngram（2-gram）作为降级方案
-            logger.warning("jieba 未安装，使用 2-gram 分词（效果会下降）")
-            jieba = None
+            total_count = collection.count()
+            if total_count == 0:
+                logger.warning(f"collection {collection_name} 为空，BM25 索引不可用")
+                return
 
-        def tokenize(text: str) -> list[str]:
-            if jieba:
-                # jieba 分词 + 去除停用标点
-                tokens = jieba.lcut(text)
-                return [t.strip() for t in tokens if t.strip() and len(t.strip()) > 0]
+            if step:
+                step.metadata["doc_count"] = total_count
+
+            # Level 1: 磁盘 pickle 缓存
+            cache_path = _BM25_CACHE_DIR / f"bm25_{collection_name}.pkl"
+            if cache_path.exists():
+                try:
+                    import pickle
+                    with open(cache_path, "rb") as f:
+                        cached = pickle.load(f)
+                    if cached.get("doc_count") == total_count:
+                        self._bm25_indices[collection_name] = cached["bm25"]
+                        self._bm25_corpora[collection_name] = cached["corpus"]
+                        self._bm25_id_maps[collection_name] = cached["ids"]
+                        logger.info(
+                            f"BM25 索引从磁盘缓存加载: {collection_name}, "
+                            f"{total_count} 个文档"
+                        )
+                        if step:
+                            step.metadata["status"] = "pickle_cache_hit"
+                        return
+                    else:
+                        logger.info(f"BM25 缓存版本不一致 ({cached.get('doc_count')} vs {total_count})，重建")
+                        cache_path.unlink(missing_ok=True)
+                except Exception as e:
+                    logger.warning(f"BM25 pickle 缓存加载失败: {e}，降级重建")
+                    cache_path.unlink(missing_ok=True)
+
+            # 从 ChromaDB 拉取所有文档 + metadata
+            SQL_VARIABLE_LIMIT = 999
+            documents = []
+            ids = []
+            metadatas = []
+            for offset in range(0, total_count, SQL_VARIABLE_LIMIT):
+                batch_data = collection.get(
+                    include=["documents", "metadatas"],
+                    offset=offset,
+                    limit=SQL_VARIABLE_LIMIT,
+                )
+                documents.extend(batch_data.get("documents", []))
+                ids.extend(batch_data.get("ids", []))
+                metadatas.extend(batch_data.get("metadatas", []))
+
+            if not documents:
+                logger.warning(f"collection {collection_name} 无文档")
+                return
+
+            # Level 2: 从 metadata 的 tokens 字段构建（跳过 jieba）
+            has_tokens = all(m.get("tokens") for m in metadatas)
+            if has_tokens:
+                logger.info(f"BM25 从预分词 tokens 构建: {collection_name}")
+                corpus = [m["tokens"].split() for m in metadatas]
+                if step:
+                    step.metadata["status"] = "tokens_fast_path"
             else:
-                # 降级：2-gram
-                chars = [c for c in text if c.strip()]
-                return [chars[i:i + 2] for i in range(len(chars) - 1)]
+                # Level 3: 全量 jieba 分词（降级）
+                logger.info(f"BM25 全量 jieba 分词构建: {collection_name}")
+                try:
+                    import jieba
+                except ImportError:
+                    logger.warning("jieba 未安装，使用 2-gram 分词（效果会下降）")
+                    jieba = None
 
-        corpus = [tokenize(doc) for doc in documents]
+                def tokenize(text: str) -> list[str]:
+                    if jieba:
+                        tokens = jieba.lcut(text)
+                        return [t.strip() for t in tokens if t.strip()]
+                    else:
+                        chars = [c for c in text if c.strip()]
+                        return [chars[i:i + 2] for i in range(len(chars) - 1)]
 
-        from rank_bm25 import BM25Okapi
-        self._bm25_indices[collection_name] = BM25Okapi(corpus)
-        self._bm25_corpora[collection_name] = corpus
-        # 保留 ChromaDB 的 doc ID 映射，方便调试和追溯
-        self._bm25_id_maps[collection_name] = ids
+                corpus = [tokenize(doc) for doc in documents]
+                if step:
+                    step.metadata["status"] = "jieba_full"
 
-        logger.info(
-            f"BM25 索引构建完成: {collection_name}, "
-            f"{len(corpus)} 个文档, "
-            f"分词方式: {'jieba' if jieba else '2-gram'}"
-        )
+            from rank_bm25 import BM25Okapi
+            bm25_index = BM25Okapi(corpus)
+            self._bm25_indices[collection_name] = bm25_index
+            self._bm25_corpora[collection_name] = corpus
+            self._bm25_id_maps[collection_name] = ids
+
+            # 写入磁盘 pickle 缓存（下次启动 ~1-2s 加载）
+            try:
+                import pickle
+                _BM25_CACHE_DIR.mkdir(parents=True, exist_ok=True)
+                with open(cache_path, "wb") as f:
+                    pickle.dump({
+                        "bm25": bm25_index,
+                        "corpus": corpus,
+                        "ids": ids,
+                        "doc_count": total_count,
+                    }, f, protocol=pickle.HIGHEST_PROTOCOL)
+                logger.info(f"BM25 索引已缓存到磁盘: {cache_path}")
+            except Exception as e:
+                logger.warning(f"BM25 pickle 缓存写入失败: {e}")
+
+            logger.info(
+                f"BM25 索引构建完成: {collection_name}, "
+                f"{len(corpus)} 个文档, "
+                f"来源: {'tokens' if has_tokens else 'jieba'}"
+            )
+        except Exception as e:
+            logger.error(f"BM25 索引构建失败: {e}")
+            if step:
+                step.metadata["status"] = "error"
+                step.metadata["error"] = str(e)
+        finally:
+            if step_cm:
+                step_cm.__exit__(None, None, None)
 
     # ============ 检索 ============
 
@@ -306,12 +384,24 @@ class HybridRetriever:
     )
     def _vector_search(self, collection_name: str, query: str, top_k: int, department: str = None) -> list[dict]:
         """向量语义检索（带相似度阈值过滤 + 科室过滤）"""
+        from src.utils.trace import get_trace
+        trace_ctx = get_trace()
+        embed_step_cm = trace_ctx.step("1b0_embed") if trace_ctx else None
+        embed_step = None
         try:
             collection = vector_store.client.get_collection(collection_name)
             if collection.count() == 0:
                 return []
 
-            query_embedding = vector_store.embeddings.embed_query(query)
+            try:
+                embed_step = embed_step_cm.__enter__() if embed_step_cm else None
+                query_embedding = vector_store.embeddings.embed_query(query)
+                if embed_step:
+                    embed_step.metadata["embedding_dim"] = len(query_embedding)
+            finally:
+                if embed_step_cm:
+                    embed_step_cm.__exit__(None, None, None)
+
             where_clause = {"department": department} if department else None
             results = collection.query(
                 query_embeddings=[query_embedding],

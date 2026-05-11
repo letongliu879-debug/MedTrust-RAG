@@ -104,6 +104,14 @@ class MedicalQAIndexer:
                 pass
 
         # ---- 构建待索引的 chunk 列表 ----
+        # 预加载 jieba（索引时预分词，查询时跳过 jieba）
+        try:
+            import jieba
+            jieba_available = True
+        except ImportError:
+            jieba_available = False
+            logger.warning("jieba 未安装，索引时不预分词（BM25 查询时会降级为全量分词）")
+
         chunks = []
         skipped = 0
         for r in records:
@@ -116,17 +124,23 @@ class MedicalQAIndexer:
                 f"科室: {r['department']}\n"
                 f"回答: {r['answer']}"
             )
+            metadata = {
+                "source_id": r["id"],
+                "department": r["department"],
+                "score": r["score"],
+                "related_diseases": r["related_diseases"],
+                "question": r["question"],
+                "answer": r["answer"],
+            }
+            # 预分词：存入 metadata，BM25 索引构建时直接读取跳过 jieba
+            if jieba_available:
+                tokens = jieba.lcut(content)
+                metadata["tokens"] = " ".join(t.strip() for t in tokens if t.strip())
+
             chunks.append({
                 "id": chunk_id,
                 "content": content,
-                "metadata": {
-                    "source_id": r["id"],
-                    "department": r["department"],
-                    "score": r["score"],
-                    "related_diseases": r["related_diseases"],
-                    "question": r["question"],
-                    "answer": r["answer"],
-                },
+                "metadata": metadata,
             })
 
         if skipped > 0:

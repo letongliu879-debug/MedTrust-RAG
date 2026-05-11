@@ -66,12 +66,14 @@ class MedicalPipeline:
         query: str,
         department: str = None,
         model_key: str = None,
+        on_progress=None,
     ) -> MedQAReport:
         """同步入口"""
         return _run_async(self.arun(
             query=query,
             department=department,
             model_key=model_key,
+            on_progress=on_progress,
         ))
 
     async def arun(
@@ -79,8 +81,19 @@ class MedicalPipeline:
         query: str,
         department: str = None,
         model_key: str = None,
+        on_progress=None,
     ) -> MedQAReport:
-        """异步主流程：4 Agent 串行（带语义缓存）"""
+        """异步主流程：4 Agent 串行（带语义缓存 + 进度回调）
+
+        Args:
+            on_progress: 进度回调函数，签名 (step_name: str, metadata: dict) -> None
+                         step_name: "retrieve_start" / "retrieve_done" / "responder_start" / ...
+                         metadata: 阶段相关信息（chunks数、confidence等）
+        """
+        def _notify(step: str, meta: dict = None):
+            if on_progress:
+                on_progress(step, meta or {})
+
         logger.info(f"MedQA pipeline start: '{query[:50]}...'")
 
         # 语义缓存检查
@@ -104,6 +117,7 @@ class MedicalPipeline:
         report_trace = {}
 
         # --- Agent 1: 检索 ---
+        _notify("retrieve_start")
         with trace_ctx.step("1_retrieve") as ts:
             evidence = await self._retriever.run(
                 query=query,
@@ -113,6 +127,7 @@ class MedicalPipeline:
             ts.metadata["confidence"] = evidence.confidence
         report_trace["retrieved_chunks"] = len(evidence.citations)
         logger.info(f"  [1/4] Retriever: {report_trace['retrieved_chunks']} chunks")
+        _notify("retrieve_done", {"chunks": len(evidence.citations), "confidence": evidence.confidence})
 
         # 检索质量不足 → 提前退出，省去 Agent 2/3/4 的 LLM 调用
         if not evidence.citations:
@@ -130,6 +145,7 @@ class MedicalPipeline:
             )
 
         # --- Agent 2: 生成 ---
+        _notify("responder_start")
         with trace_ctx.step("2_responder") as ts:
             response = await self._responder.run(
                 query=query,
@@ -139,8 +155,10 @@ class MedicalPipeline:
             ts.metadata["confidence"] = response.confidence
         report_trace["responder_confidence"] = response.confidence
         logger.info(f"  [2/4] Responder: confidence={response.confidence:.2f}")
+        _notify("responder_done", {"confidence": response.confidence})
 
         # --- Agent 3: 安全校验 ---
+        _notify("safety_start")
         with trace_ctx.step("3_safety_check") as ts:
             safety_result = await self._safety.run(
                 query=query,
@@ -152,8 +170,10 @@ class MedicalPipeline:
             ts.metadata["flagged"] = len(safety_result.safety.flagged_segments)
         report_trace["risk_level"] = safety_result.safety.risk_level
         logger.info(f"  [3/4] Safety: risk={safety_result.safety.risk_level}")
+        _notify("safety_done", {"risk_level": safety_result.safety.risk_level, "flagged": len(safety_result.safety.flagged_segments)})
 
         # --- Agent 4: 合成 ---
+        _notify("synthesize_start")
         with trace_ctx.step("4_synthesize") as ts:
             final = await self._synthesizer.run(
                 query=query,
@@ -166,6 +186,7 @@ class MedicalPipeline:
             ts.metadata["confidence"] = final.confidence
         report_trace["final_confidence"] = final.confidence
         logger.info(f"  [4/4] Synthesizer: confidence={final.confidence:.2f}")
+        _notify("synthesize_done", {"confidence": final.confidence})
 
         finish_trace()
         exec_log_path = finish_log() or ""
