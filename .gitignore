@@ -1,0 +1,22 @@
+# Editor
+.claude/
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.pytest_cache/
+
+# Local config (use settings.example.yaml as template)
+config/settings.yaml
+
+# Runtime data (chroma DB, logs, cache, traces)
+data/*.log
+data/chroma_db/
+data/cache/
+data/traces/
+debug_logs/

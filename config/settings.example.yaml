@@ -1,0 +1,88 @@
+# MedTrust-RAG 全局配置
+# 复制此文件为 settings.yaml 并填入真实的 API Key
+
+# ---- 数据集配置 ----
+dataset:
+  name: "FreedomIntelligence/Huatuo26M-Lite"
+  collection_name: "med_all"
+
+# ---- LLM模型配置 ----
+llm:
+  default_model: deepseek
+  models:
+    deepseek:
+      model_name: "deepseek-chat"
+      api_base: "https://api.deepseek.com/v1"
+      api_key: "${DEEPSEEK_API_KEY}"
+      temperature: 0.1
+      max_tokens: 4096
+    zhipu:
+      model_name: "GLM-4.5-Air"
+      api_base: "https://open.bigmodel.cn/api/paas/v4"
+      api_key: "${ZHIPU_API_KEY}"
+      temperature: 0.1
+      max_tokens: 4096
+    qwen:
+      model_name: "qwen-plus"
+      api_base: "https://dashscope.aliyuncs.com/compatible-mode/v1"
+      api_key: "${QWEN_API_KEY}"
+      temperature: 0.1
+      max_tokens: 4096
+
+# ---- Embedding模型配置（Ollama本地）----
+# 推荐 bge-m3: ollama pull bge-m3
+embedding:
+  model_name: "bge-m3"
+  base_url: "http://localhost:11434"
+  index_workers: 4  # Ollama 并发请求数（默认 4，根据 OLLAMA_NUM_PARALLEL 调整）
+  index_batch_size: 20  # 每批embed的文本数
+
+# ---- RAG配置 ----
+rag:
+  chroma_persist_dir: "data/chroma_db"
+  retrieval_top_k: 5
+  index_batch_size: 10
+
+  hybrid:
+    enabled: true
+    bm25_top_k: 20
+    vector_top_k: 10
+    rrf_k: 60
+    vector_similarity_threshold: 0.5  # 余弦相似度阈值，低于此值的 chunk 被过滤（0=无关 1=完全匹配）
+
+  reranker:
+    enabled: true
+    model_name: "BAAI/bge-reranker-base"
+    normalize: true  # 分数归一化到 [0,1]，此时 threshold 应为 0~1（如 0.3）
+    threshold: 0.3   # 归一化模式下低于 0.3 的 chunk 被过滤；非归一化模式默认 -3.0
+    use_fp16: false
+    min_quality_score: 0.1  # 精排后 top-1 分数低于此值 → 判定检索失败，跳过 LLM 生成
+
+# ---- Agent 配置 ----
+agents:
+  retriever: {}
+  responder:
+    model: "zhipu"
+  safety_checker:
+    model: "zhipu"
+  synthesizer:
+    model: "zhipu"
+
+# ---- 日志配置 ----
+logging:
+  level: "INFO"
+  format: "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+  file: "data/app.log"
+  detailed_llm_logging: false
+
+# ---- 语义缓存 ----
+cache:
+  enabled: true
+  similarity_threshold: 0.95  # embedding 相似度阈值，高于此值命中缓存
+
+# ---- LangSmith 追踪 ----
+langsmith:
+  enabled: false
+  api_key: "${LANGSMITH_API_KEY}"
+  project: "medtrust-rag"
+  tracing: true

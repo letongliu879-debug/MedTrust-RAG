@@ -1,0 +1,2236 @@
+2026-05-08 11:07:23,311 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpybprxlsv.docx, 方法=direct, 字数=2888
+2026-05-08 11:07:34,681 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpsqw_h2gj.docx, 方法=direct, 字数=2888
+2026-05-08 11:07:40,299 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmp5d3yedeq.docx, 方法=direct, 字数=2888
+2026-05-08 11:07:43,878 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmplnygmcla.docx, 方法=direct, 字数=2888
+2026-05-08 11:07:45,579 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmp50pw4gjg.docx, 方法=direct, 字数=2888
+2026-05-08 11:07:46,259 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpepay0ghp.docx, 方法=direct, 字数=2888
+2026-05-08 11:07:51,482 - contract_review - WARNING - 知识库目录不存在: knowledge_base\lease
+2026-05-08 11:07:51,493 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpbxmu7fdv.docx, 方法=direct, 字数=2888
+2026-05-08 11:07:53,384 - contract_review - WARNING - 知识库目录不存在: knowledge_base\labor
+2026-05-08 11:07:53,385 - contract_review - WARNING - 知识库目录不存在: knowledge_base\sales
+2026-05-08 11:07:53,385 - contract_review - WARNING - 知识库目录不存在: knowledge_base\lease
+2026-05-08 11:07:53,385 - contract_review - WARNING - 知识库目录不存在: knowledge_base\service
+2026-05-08 11:07:53,399 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmp6u2mbc40.docx, 方法=direct, 字数=2888
+2026-05-08 11:07:59,810 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmp2chs6y1l.docx, 方法=direct, 字数=2888
+2026-05-08 11:07:59,812 - contract_review - INFO - 开始合同审查: C:\Users\LLT\AppData\Local\Temp\tmp2chs6y1l.docx, 类型=lease
+2026-05-08 11:07:59,821 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmp2chs6y1l.docx, 方法=direct, 字数=2888
+2026-05-08 11:07:59,821 - contract_review - INFO - 文件解析完成: direct, 字数=2888
+2026-05-08 11:08:03,253 - contract_review - INFO - Chroma客户端初始化: data/chroma_db
+2026-05-08 11:08:03,263 - contract_review - INFO - 获取/创建collection: contract_lease
+2026-05-08 11:08:03,265 - contract_review - WARNING - 合同类型lease的知识库为空
+2026-05-08 11:08:03,265 - contract_review - WARNING - 合同类型lease的知识库为空
+2026-05-08 11:08:03,266 - contract_review - WARNING - 合同类型lease的知识库为空
+2026-05-08 11:08:03,266 - contract_review - INFO - RAG检索完成
+2026-05-08 11:08:03,266 - contract_review - INFO - 创建Chat模型: zhipu (GLM-4.5-Air)
+2026-05-08 11:08:08,207 - contract_review - INFO - 执行logic审查...
+2026-05-08 11:08:08,218 - contract_review - INFO - 创建链: logic_review
+2026-05-08 11:09:40,782 - contract_review - INFO - 逻辑审查完成: 发现6个问题
+2026-05-08 11:09:40,782 - contract_review - INFO - 执行rule审查...
+2026-05-08 11:09:40,783 - contract_review - INFO - 创建链: rule_review
+2026-05-08 11:13:12,758 - contract_review - INFO - 规则审查完成: 发现4个问题
+2026-05-08 11:13:12,758 - contract_review - INFO - 执行completeness审查...
+2026-05-08 11:13:12,758 - contract_review - INFO - 创建链: completeness_check
+2026-05-08 11:15:21,198 - contract_review - INFO - 完整性审查完成: 发现10个问题
+2026-05-08 11:15:21,198 - contract_review - INFO - 执行pass审查...
+2026-05-08 11:15:21,199 - contract_review - INFO - 创建链: pass_judgment
+2026-05-08 11:17:07,402 - contract_review - INFO - 通过判断完成: can_pass=True, risk_level=low
+2026-05-08 11:17:07,402 - contract_review - INFO - 标注完成: 20个问题, 风险等级=high, 通过=False
+2026-05-08 11:17:07,403 - contract_review - INFO - 审查报告已保存: data\output\review_report_20260508_111707.json
+2026-05-08 11:17:07,403 - contract_review - INFO - 审查完成: 20个问题, 风险=high, 通过=False
+2026-05-08 12:39:06,950 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmp_596gyhk.docx, 方法=direct, 字数=2888
+2026-05-08 12:39:10,340 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmppsrnwxt1.docx, 方法=direct, 字数=2888
+2026-05-08 12:39:10,985 - contract_review - INFO - LangSmith已启用: project=contract-review, tracing=True
+2026-05-08 12:39:10,986 - contract_review - INFO - 开始合同审查: C:\Users\LLT\AppData\Local\Temp\tmppsrnwxt1.docx, 类型=labor
+2026-05-08 12:39:11,000 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmppsrnwxt1.docx, 方法=direct, 字数=2888
+2026-05-08 12:39:11,000 - contract_review - INFO - 文件解析完成: direct, 字数=2888
+2026-05-08 12:39:11,101 - contract_review - INFO - Chroma客户端初始化: data/chroma_db
+2026-05-08 12:39:11,112 - contract_review - INFO - 获取/创建collection: contract_labor
+2026-05-08 12:39:11,114 - contract_review - WARNING - 合同类型labor的知识库为空
+2026-05-08 12:39:11,116 - contract_review - WARNING - 合同类型labor的知识库为空
+2026-05-08 12:39:11,116 - contract_review - WARNING - 合同类型labor的知识库为空
+2026-05-08 12:39:11,117 - contract_review - INFO - RAG检索完成
+2026-05-08 12:39:11,117 - contract_review - INFO - 创建Chat模型: zhipu (GLM-4.5-Air), streaming=False
+2026-05-08 12:39:17,787 - contract_review - INFO - 并行执行4个审查: ['logic', 'rule', 'completeness', 'pass']
+2026-05-08 12:39:17,789 - contract_review - INFO - 创建链: logic_review
+2026-05-08 12:39:17,867 - contract_review - INFO - 创建链: rule_review
+2026-05-08 12:39:17,868 - contract_review - INFO - 创建链: completeness_check
+2026-05-08 12:39:17,869 - contract_review - INFO - 创建链: pass_judgment
+2026-05-08 12:39:17,876 - contract_review - ERROR - 逻辑审查失败: langchain_core.language_models.chat_models.BaseChatModel.agenerate_prompt() got multiple values for keyword argument 'callbacks'
+2026-05-08 12:39:17,876 - contract_review - ERROR - 规则审查失败: langchain_core.language_models.chat_models.BaseChatModel.agenerate_prompt() got multiple values for keyword argument 'callbacks'
+2026-05-08 12:39:17,876 - contract_review - ERROR - 完整性审查失败: langchain_core.language_models.chat_models.BaseChatModel.agenerate_prompt() got multiple values for keyword argument 'callbacks'
+2026-05-08 12:39:17,876 - contract_review - ERROR - 通过判断失败: langchain_core.language_models.chat_models.BaseChatModel.agenerate_prompt() got multiple values for keyword argument 'callbacks'
+2026-05-08 12:39:17,876 - contract_review - INFO - 标注完成: 0个问题, 风险等级=low, 通过=True
+2026-05-08 12:39:17,877 - contract_review - INFO - 审查报告已保存: data\output\review_report_20260508_123917.json
+2026-05-08 12:39:17,877 - contract_review - INFO - 审查完成: 0个问题, 风险=low, 通过=True
+2026-05-08 12:41:42,790 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpl9_o299g.docx, 方法=direct, 字数=2888
+2026-05-08 12:41:42,792 - contract_review - INFO - LangSmith已启用: project=contract-review, tracing=True
+2026-05-08 12:41:42,792 - contract_review - INFO - 开始合同审查: C:\Users\LLT\AppData\Local\Temp\tmpl9_o299g.docx, 类型=labor
+2026-05-08 12:41:42,809 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpl9_o299g.docx, 方法=direct, 字数=2888
+2026-05-08 12:41:42,809 - contract_review - INFO - 文件解析完成: direct, 字数=2888
+2026-05-08 12:41:42,811 - contract_review - WARNING - 合同类型labor的知识库为空
+2026-05-08 12:41:42,812 - contract_review - WARNING - 合同类型labor的知识库为空
+2026-05-08 12:41:42,812 - contract_review - WARNING - 合同类型labor的知识库为空
+2026-05-08 12:41:42,813 - contract_review - INFO - RAG检索完成
+2026-05-08 12:41:42,814 - contract_review - INFO - 创建Chat模型: zhipu (GLM-4.5-Air), streaming=False
+2026-05-08 12:41:42,815 - contract_review - INFO - 并行执行4个审查: ['logic', 'rule', 'completeness', 'pass']
+2026-05-08 12:41:42,817 - contract_review - INFO - 创建链: logic_review
+2026-05-08 12:41:42,823 - contract_review - INFO - 创建链: rule_review
+2026-05-08 12:41:42,826 - contract_review - INFO - 创建链: completeness_check
+2026-05-08 12:41:42,828 - contract_review - INFO - 创建链: pass_judgment
+2026-05-08 12:41:42,836 - contract_review - ERROR - 逻辑审查失败: langchain_core.language_models.chat_models.BaseChatModel.agenerate_prompt() got multiple values for keyword argument 'callbacks'
+2026-05-08 12:41:42,836 - contract_review - ERROR - 规则审查失败: langchain_core.language_models.chat_models.BaseChatModel.agenerate_prompt() got multiple values for keyword argument 'callbacks'
+2026-05-08 12:41:42,836 - contract_review - ERROR - 完整性审查失败: langchain_core.language_models.chat_models.BaseChatModel.agenerate_prompt() got multiple values for keyword argument 'callbacks'
+2026-05-08 12:41:42,837 - contract_review - ERROR - 通过判断失败: langchain_core.language_models.chat_models.BaseChatModel.agenerate_prompt() got multiple values for keyword argument 'callbacks'
+2026-05-08 12:41:42,837 - contract_review - INFO - 标注完成: 0个问题, 风险等级=low, 通过=True
+2026-05-08 12:41:42,839 - contract_review - INFO - 审查报告已保存: data\output\review_report_20260508_124142.json
+2026-05-08 12:41:42,839 - contract_review - INFO - 审查完成: 0个问题, 风险=low, 通过=True
+2026-05-08 12:41:45,176 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmp4zvuek4w.docx, 方法=direct, 字数=2888
+2026-05-08 12:41:45,178 - contract_review - INFO - LangSmith已启用: project=contract-review, tracing=True
+2026-05-08 12:41:45,179 - contract_review - INFO - 开始合同审查: C:\Users\LLT\AppData\Local\Temp\tmp4zvuek4w.docx, 类型=labor
+2026-05-08 12:41:45,192 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmp4zvuek4w.docx, 方法=direct, 字数=2888
+2026-05-08 12:41:45,192 - contract_review - INFO - 文件解析完成: direct, 字数=2888
+2026-05-08 12:41:45,193 - contract_review - WARNING - 合同类型labor的知识库为空
+2026-05-08 12:41:45,194 - contract_review - WARNING - 合同类型labor的知识库为空
+2026-05-08 12:41:45,195 - contract_review - WARNING - 合同类型labor的知识库为空
+2026-05-08 12:41:45,195 - contract_review - INFO - RAG检索完成
+2026-05-08 12:41:45,195 - contract_review - INFO - 创建Chat模型: zhipu (GLM-4.5-Air), streaming=False
+2026-05-08 12:41:45,195 - contract_review - INFO - 并行执行4个审查: ['logic', 'rule', 'completeness', 'pass']
+2026-05-08 12:41:45,197 - contract_review - INFO - 创建链: logic_review
+2026-05-08 12:41:45,201 - contract_review - INFO - 创建链: rule_review
+2026-05-08 12:41:45,204 - contract_review - INFO - 创建链: completeness_check
+2026-05-08 12:41:45,205 - contract_review - INFO - 创建链: pass_judgment
+2026-05-08 12:41:45,214 - contract_review - ERROR - 逻辑审查失败: langchain_core.language_models.chat_models.BaseChatModel.agenerate_prompt() got multiple values for keyword argument 'callbacks'
+2026-05-08 12:41:45,215 - contract_review - ERROR - 规则审查失败: langchain_core.language_models.chat_models.BaseChatModel.agenerate_prompt() got multiple values for keyword argument 'callbacks'
+2026-05-08 12:41:45,215 - contract_review - ERROR - 完整性审查失败: langchain_core.language_models.chat_models.BaseChatModel.agenerate_prompt() got multiple values for keyword argument 'callbacks'
+2026-05-08 12:41:45,215 - contract_review - ERROR - 通过判断失败: langchain_core.language_models.chat_models.BaseChatModel.agenerate_prompt() got multiple values for keyword argument 'callbacks'
+2026-05-08 12:41:45,215 - contract_review - INFO - 标注完成: 0个问题, 风险等级=low, 通过=True
+2026-05-08 12:41:45,217 - contract_review - INFO - 审查报告已保存: data\output\review_report_20260508_124145.json
+2026-05-08 12:41:45,217 - contract_review - INFO - 审查完成: 0个问题, 风险=low, 通过=True
+2026-05-08 12:44:45,249 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpbrxufm2k.docx, 方法=direct, 字数=2888
+2026-05-08 12:44:47,417 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmp3eqchzk7.docx, 方法=direct, 字数=2888
+2026-05-08 12:44:48,061 - contract_review - INFO - LangSmith已启用: project=contract-review, tracing=True
+2026-05-08 12:44:48,062 - contract_review - INFO - 开始合同审查: C:\Users\LLT\AppData\Local\Temp\tmp3eqchzk7.docx, 类型=labor
+2026-05-08 12:44:48,076 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmp3eqchzk7.docx, 方法=direct, 字数=2888
+2026-05-08 12:44:48,076 - contract_review - INFO - 文件解析完成: direct, 字数=2888
+2026-05-08 12:44:48,174 - contract_review - INFO - Chroma客户端初始化: data/chroma_db
+2026-05-08 12:44:48,176 - contract_review - INFO - 获取/创建collection: contract_labor
+2026-05-08 12:44:48,178 - contract_review - WARNING - 合同类型labor的知识库为空
+2026-05-08 12:44:48,179 - contract_review - WARNING - 合同类型labor的知识库为空
+2026-05-08 12:44:48,180 - contract_review - WARNING - 合同类型labor的知识库为空
+2026-05-08 12:44:48,180 - contract_review - INFO - RAG检索完成
+2026-05-08 12:44:48,181 - contract_review - INFO - 创建Chat模型: deepseek (deepseek-chat), streaming=False
+2026-05-08 12:52:35,282 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpod1nl340.docx, 方法=direct, 字数=2888
+2026-05-08 12:52:36,398 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpfns5mhj2.docx, 方法=direct, 字数=2888
+2026-05-08 12:52:37,033 - contract_review - INFO - LangSmith已启用: project=contract-review, tracing=True
+2026-05-08 12:52:37,034 - contract_review - INFO - 开始合同审查: C:\Users\LLT\AppData\Local\Temp\tmpfns5mhj2.docx, 类型=labor
+2026-05-08 12:52:37,049 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpfns5mhj2.docx, 方法=direct, 字数=2888
+2026-05-08 12:52:37,050 - contract_review - INFO - 文件解析完成: direct, 字数=2888
+2026-05-08 12:52:37,151 - contract_review - INFO - Chroma客户端初始化: data/chroma_db
+2026-05-08 12:52:37,153 - contract_review - INFO - 获取/创建collection: contract_labor
+2026-05-08 12:52:37,155 - contract_review - WARNING - 合同类型labor的知识库为空
+2026-05-08 12:52:37,156 - contract_review - WARNING - 合同类型labor的知识库为空
+2026-05-08 12:52:37,157 - contract_review - WARNING - 合同类型labor的知识库为空
+2026-05-08 12:52:37,158 - contract_review - INFO - RAG检索完成
+2026-05-08 12:52:37,158 - contract_review - INFO - 创建Chat模型: deepseek (deepseek-chat), streaming=False
+2026-05-08 12:55:42,972 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmp_k6qk5u7.docx, 方法=direct, 字数=2888
+2026-05-08 12:55:44,972 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpngii0p6v.docx, 方法=direct, 字数=2888
+2026-05-08 12:55:45,629 - contract_review - INFO - LangSmith已启用: project=contract-review, tracing=True
+2026-05-08 12:55:45,630 - contract_review - INFO - 开始合同审查: C:\Users\LLT\AppData\Local\Temp\tmpngii0p6v.docx, 类型=labor
+2026-05-08 12:55:45,646 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpngii0p6v.docx, 方法=direct, 字数=2888
+2026-05-08 12:55:45,646 - contract_review - INFO - 文件解析完成: direct, 字数=2888
+2026-05-08 12:55:45,751 - contract_review - INFO - Chroma客户端初始化: data/chroma_db
+2026-05-08 12:55:45,753 - contract_review - INFO - 获取/创建collection: contract_labor
+2026-05-08 12:55:45,756 - contract_review - WARNING - 合同类型labor的知识库为空
+2026-05-08 12:55:45,757 - contract_review - WARNING - 合同类型labor的知识库为空
+2026-05-08 12:55:45,758 - contract_review - WARNING - 合同类型labor的知识库为空
+2026-05-08 12:55:45,758 - contract_review - INFO - RAG检索完成
+2026-05-08 12:55:45,759 - contract_review - INFO - 创建Chat模型: zhipu (GLM-4.5-Air), streaming=False
+2026-05-08 12:55:54,789 - contract_review - INFO - 并行执行4个审查: ['logic', 'rule', 'completeness', 'pass']
+2026-05-08 12:55:54,792 - contract_review - INFO - 创建链: logic_review
+2026-05-08 12:55:54,892 - contract_review - INFO - 创建链: rule_review
+2026-05-08 12:55:54,895 - contract_review - INFO - 创建链: completeness_check
+2026-05-08 12:55:54,896 - contract_review - INFO - 创建链: pass_judgment
+2026-05-08 12:55:54,907 - contract_review - ERROR - 逻辑审查失败: langchain_core.language_models.chat_models.BaseChatModel.agenerate_prompt() got multiple values for keyword argument 'callbacks'
+2026-05-08 12:55:54,908 - contract_review - ERROR - 规则审查失败: langchain_core.language_models.chat_models.BaseChatModel.agenerate_prompt() got multiple values for keyword argument 'callbacks'
+2026-05-08 12:55:54,908 - contract_review - ERROR - 完整性审查失败: langchain_core.language_models.chat_models.BaseChatModel.agenerate_prompt() got multiple values for keyword argument 'callbacks'
+2026-05-08 12:55:54,908 - contract_review - ERROR - 通过判断失败: langchain_core.language_models.chat_models.BaseChatModel.agenerate_prompt() got multiple values for keyword argument 'callbacks'
+2026-05-08 12:55:54,908 - contract_review - INFO - 标注完成: 0个问题, 风险等级=low, 通过=True
+2026-05-08 12:55:54,910 - contract_review - INFO - 审查报告已保存: data\output\review_report_20260508_125554.json
+2026-05-08 12:55:54,910 - contract_review - INFO - 审查完成: 0个问题, 风险=low, 通过=True
+2026-05-08 13:06:02,135 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmp044etoo_.docx, 方法=direct, 字数=2888
+2026-05-08 13:06:03,901 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpdcwl4b5t.docx, 方法=direct, 字数=2888
+2026-05-08 13:06:06,050 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpw3c4f41j.docx, 方法=direct, 字数=2888
+2026-05-08 13:06:06,708 - contract_review - INFO - LangSmith已启用: project=contract-review, tracing=True
+2026-05-08 13:06:06,709 - contract_review - INFO - 开始合同审查: C:\Users\LLT\AppData\Local\Temp\tmpw3c4f41j.docx, 类型=lease
+2026-05-08 13:06:06,724 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpw3c4f41j.docx, 方法=direct, 字数=2888
+2026-05-08 13:06:06,725 - contract_review - INFO - 文件解析完成: direct, 字数=2888
+2026-05-08 13:06:06,827 - contract_review - INFO - Chroma客户端初始化: data/chroma_db
+2026-05-08 13:06:06,829 - contract_review - INFO - 获取/创建collection: contract_lease
+2026-05-08 13:06:06,831 - contract_review - WARNING - 合同类型lease的知识库为空
+2026-05-08 13:06:06,832 - contract_review - WARNING - 合同类型lease的知识库为空
+2026-05-08 13:06:06,833 - contract_review - WARNING - 合同类型lease的知识库为空
+2026-05-08 13:06:06,834 - contract_review - INFO - RAG检索完成
+2026-05-08 13:06:06,834 - contract_review - INFO - 创建Chat模型: zhipu (GLM-4.5-Air), streaming=False
+2026-05-08 13:06:16,109 - contract_review - INFO - 并行执行4个审查: ['logic', 'rule', 'completeness', 'pass']
+2026-05-08 13:06:16,113 - contract_review - INFO - 创建链: logic_review
+2026-05-08 13:06:16,215 - contract_review - INFO - 创建链: rule_review
+2026-05-08 13:06:16,218 - contract_review - INFO - 创建链: completeness_check
+2026-05-08 13:06:16,219 - contract_review - INFO - 创建链: pass_judgment
+2026-05-08 13:06:16,229 - contract_review - DEBUG - [logic] LLM请求开始 | prompts数量=1 | prompt长度=3374 | tags=['seq:step:2']
+2026-05-08 13:06:16,229 - contract_review - DEBUG - [logic] Prompt[0]: Human: 你是一位专业的合同审查专家，擅长发现合同中的逻辑漏洞。
+
+请审查以下合同文本，找出其中的逻辑漏洞，包括但不限于：
+1. 条款之间的矛盾或冲突
+2. 逻辑不通的表述
+3. 条件缺失导致的逻辑不完整
+4. 权利义务不对等
+5. 时间线或顺序上的逻辑问题
+
+合同类型：lease
+合同文本：
+福州市房屋租赁合同
+合同编号：FZ-ZL-20241015-008
+签订地点：福建省福州市鼓楼区
+签订日期：2024年10月15日
+出租方（甲方）：李包租公
+身份证号码：350102198506123456
+联系电话：13800138000
+通讯地址：福州市鼓楼区鼓西路123号
+承租方（乙方）：张三
+身份证号码：350103199208051234
+联系电话：13900139000
+通讯地址：福州市仓山区金山大道88号
+根据《中华人民共和国民法典》《福州市房屋租赁管理办法》及相关法律法规，甲乙双方在平等、自愿、协商一致的基础上，就房屋租赁事宜订立本合同，以资共同遵守。
+第一条 房屋基本情况
+1.1 房屋坐落：福州市鼓楼区五四路158号嘉键大厦B栋1205室。
+1.2 建筑面积：85㎡，户型：2室2厅1卫，楼层：12/18层。
+1.3 权属证明：不动产权证号：闽(2020)福州市不动产权第0012345号。甲方保证对该房屋享有合法出租权，无权属争议、无查封、无抵押限制出租情形。
+1.4 房屋现状：按交付时现状出租，具体设施设备及装修状况详见《附件三：房屋交接清单》。
+第二条 租赁用途
+2.1 乙方承租该房屋仅作为居住使用，居住人数不超过2人。
+2.2 乙方不得将房屋用于商业经营、仓储、生产加工、群租、违法活动或改变房屋规划用途。不得违反福州市关于出租屋消防安全、治安管理、垃圾分类等规定。
+第三条 租赁期限
+3.1 租赁期共12个月，自2024年11月1日起至2025年10月31日止。
+3.2 租赁期满，乙方如需续租，应提前30日书面通知甲方。同等条件下乙方享有优先承租权，租金及条款由双方另行协商签订。
+第四条 租金及支付方式
+4.1 租金标准：人民币（大写）叁仟伍佰元整/月（¥3500.00元）。
+4.2 支付方式：押一付三。首期租金及押金于本合同签署当日支付，后续租金乙方应于每个付款周期开始前5日支付。
+4.3 收款账户：
+  户名：李包租公
+  开户行：中国工商银行福州鼓楼支行
+  账号：6222021402001234567
+4.4 甲方收款后应向乙方出具收款凭证。租赁期内甲方不得单方上调租金。
+第五条 押金
+5.1 乙方于本合同签署当日向甲方支付押金人民币（大写）叁仟伍佰元整（¥3500.00元）。
+5.2 租赁期满或合同依法解除后3个工作日内，甲方在结清乙方应付未付租金、违约金、房屋及设施损坏赔偿、欠费后，将押金余额无息退还乙方。
+5.3 正常自然损耗不构成扣减押金的理由，甲方不得以墙面自然泛黄、地板轻微磨损等为由拒绝退还押金。
+第六条 房屋交付与返还
+6.1 甲方应于2024年10月28日前将房屋按约定状态交付乙方，双方共同抄录水、电、燃气表底数并签署《附件四：表底数确认单》。
+6.2 租赁期满或合同解除后3日内，乙方应腾空私人物品，保持房屋基本清洁，将房屋及钥匙交还甲方。逾期未返还的，按日租金的2倍支付房屋占用费。
+第七条 房屋维修与保养
+7.1 甲方负责房屋主体结构、外墙、屋顶、预埋管线及交付清单内固定家电、设施的自然损坏维修。乙方通知后3日内未响应的，乙方可自行维修，合理费用从租金中抵扣或由甲方承担。
+7.2 乙方负责日常保洁、易耗品更换及因使用不当造成的损坏维修。未经甲方书面同意，不得拆改承重结构、改变房屋布局或增设隔断。
+7.3 符合《民法典》第七百一十二条、第七百一十三条之规定。
+第八条 费用承担
+8.1 租赁期内，水费、电费、燃气费、宽带费、物业管理费、有线电视费、垃圾清运费等由乙方按实际发生额或物业/公用事业部门标准承担。
+8.2 甲方承诺交付前已结清所有历史欠费，并提供缴费凭证。
+8.3 乙方应配合属地社区、派出所完成流动人口登记及网格化管理要求。
+第九条 转租、出借与改造
+9.1 未经甲方书面同意，乙方不得将房屋全部或部分转租、分租、出借或与他人合租。
+9.2 乙方如需对房屋进行装饰装修或设备安装，须事先取得甲方书面同意，施工不得破坏房屋安全结构。退租时按双方约定处理（恢复原状/折价补偿/无偿归甲方所有）。
+第十条 违约责任
+10.1 乙方逾期支付租金的，每逾期一日按应付未付金额的0.5‰支付违约金；逾期超过15日，甲方有权单方解除合同，押金不予退还。
+10.2 乙方擅自转租、改变用途、从事违法活动或严重违反消防/治安规定的，甲方有权立即解除合同，押金不予退还，并要求乙方赔偿全部损失。
+10.3 甲方逾...
+2026-05-08 13:06:16,229 - contract_review - DEBUG - [rule] LLM请求开始 | prompts数量=1 | prompt长度=3431 | tags=['seq:step:2']
+2026-05-08 13:06:16,230 - contract_review - DEBUG - [completeness] LLM请求开始 | prompts数量=1 | prompt长度=3571 | tags=['seq:step:2']
+2026-05-08 13:06:16,230 - contract_review - DEBUG - [pass] LLM请求开始 | prompts数量=1 | prompt长度=3253 | tags=['seq:step:2']
+2026-05-08 13:06:16,231 - contract_review - DEBUG - [rule] Prompt[0]: Human: 你是一位专业的合同审查专家，擅长发现合同中违反法律法规和公司规定的问题。
+
+请审查以下合同文本，找出其中违反法规或公司规定的问题，包括但不限于：
+1. 违反国家法律法规的条款
+2. 违反行业监管规定的条款
+3. 违反公司内部合规要求的条款
+4. 可能导致法律风险的条款
+
+合同类型：lease
+合同文本：
+福州市房屋租赁合同
+合同编号：FZ-ZL-20241015-008
+签订地点：福建省福州市鼓楼区
+签订日期：2024年10月15日
+出租方（甲方）：李包租公
+身份证号码：350102198506123456
+联系电话：13800138000
+通讯地址：福州市鼓楼区鼓西路123号
+承租方（乙方）：张三
+身份证号码：350103199208051234
+联系电话：13900139000
+通讯地址：福州市仓山区金山大道88号
+根据《中华人民共和国民法典》《福州市房屋租赁管理办法》及相关法律法规，甲乙双方在平等、自愿、协商一致的基础上，就房屋租赁事宜订立本合同，以资共同遵守。
+第一条 房屋基本情况
+1.1 房屋坐落：福州市鼓楼区五四路158号嘉键大厦B栋1205室。
+1.2 建筑面积：85㎡，户型：2室2厅1卫，楼层：12/18层。
+1.3 权属证明：不动产权证号：闽(2020)福州市不动产权第0012345号。甲方保证对该房屋享有合法出租权，无权属争议、无查封、无抵押限制出租情形。
+1.4 房屋现状：按交付时现状出租，具体设施设备及装修状况详见《附件三：房屋交接清单》。
+第二条 租赁用途
+2.1 乙方承租该房屋仅作为居住使用，居住人数不超过2人。
+2.2 乙方不得将房屋用于商业经营、仓储、生产加工、群租、违法活动或改变房屋规划用途。不得违反福州市关于出租屋消防安全、治安管理、垃圾分类等规定。
+第三条 租赁期限
+3.1 租赁期共12个月，自2024年11月1日起至2025年10月31日止。
+3.2 租赁期满，乙方如需续租，应提前30日书面通知甲方。同等条件下乙方享有优先承租权，租金及条款由双方另行协商签订。
+第四条 租金及支付方式
+4.1 租金标准：人民币（大写）叁仟伍佰元整/月（¥3500.00元）。
+4.2 支付方式：押一付三。首期租金及押金于本合同签署当日支付，后续租金乙方应于每个付款周期开始前5日支付。
+4.3 收款账户：
+  户名：李包租公
+  开户行：中国工商银行福州鼓楼支行
+  账号：6222021402001234567
+4.4 甲方收款后应向乙方出具收款凭证。租赁期内甲方不得单方上调租金。
+第五条 押金
+5.1 乙方于本合同签署当日向甲方支付押金人民币（大写）叁仟伍佰元整（¥3500.00元）。
+5.2 租赁期满或合同依法解除后3个工作日内，甲方在结清乙方应付未付租金、违约金、房屋及设施损坏赔偿、欠费后，将押金余额无息退还乙方。
+5.3 正常自然损耗不构成扣减押金的理由，甲方不得以墙面自然泛黄、地板轻微磨损等为由拒绝退还押金。
+第六条 房屋交付与返还
+6.1 甲方应于2024年10月28日前将房屋按约定状态交付乙方，双方共同抄录水、电、燃气表底数并签署《附件四：表底数确认单》。
+6.2 租赁期满或合同解除后3日内，乙方应腾空私人物品，保持房屋基本清洁，将房屋及钥匙交还甲方。逾期未返还的，按日租金的2倍支付房屋占用费。
+第七条 房屋维修与保养
+7.1 甲方负责房屋主体结构、外墙、屋顶、预埋管线及交付清单内固定家电、设施的自然损坏维修。乙方通知后3日内未响应的，乙方可自行维修，合理费用从租金中抵扣或由甲方承担。
+7.2 乙方负责日常保洁、易耗品更换及因使用不当造成的损坏维修。未经甲方书面同意，不得拆改承重结构、改变房屋布局或增设隔断。
+7.3 符合《民法典》第七百一十二条、第七百一十三条之规定。
+第八条 费用承担
+8.1 租赁期内，水费、电费、燃气费、宽带费、物业管理费、有线电视费、垃圾清运费等由乙方按实际发生额或物业/公用事业部门标准承担。
+8.2 甲方承诺交付前已结清所有历史欠费，并提供缴费凭证。
+8.3 乙方应配合属地社区、派出所完成流动人口登记及网格化管理要求。
+第九条 转租、出借与改造
+9.1 未经甲方书面同意，乙方不得将房屋全部或部分转租、分租、出借或与他人合租。
+9.2 乙方如需对房屋进行装饰装修或设备安装，须事先取得甲方书面同意，施工不得破坏房屋安全结构。退租时按双方约定处理（恢复原状/折价补偿/无偿归甲方所有）。
+第十条 违约责任
+10.1 乙方逾期支付租金的，每逾期一日按应付未付金额的0.5‰支付违约金；逾期超过15日，甲方有权单方解除合同，押金不予退还。
+10.2 乙方擅自转租、改变用途、从事违法活动或严重违反消防/治安规定的，甲方有权立即解除合同，押金不予退还，并要求乙方赔偿全部损失...
+2026-05-08 13:06:16,231 - contract_review - DEBUG - [completeness] Prompt[0]: Human: 你是一位专业的合同审查专家，擅长发现合同中的内容缺失和遗漏。
+
+请审查以下合同文本，找出其中的内容缺失，包括但不限于：
+1. 该类型合同应包含但缺失的必要条款
+2. 关键要素的遗漏（如金额、期限、违约责任等）
+3. 重要定义或解释的缺失
+4. 附件或补充协议的引用但未附
+5. 签署要素的缺失
+
+合同类型：lease
+合同文本：
+福州市房屋租赁合同
+合同编号：FZ-ZL-20241015-008
+签订地点：福建省福州市鼓楼区
+签订日期：2024年10月15日
+出租方（甲方）：李包租公
+身份证号码：350102198506123456
+联系电话：13800138000
+通讯地址：福州市鼓楼区鼓西路123号
+承租方（乙方）：张三
+身份证号码：350103199208051234
+联系电话：13900139000
+通讯地址：福州市仓山区金山大道88号
+根据《中华人民共和国民法典》《福州市房屋租赁管理办法》及相关法律法规，甲乙双方在平等、自愿、协商一致的基础上，就房屋租赁事宜订立本合同，以资共同遵守。
+第一条 房屋基本情况
+1.1 房屋坐落：福州市鼓楼区五四路158号嘉键大厦B栋1205室。
+1.2 建筑面积：85㎡，户型：2室2厅1卫，楼层：12/18层。
+1.3 权属证明：不动产权证号：闽(2020)福州市不动产权第0012345号。甲方保证对该房屋享有合法出租权，无权属争议、无查封、无抵押限制出租情形。
+1.4 房屋现状：按交付时现状出租，具体设施设备及装修状况详见《附件三：房屋交接清单》。
+第二条 租赁用途
+2.1 乙方承租该房屋仅作为居住使用，居住人数不超过2人。
+2.2 乙方不得将房屋用于商业经营、仓储、生产加工、群租、违法活动或改变房屋规划用途。不得违反福州市关于出租屋消防安全、治安管理、垃圾分类等规定。
+第三条 租赁期限
+3.1 租赁期共12个月，自2024年11月1日起至2025年10月31日止。
+3.2 租赁期满，乙方如需续租，应提前30日书面通知甲方。同等条件下乙方享有优先承租权，租金及条款由双方另行协商签订。
+第四条 租金及支付方式
+4.1 租金标准：人民币（大写）叁仟伍佰元整/月（¥3500.00元）。
+4.2 支付方式：押一付三。首期租金及押金于本合同签署当日支付，后续租金乙方应于每个付款周期开始前5日支付。
+4.3 收款账户：
+  户名：李包租公
+  开户行：中国工商银行福州鼓楼支行
+  账号：6222021402001234567
+4.4 甲方收款后应向乙方出具收款凭证。租赁期内甲方不得单方上调租金。
+第五条 押金
+5.1 乙方于本合同签署当日向甲方支付押金人民币（大写）叁仟伍佰元整（¥3500.00元）。
+5.2 租赁期满或合同依法解除后3个工作日内，甲方在结清乙方应付未付租金、违约金、房屋及设施损坏赔偿、欠费后，将押金余额无息退还乙方。
+5.3 正常自然损耗不构成扣减押金的理由，甲方不得以墙面自然泛黄、地板轻微磨损等为由拒绝退还押金。
+第六条 房屋交付与返还
+6.1 甲方应于2024年10月28日前将房屋按约定状态交付乙方，双方共同抄录水、电、燃气表底数并签署《附件四：表底数确认单》。
+6.2 租赁期满或合同解除后3日内，乙方应腾空私人物品，保持房屋基本清洁，将房屋及钥匙交还甲方。逾期未返还的，按日租金的2倍支付房屋占用费。
+第七条 房屋维修与保养
+7.1 甲方负责房屋主体结构、外墙、屋顶、预埋管线及交付清单内固定家电、设施的自然损坏维修。乙方通知后3日内未响应的，乙方可自行维修，合理费用从租金中抵扣或由甲方承担。
+7.2 乙方负责日常保洁、易耗品更换及因使用不当造成的损坏维修。未经甲方书面同意，不得拆改承重结构、改变房屋布局或增设隔断。
+7.3 符合《民法典》第七百一十二条、第七百一十三条之规定。
+第八条 费用承担
+8.1 租赁期内，水费、电费、燃气费、宽带费、物业管理费、有线电视费、垃圾清运费等由乙方按实际发生额或物业/公用事业部门标准承担。
+8.2 甲方承诺交付前已结清所有历史欠费，并提供缴费凭证。
+8.3 乙方应配合属地社区、派出所完成流动人口登记及网格化管理要求。
+第九条 转租、出借与改造
+9.1 未经甲方书面同意，乙方不得将房屋全部或部分转租、分租、出借或与他人合租。
+9.2 乙方如需对房屋进行装饰装修或设备安装，须事先取得甲方书面同意，施工不得破坏房屋安全结构。退租时按双方约定处理（恢复原状/折价补偿/无偿归甲方所有）。
+第十条 违约责任
+10.1 乙方逾期支付租金的，每逾期一日按应付未付金额的0.5‰支付违约金；逾期超过15日，甲方有权单方解除合同，押金不予退还。
+10.2 乙方擅自转租、改变用途、从事违法活动或严重违反消防/治安规定的，甲方有权立即解除合同，押金不予退还...
+2026-05-08 13:06:16,231 - contract_review - DEBUG - [pass] Prompt[0]: Human: 你是一位专业的合同审查专家，需要判断一份合同是否风险极低可以直接通过审查。
+
+请评估以下合同是否可以无需修改直接通过。判断标准：
+1. 条款逻辑清晰无矛盾
+2. 不违反任何法律法规
+3. 必要条款齐全无遗漏
+4. 权利义务合理对等
+5. 违约责任明确
+6. 无明显不利于己方的条款
+
+合同类型：lease
+合同文本：
+福州市房屋租赁合同
+合同编号：FZ-ZL-20241015-008
+签订地点：福建省福州市鼓楼区
+签订日期：2024年10月15日
+出租方（甲方）：李包租公
+身份证号码：350102198506123456
+联系电话：13800138000
+通讯地址：福州市鼓楼区鼓西路123号
+承租方（乙方）：张三
+身份证号码：350103199208051234
+联系电话：13900139000
+通讯地址：福州市仓山区金山大道88号
+根据《中华人民共和国民法典》《福州市房屋租赁管理办法》及相关法律法规，甲乙双方在平等、自愿、协商一致的基础上，就房屋租赁事宜订立本合同，以资共同遵守。
+第一条 房屋基本情况
+1.1 房屋坐落：福州市鼓楼区五四路158号嘉键大厦B栋1205室。
+1.2 建筑面积：85㎡，户型：2室2厅1卫，楼层：12/18层。
+1.3 权属证明：不动产权证号：闽(2020)福州市不动产权第0012345号。甲方保证对该房屋享有合法出租权，无权属争议、无查封、无抵押限制出租情形。
+1.4 房屋现状：按交付时现状出租，具体设施设备及装修状况详见《附件三：房屋交接清单》。
+第二条 租赁用途
+2.1 乙方承租该房屋仅作为居住使用，居住人数不超过2人。
+2.2 乙方不得将房屋用于商业经营、仓储、生产加工、群租、违法活动或改变房屋规划用途。不得违反福州市关于出租屋消防安全、治安管理、垃圾分类等规定。
+第三条 租赁期限
+3.1 租赁期共12个月，自2024年11月1日起至2025年10月31日止。
+3.2 租赁期满，乙方如需续租，应提前30日书面通知甲方。同等条件下乙方享有优先承租权，租金及条款由双方另行协商签订。
+第四条 租金及支付方式
+4.1 租金标准：人民币（大写）叁仟伍佰元整/月（¥3500.00元）。
+4.2 支付方式：押一付三。首期租金及押金于本合同签署当日支付，后续租金乙方应于每个付款周期开始前5日支付。
+4.3 收款账户：
+  户名：李包租公
+  开户行：中国工商银行福州鼓楼支行
+  账号：6222021402001234567
+4.4 甲方收款后应向乙方出具收款凭证。租赁期内甲方不得单方上调租金。
+第五条 押金
+5.1 乙方于本合同签署当日向甲方支付押金人民币（大写）叁仟伍佰元整（¥3500.00元）。
+5.2 租赁期满或合同依法解除后3个工作日内，甲方在结清乙方应付未付租金、违约金、房屋及设施损坏赔偿、欠费后，将押金余额无息退还乙方。
+5.3 正常自然损耗不构成扣减押金的理由，甲方不得以墙面自然泛黄、地板轻微磨损等为由拒绝退还押金。
+第六条 房屋交付与返还
+6.1 甲方应于2024年10月28日前将房屋按约定状态交付乙方，双方共同抄录水、电、燃气表底数并签署《附件四：表底数确认单》。
+6.2 租赁期满或合同解除后3日内，乙方应腾空私人物品，保持房屋基本清洁，将房屋及钥匙交还甲方。逾期未返还的，按日租金的2倍支付房屋占用费。
+第七条 房屋维修与保养
+7.1 甲方负责房屋主体结构、外墙、屋顶、预埋管线及交付清单内固定家电、设施的自然损坏维修。乙方通知后3日内未响应的，乙方可自行维修，合理费用从租金中抵扣或由甲方承担。
+7.2 乙方负责日常保洁、易耗品更换及因使用不当造成的损坏维修。未经甲方书面同意，不得拆改承重结构、改变房屋布局或增设隔断。
+7.3 符合《民法典》第七百一十二条、第七百一十三条之规定。
+第八条 费用承担
+8.1 租赁期内，水费、电费、燃气费、宽带费、物业管理费、有线电视费、垃圾清运费等由乙方按实际发生额或物业/公用事业部门标准承担。
+8.2 甲方承诺交付前已结清所有历史欠费，并提供缴费凭证。
+8.3 乙方应配合属地社区、派出所完成流动人口登记及网格化管理要求。
+第九条 转租、出借与改造
+9.1 未经甲方书面同意，乙方不得将房屋全部或部分转租、分租、出借或与他人合租。
+9.2 乙方如需对房屋进行装饰装修或设备安装，须事先取得甲方书面同意，施工不得破坏房屋安全结构。退租时按双方约定处理（恢复原状/折价补偿/无偿归甲方所有）。
+第十条 违约责任
+10.1 乙方逾期支付租金的，每逾期一日按应付未付金额的0.5‰支付违约金；逾期超过15日，甲方有权单方解除合同，押金不予退还。
+10.2 乙方擅自转租、改变用途、从事违法活动或严重违反消防/治安规定的，甲方有权立即解除合同，押金不予退还，并要求乙方...
+2026-05-08 13:06:40,750 - contract_review - DEBUG - [pass] LLM请求完成 | 耗时=24.52s | prompt_tokens=2052 | completion_tokens=1632 | total_tokens=3684
+2026-05-08 13:06:40,750 - contract_review - DEBUG - [pass] Response: ```json
+{
+  "can_pass": true,
+  "confidence": 0.95,
+  "reason": "合同条款全面、清晰、合法且公平，符合所有判断标准",
+  "risk_level": "low",
+  "notes": "合同附件齐全，与正文内容一致，增强了合同的完整性和可执行性。"
+}
+```
+2026-05-08 13:06:40,755 - contract_review - INFO - 通过判断完成: can_pass=True, risk_level=low
+2026-05-08 13:06:49,223 - contract_review - DEBUG - [completeness] LLM请求完成 | 耗时=32.99s | prompt_tokens=2217 | completion_tokens=2693 | total_tokens=4910
+2026-05-08 13:06:49,223 - contract_review - DEBUG - [completeness] Response: ```json
+{
+  "issues": [
+    {
+      "issue_type": "completeness",
+      "description": "缺失租赁物保险条款",
+      "location": "合同整体",
+      "severity": "high",
+      "confidence": 0.9,
+      "missing_item": "租赁物保险条款",
+      "suggestion": "建议增加保险条款，明确房屋保险的购买方、保险类型、保险金额、保险范围以及保险事故发生后的处理流程。通常建议由出租方购买房屋财产保险，承租方购买个人责任保险。"
+    },
+    {
+      "issue_type": "completeness",
+      "description": "缺失费用调整机制",
+      "location": "第八条 费用承担",
+      "severity": "medium",
+      "confidence": 0.8,
+      "missing_item": "费用调整机制",
+      "suggestion": "建议在第八条增加关于物业费、公共事业费等可能调整的费用调整机制，包括调整通知期、调整幅度限制以及双方协商机制。"
+    },
+    {
+      "issue_type": "completeness",
+      "description": "缺失备案费用承担约定",
+      "location": "第十四条 租赁登记备案",
+      "severity": "medium",
+      "confidence": 0.8,
+      "missing_item": "备案费用承担",
+      "suggestion": "建议在第十四条明确租赁登记备案费用的承担方，通常由双方各承担一半或由出租方承担。"
+    },
+    {
+      "issue_type": "completeness",
+      "description": "通知方式规定不完整",
+      "location": "第十三条 其他约定",
+      "severity": "low",
+      "confidence": 0.7,
+      "missing_item": "通知方式规定",
+      "suggestion": "建议在第十三条补充通知方式的具体规定，包括书面通知的形式（如邮件、快递等）、送达确认方式以及通知生效时间。"
+    },
+    {
+      "issue_type": "completeness",
+      "description": "不可抗力定义不够详细",
+      "location": "第十一条 合同解除",
+      "severity": "medium",
+      "confidence": 0.8,
+      "missing_item": "不可抗力定义",
+      "suggestion": "建议在第十一条补充不可抗力的明确定义，列举常见的不可抗力情形（如自然灾害、战争、政府行为等），并明确不可抗力发生后的通知义务和证明要求。"
+    },
+    {
+      "issue_type": "completeness",
+      "description": "维修责任和流程可以更详细",
+      "location": "第七条 房屋维修与保养",
+      "severity": "low",
+      "confidence": 0.7,
+      "missing_item": "维修责任细化",
+      "suggestion": "建议在第七条进一步细化维修责任和流程，包括维修申请的具体方式、维修时限的延长条件、紧急维修的处理程序以及维修费用的结算方式。"
+    },
+    {
+      "issue_type": "completeness",
+      "description": "其他违约情形的责任可以更明确",
+      "location": "第十条 违约责任",
+      "severity": "medium",
+      "confidence": 0.8,
+      "missing_item": "违约责任细化",
+      "suggestion": "建议在第十条补充其他常见违约情形的责任，如乙方擅自改变房屋结构、甲方未履行维修义务、乙方未按时支付各项费用等情形的具体违约责任。"
+    }
+  ],...
+2026-05-08 13:06:49,277 - contract_review - INFO - 完整性审查完成: 发现7个问题
+2026-05-08 13:07:00,921 - contract_review - DEBUG - [logic] LLM请求完成 | 耗时=44.69s | prompt_tokens=2084 | completion_tokens=2786 | total_tokens=4870
+2026-05-08 13:07:00,922 - contract_review - DEBUG - [logic] Response: ```json
+{
+  "issues": [
+    {
+      "issue_type": "logic",
+      "description": "租金支付时间与租赁开始时间不匹配，导致乙方提前支付尚未使用的租金",
+      "location": "第四条 租金及支付方式 4.2：'首期租金及押金于本合同签署当日支付，后续租金乙方应于每个付款周期开始前5日支付。'",
+      "severity": "medium",
+      "confidence": 0.9,
+      "suggestion": "修改为'首期租金及押金于本合同签署当日支付，后续租金乙方应于每个付款周期开始前5日支付。首个付款周期从2024年11月1日开始，乙方应于2024年10月27日前支付2024年11月1日至2025年1月31日的租金。'"
+    },
+    {
+      "issue_type": "logic",
+      "description": "房屋返还时间未考虑周末或节假日，可能导致乙方无法按时搬迁",
+      "location": "第六条 房屋交付与返还 6.2：'租赁期满或合同解除后3日内，乙方应腾空私人物品...'",
+      "severity": "medium",
+      "confidence": 0.8,
+      "suggestion": "修改为'租赁期满或合同解除后3个工作日内，乙方应腾空私人物品...'"
+    },
+    {
+      "issue_type": "logic",
+      "description": "双倍返还押金的规定与押金功能不符，可能导致甲方损失过大",
+      "location": "第十条 违约责任 10.3：'...逾期超过7日或导致合同目的无法实现的，乙方有权解除合同，甲方应双倍返还押金并赔偿搬迁等实际损失。'",
+      "severity": "high",
+      "confidence": 0.9,
+      "suggestion": "修改为'...逾期超过7日或导致合同目的无法实现的，乙方有权解除合同，甲方应退还押金并按日租金的2倍支付违约金，同时赔偿搬迁等实际损失。'"
+    },
+    {
+      "issue_type": "logic",
+      "description": "押金退还时间与房屋返还时间表述不一致，可能导致计算时间的差异",
+      "location": "第五条 押金 5.2：'租赁期满或合同依法解除后3个工作日内，甲方...将押金余额无息退还乙方。' 与 第六条 房屋交付与返还 6.2：'租赁期满或合同解除后3日内，乙方应腾空私人物品...'",
+      "severity": "medium",
+      "confidence": 0.8,
+      "suggestion": "统一时间表述，例如都使用'工作日'或'日'，并明确说明两者之间的关系。"
+    },
+    {
+      "issue_type": "logic",
+      "description": "逾期交付房屋的违约金(日租金2倍)远高于逾期支付租金的违约金(日0.5‰)，存在明显不对等",
+      "location": "第十条 违约责任 10.1和10.3条款",
+      "severity": "high",
+      "confidence": 0.9,
+      "suggestion": "统一违约金计算标准，或使两者比例更加合理。例如，逾期交付房屋的违约金可调整为日租金的1倍。"
+    },
+    {
+      "issue_type": "logic",
+      "description": "维修费用处理方式不明确，'从租金中抵扣或由甲方承担'可能导致争议",
+      "location": "第七条 房屋维修与保养 7.1：'乙方可自行维修，合理费用从租金中抵扣或由甲方承担。'",
+      "severity": "medium",
+      "confidence": 0.8,
+      "suggestion": "明确处理方式，例如'乙方可自行维修，合理费用由甲方承担，甲方应在收到乙方提供的维修凭证后7日内支付。'"
+    },
+    {
+      "issue_type": "logic",
+      "description": "宠物政策仅在附件中提及，未在正文中明确，可能与第二条租赁用途条款产生潜在冲突",
+      "location": "第二条 租赁用途 ...
+2026-05-08 13:07:00,998 - contract_review - INFO - 逻辑审查完成: 发现8个问题
+2026-05-08 13:07:09,329 - contract_review - DEBUG - [rule] LLM请求完成 | 耗时=53.10s | prompt_tokens=2103 | completion_tokens=4142 | total_tokens=6245
+2026-05-08 13:07:09,329 - contract_review - DEBUG - [rule] Response: ```json
+{
+  "issues": [
+    {
+      "issue_type": "rule",
+      "description": "合同未明确未办理租赁登记备案的法律后果",
+      "location": "第十四条 租赁登记备案",
+      "severity": "high",
+      "confidence": 0.9,
+      "violated_rule": "《商品房屋租赁管理办法》第十四条",
+      "suggestion": "增加条款明确双方未按期办理租赁登记备案的违约责任，如罚款承担比例或合同解除权等"
+    },
+    {
+      "issue_type": "rule",
+      "description": "未明确甲方逾期不退还押金的违约责任",
+      "location": "第五条 押金 5.2款",
+      "severity": "high",
+      "confidence": 0.95,
+      "violated_rule": "《民法典》第五百八十五条",
+      "suggestion": "增加条款明确甲方逾期不退还押金的违约责任，如按日支付一定比例的违约金或双倍返还押金"
+    },
+    {
+      "issue_type": "rule",
+      "description": "未明确房屋安全检查要求",
+      "location": "第七条 房屋维修与保养",
+      "severity": "medium",
+      "confidence": 0.8,
+      "violated_rule": "《消防法》相关规定",
+      "suggestion": "增加条款明确房屋安全检查的频率、责任方及检查结果的处理方式"
+    },
+    {
+      "issue_type": "rule",
+      "description": "未明确乙方违反用途限制的具体措施",
+      "location": "第二条 租赁用途 2.2款",
+      "severity": "medium",
+      "confidence": 0.85,
+      "violated_rule": "《商品房屋租赁管理办法》第九条",
+      "suggestion": "明确乙方违反用途限制的具体违约责任，如限期改正、支付违约金或解除合同等"
+    },
+    {
+      "issue_type": "rule",
+      "description": "未明确甲方拒绝维修或维修不及时时乙方的救济措施",
+      "location": "第七条 房屋维修与保养 7.1款",
+      "severity": "medium",
+      "confidence": 0.9,
+      "violated_rule": "《民法典》第七百一十二条",
+      "suggestion": "增加条款明确甲方拒绝维修或维修不及时时乙方的救济措施，如自行维修费用承担方式或合同解除权"
+    },
+    {
+      "issue_type": "rule",
+      "description": "未明确特殊情况下的租金调整机制",
+      "location": "第四条 租金及支付方式 4.4款",
+      "severity": "medium",
+      "confidence": 0.75,
+      "violated_rule": "《民法典》第五百三十三条",
+      "suggestion": "增加条款明确在物价大幅上涨等特殊情况下，双方可协商调整租金的机制"
+    },
+    {
+      "issue_type": "rule",
+      "description": "未明确房屋占用费的计算上限",
+      "location": "第六条 房屋交付与返还 6.2款",
+      "severity": "medium",
+      "confidence": 0.8,
+      "violated_rule": "《民法典》第五百八十五条",
+      "suggestion": "增加条款明确房屋占用费的计算上限，如不超过押金金额或不超过一定倍数的日租金"
+    },
+    {
+      "issue_type": "rule",
+      "description": "未明确违约金的上限",
+      "location": "...
+2026-05-08 13:07:09,418 - contract_review - INFO - 规则审查完成: 发现10个问题
+2026-05-08 13:07:09,419 - contract_review - INFO - 标注完成: 25个问题, 风险等级=high, 通过=False
+2026-05-08 13:07:09,421 - contract_review - INFO - 审查报告已保存: data\output\review_report_20260508_130709.json
+2026-05-08 13:07:09,421 - contract_review - INFO - 审查完成: 25个问题, 风险=high, 通过=False
+2026-05-08 16:21:14,370 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmp_rlroyvt.docx, 方法=direct, 字数=2888
+2026-05-08 16:21:15,409 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpr5jrclbx.docx, 方法=direct, 字数=2888
+2026-05-08 16:21:15,411 - contract_review - INFO - LangSmith已启用: project=contract-review, tracing=True
+2026-05-08 19:54:08,380 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpap_ql7f9.docx, 方法=direct, 字数=2888
+2026-05-08 19:54:09,437 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpjdzml31m.docx, 方法=direct, 字数=2888
+2026-05-08 19:54:12,097 - contract_review - INFO - LangSmith已启用: project=contract-review, tracing=True
+2026-05-08 19:54:12,098 - contract_review - INFO - 开始合同审查: C:\Users\LLT\AppData\Local\Temp\tmpjdzml31m.docx, 类型=labor
+2026-05-08 19:54:12,104 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpjdzml31m.docx, 方法=direct, 字数=2888
+2026-05-08 19:54:12,104 - contract_review - INFO - 文件解析完成: direct, 字数=2888
+2026-05-08 19:54:12,167 - contract_review - INFO - Chroma客户端初始化: data/chroma_db
+2026-05-08 19:54:12,168 - contract_review - INFO - 获取/创建collection: contract_labor
+2026-05-08 19:54:12,170 - contract_review - WARNING - 合同类型labor的知识库为空
+2026-05-08 19:54:12,171 - contract_review - WARNING - 合同类型labor的知识库为空
+2026-05-08 19:54:12,171 - contract_review - WARNING - 合同类型labor的知识库为空
+2026-05-08 19:54:12,171 - contract_review - INFO - RAG检索完成
+2026-05-08 19:54:12,171 - contract_review - INFO - 创建Chat模型: zhipu (GLM-4.5-Air)
+2026-05-08 19:54:16,827 - contract_review - INFO - 并行执行4个审查: ['logic', 'rule', 'completeness', 'pass']
+2026-05-08 19:54:16,830 - contract_review - INFO - 创建链: logic_review
+2026-05-08 19:54:16,914 - contract_review - INFO - 创建链: rule_review
+2026-05-08 19:54:16,916 - contract_review - INFO - 创建链: completeness_check
+2026-05-08 19:54:16,917 - contract_review - INFO - 创建链: pass_judgment
+2026-05-08 19:54:16,925 - contract_review - DEBUG - [rule] LLM请求开始 | prompts数量=1 | prompt长度=3431 | tags=['seq:step:2']
+2026-05-08 19:54:16,925 - contract_review - DEBUG - [rule] Prompt[0]: Human: 你是一位专业的合同审查专家，擅长发现合同中违反法律法规和公司规定的问题。
+
+请审查以下合同文本，找出其中违反法规或公司规定的问题，包括但不限于：
+1. 违反国家法律法规的条款
+2. 违反行业监管规定的条款
+3. 违反公司内部合规要求的条款
+4. 可能导致法律风险的条款
+
+合同类型：labor
+合同文本：
+福州市房屋租赁合同
+合同编号：FZ-ZL-20241015-008
+签订地点：福建省福州市鼓楼区
+签订日期：2024年10月15日
+出租方（甲方）：李包租公
+身份证号码：350102198506123456
+联系电话：13800138000
+通讯地址：福州市鼓楼区鼓西路123号
+承租方（乙方）：张三
+身份证号码：350103199208051234
+联系电话：13900139000
+通讯地址：福州市仓山区金山大道88号
+根据《中华人民共和国民法典》《福州市房屋租赁管理办法》及相关法律法规，甲乙双方在平等、自愿、协商一致的基础上，就房屋租赁事宜订立本合同，以资共同遵守。
+第一条 房屋基本情况
+1.1 房屋坐落：福州市鼓楼区五四路158号嘉键大厦B栋1205室。
+1.2 建筑面积：85㎡，户型：2室2厅1卫，楼层：12/18层。
+1.3 权属证明：不动产权证号：闽(2020)福州市不动产权第0012345号。甲方保证对该房屋享有合法出租权，无权属争议、无查封、无抵押限制出租情形。
+1.4 房屋现状：按交付时现状出租，具体设施设备及装修状况详见《附件三：房屋交接清单》。
+第二条 租赁用途
+2.1 乙方承租该房屋仅作为居住使用，居住人数不超过2人。
+2.2 乙方不得将房屋用于商业经营、仓储、生产加工、群租、违法活动或改变房屋规划用途。不得违反福州市关于出租屋消防安全、治安管理、垃圾分类等规定。
+第三条 租赁期限
+3.1 租赁期共12个月，自2024年11月1日起至2025年10月31日止。
+3.2 租赁期满，乙方如需续租，应提前30日书面通知甲方。同等条件下乙方享有优先承租权，租金及条款由双方另行协商签订。
+第四条 租金及支付方式
+4.1 租金标准：人民币（大写）叁仟伍佰元整/月（¥3500.00元）。
+4.2 支付方式：押一付三。首期租金及押金于本合同签署当日支付，后续租金乙方应于每个付款周期开始前5日支付。
+4.3 收款账户：
+  户名：李包租公
+  开户行：中国工商银行福州鼓楼支行
+  账号：6222021402001234567
+4.4 甲方收款后应向乙方出具收款凭证。租赁期内甲方不得单方上调租金。
+第五条 押金
+5.1 乙方于本合同签署当日向甲方支付押金人民币（大写）叁仟伍佰元整（¥3500.00元）。
+5.2 租赁期满或合同依法解除后3个工作日内，甲方在结清乙方应付未付租金、违约金、房屋及设施损坏赔偿、欠费后，将押金余额无息退还乙方。
+5.3 正常自然损耗不构成扣减押金的理由，甲方不得以墙面自然泛黄、地板轻微磨损等为由拒绝退还押金。
+第六条 房屋交付与返还
+6.1 甲方应于2024年10月28日前将房屋按约定状态交付乙方，双方共同抄录水、电、燃气表底数并签署《附件四：表底数确认单》。
+6.2 租赁期满或合同解除后3日内，乙方应腾空私人物品，保持房屋基本清洁，将房屋及钥匙交还甲方。逾期未返还的，按日租金的2倍支付房屋占用费。
+第七条 房屋维修与保养
+7.1 甲方负责房屋主体结构、外墙、屋顶、预埋管线及交付清单内固定家电、设施的自然损坏维修。乙方通知后3日内未响应的，乙方可自行维修，合理费用从租金中抵扣或由甲方承担。
+7.2 乙方负责日常保洁、易耗品更换及因使用不当造成的损坏维修。未经甲方书面同意，不得拆改承重结构、改变房屋布局或增设隔断。
+7.3 符合《民法典》第七百一十二条、第七百一十三条之规定。
+第八条 费用承担
+8.1 租赁期内，水费、电费、燃气费、宽带费、物业管理费、有线电视费、垃圾清运费等由乙方按实际发生额或物业/公用事业部门标准承担。
+8.2 甲方承诺交付前已结清所有历史欠费，并提供缴费凭证。
+8.3 乙方应配合属地社区、派出所完成流动人口登记及网格化管理要求。
+第九条 转租、出借与改造
+9.1 未经甲方书面同意，乙方不得将房屋全部或部分转租、分租、出借或与他人合租。
+9.2 乙方如需对房屋进行装饰装修或设备安装，须事先取得甲方书面同意，施工不得破坏房屋安全结构。退租时按双方约定处理（恢复原状/折价补偿/无偿归甲方所有）。
+第十条 违约责任
+10.1 乙方逾期支付租金的，每逾期一日按应付未付金额的0.5‰支付违约金；逾期超过15日，甲方有权单方解除合同，押金不予退还。
+10.2 乙方擅自转租、改变用途、从事违法活动或严重违反消防/治安规定的，甲方有权立即解除合同，押金不予退还，并要求乙方赔偿全部损失...
+2026-05-08 19:54:16,925 - contract_review - DEBUG - [logic] LLM请求开始 | prompts数量=1 | prompt长度=3374 | tags=['seq:step:2']
+2026-05-08 19:54:16,926 - contract_review - DEBUG - [logic] Prompt[0]: Human: 你是一位专业的合同审查专家，擅长发现合同中的逻辑漏洞。
+
+请审查以下合同文本，找出其中的逻辑漏洞，包括但不限于：
+1. 条款之间的矛盾或冲突
+2. 逻辑不通的表述
+3. 条件缺失导致的逻辑不完整
+4. 权利义务不对等
+5. 时间线或顺序上的逻辑问题
+
+合同类型：labor
+合同文本：
+福州市房屋租赁合同
+合同编号：FZ-ZL-20241015-008
+签订地点：福建省福州市鼓楼区
+签订日期：2024年10月15日
+出租方（甲方）：李包租公
+身份证号码：350102198506123456
+联系电话：13800138000
+通讯地址：福州市鼓楼区鼓西路123号
+承租方（乙方）：张三
+身份证号码：350103199208051234
+联系电话：13900139000
+通讯地址：福州市仓山区金山大道88号
+根据《中华人民共和国民法典》《福州市房屋租赁管理办法》及相关法律法规，甲乙双方在平等、自愿、协商一致的基础上，就房屋租赁事宜订立本合同，以资共同遵守。
+第一条 房屋基本情况
+1.1 房屋坐落：福州市鼓楼区五四路158号嘉键大厦B栋1205室。
+1.2 建筑面积：85㎡，户型：2室2厅1卫，楼层：12/18层。
+1.3 权属证明：不动产权证号：闽(2020)福州市不动产权第0012345号。甲方保证对该房屋享有合法出租权，无权属争议、无查封、无抵押限制出租情形。
+1.4 房屋现状：按交付时现状出租，具体设施设备及装修状况详见《附件三：房屋交接清单》。
+第二条 租赁用途
+2.1 乙方承租该房屋仅作为居住使用，居住人数不超过2人。
+2.2 乙方不得将房屋用于商业经营、仓储、生产加工、群租、违法活动或改变房屋规划用途。不得违反福州市关于出租屋消防安全、治安管理、垃圾分类等规定。
+第三条 租赁期限
+3.1 租赁期共12个月，自2024年11月1日起至2025年10月31日止。
+3.2 租赁期满，乙方如需续租，应提前30日书面通知甲方。同等条件下乙方享有优先承租权，租金及条款由双方另行协商签订。
+第四条 租金及支付方式
+4.1 租金标准：人民币（大写）叁仟伍佰元整/月（¥3500.00元）。
+4.2 支付方式：押一付三。首期租金及押金于本合同签署当日支付，后续租金乙方应于每个付款周期开始前5日支付。
+4.3 收款账户：
+  户名：李包租公
+  开户行：中国工商银行福州鼓楼支行
+  账号：6222021402001234567
+4.4 甲方收款后应向乙方出具收款凭证。租赁期内甲方不得单方上调租金。
+第五条 押金
+5.1 乙方于本合同签署当日向甲方支付押金人民币（大写）叁仟伍佰元整（¥3500.00元）。
+5.2 租赁期满或合同依法解除后3个工作日内，甲方在结清乙方应付未付租金、违约金、房屋及设施损坏赔偿、欠费后，将押金余额无息退还乙方。
+5.3 正常自然损耗不构成扣减押金的理由，甲方不得以墙面自然泛黄、地板轻微磨损等为由拒绝退还押金。
+第六条 房屋交付与返还
+6.1 甲方应于2024年10月28日前将房屋按约定状态交付乙方，双方共同抄录水、电、燃气表底数并签署《附件四：表底数确认单》。
+6.2 租赁期满或合同解除后3日内，乙方应腾空私人物品，保持房屋基本清洁，将房屋及钥匙交还甲方。逾期未返还的，按日租金的2倍支付房屋占用费。
+第七条 房屋维修与保养
+7.1 甲方负责房屋主体结构、外墙、屋顶、预埋管线及交付清单内固定家电、设施的自然损坏维修。乙方通知后3日内未响应的，乙方可自行维修，合理费用从租金中抵扣或由甲方承担。
+7.2 乙方负责日常保洁、易耗品更换及因使用不当造成的损坏维修。未经甲方书面同意，不得拆改承重结构、改变房屋布局或增设隔断。
+7.3 符合《民法典》第七百一十二条、第七百一十三条之规定。
+第八条 费用承担
+8.1 租赁期内，水费、电费、燃气费、宽带费、物业管理费、有线电视费、垃圾清运费等由乙方按实际发生额或物业/公用事业部门标准承担。
+8.2 甲方承诺交付前已结清所有历史欠费，并提供缴费凭证。
+8.3 乙方应配合属地社区、派出所完成流动人口登记及网格化管理要求。
+第九条 转租、出借与改造
+9.1 未经甲方书面同意，乙方不得将房屋全部或部分转租、分租、出借或与他人合租。
+9.2 乙方如需对房屋进行装饰装修或设备安装，须事先取得甲方书面同意，施工不得破坏房屋安全结构。退租时按双方约定处理（恢复原状/折价补偿/无偿归甲方所有）。
+第十条 违约责任
+10.1 乙方逾期支付租金的，每逾期一日按应付未付金额的0.5‰支付违约金；逾期超过15日，甲方有权单方解除合同，押金不予退还。
+10.2 乙方擅自转租、改变用途、从事违法活动或严重违反消防/治安规定的，甲方有权立即解除合同，押金不予退还，并要求乙方赔偿全部损失。
+10.3 甲方逾...
+2026-05-08 19:54:16,925 - contract_review - DEBUG - [completeness] LLM请求开始 | prompts数量=1 | prompt长度=3603 | tags=['seq:step:2']
+2026-05-08 19:54:16,925 - contract_review - DEBUG - [pass] LLM请求开始 | prompts数量=1 | prompt长度=3253 | tags=['seq:step:2']
+2026-05-08 19:54:16,927 - contract_review - DEBUG - [completeness] Prompt[0]: Human: 你是一位专业的合同审查专家，擅长发现合同中的内容缺失和遗漏。
+
+请审查以下合同文本，找出其中的内容缺失，包括但不限于：
+1. 该类型合同应包含但缺失的必要条款
+2. 关键要素的遗漏（如金额、期限、违约责任等）
+3. 重要定义或解释的缺失
+4. 附件或补充协议的引用但未附
+5. 签署要素的缺失
+
+合同类型：labor
+合同文本：
+福州市房屋租赁合同
+合同编号：FZ-ZL-20241015-008
+签订地点：福建省福州市鼓楼区
+签订日期：2024年10月15日
+出租方（甲方）：李包租公
+身份证号码：350102198506123456
+联系电话：13800138000
+通讯地址：福州市鼓楼区鼓西路123号
+承租方（乙方）：张三
+身份证号码：350103199208051234
+联系电话：13900139000
+通讯地址：福州市仓山区金山大道88号
+根据《中华人民共和国民法典》《福州市房屋租赁管理办法》及相关法律法规，甲乙双方在平等、自愿、协商一致的基础上，就房屋租赁事宜订立本合同，以资共同遵守。
+第一条 房屋基本情况
+1.1 房屋坐落：福州市鼓楼区五四路158号嘉键大厦B栋1205室。
+1.2 建筑面积：85㎡，户型：2室2厅1卫，楼层：12/18层。
+1.3 权属证明：不动产权证号：闽(2020)福州市不动产权第0012345号。甲方保证对该房屋享有合法出租权，无权属争议、无查封、无抵押限制出租情形。
+1.4 房屋现状：按交付时现状出租，具体设施设备及装修状况详见《附件三：房屋交接清单》。
+第二条 租赁用途
+2.1 乙方承租该房屋仅作为居住使用，居住人数不超过2人。
+2.2 乙方不得将房屋用于商业经营、仓储、生产加工、群租、违法活动或改变房屋规划用途。不得违反福州市关于出租屋消防安全、治安管理、垃圾分类等规定。
+第三条 租赁期限
+3.1 租赁期共12个月，自2024年11月1日起至2025年10月31日止。
+3.2 租赁期满，乙方如需续租，应提前30日书面通知甲方。同等条件下乙方享有优先承租权，租金及条款由双方另行协商签订。
+第四条 租金及支付方式
+4.1 租金标准：人民币（大写）叁仟伍佰元整/月（¥3500.00元）。
+4.2 支付方式：押一付三。首期租金及押金于本合同签署当日支付，后续租金乙方应于每个付款周期开始前5日支付。
+4.3 收款账户：
+  户名：李包租公
+  开户行：中国工商银行福州鼓楼支行
+  账号：6222021402001234567
+4.4 甲方收款后应向乙方出具收款凭证。租赁期内甲方不得单方上调租金。
+第五条 押金
+5.1 乙方于本合同签署当日向甲方支付押金人民币（大写）叁仟伍佰元整（¥3500.00元）。
+5.2 租赁期满或合同依法解除后3个工作日内，甲方在结清乙方应付未付租金、违约金、房屋及设施损坏赔偿、欠费后，将押金余额无息退还乙方。
+5.3 正常自然损耗不构成扣减押金的理由，甲方不得以墙面自然泛黄、地板轻微磨损等为由拒绝退还押金。
+第六条 房屋交付与返还
+6.1 甲方应于2024年10月28日前将房屋按约定状态交付乙方，双方共同抄录水、电、燃气表底数并签署《附件四：表底数确认单》。
+6.2 租赁期满或合同解除后3日内，乙方应腾空私人物品，保持房屋基本清洁，将房屋及钥匙交还甲方。逾期未返还的，按日租金的2倍支付房屋占用费。
+第七条 房屋维修与保养
+7.1 甲方负责房屋主体结构、外墙、屋顶、预埋管线及交付清单内固定家电、设施的自然损坏维修。乙方通知后3日内未响应的，乙方可自行维修，合理费用从租金中抵扣或由甲方承担。
+7.2 乙方负责日常保洁、易耗品更换及因使用不当造成的损坏维修。未经甲方书面同意，不得拆改承重结构、改变房屋布局或增设隔断。
+7.3 符合《民法典》第七百一十二条、第七百一十三条之规定。
+第八条 费用承担
+8.1 租赁期内，水费、电费、燃气费、宽带费、物业管理费、有线电视费、垃圾清运费等由乙方按实际发生额或物业/公用事业部门标准承担。
+8.2 甲方承诺交付前已结清所有历史欠费，并提供缴费凭证。
+8.3 乙方应配合属地社区、派出所完成流动人口登记及网格化管理要求。
+第九条 转租、出借与改造
+9.1 未经甲方书面同意，乙方不得将房屋全部或部分转租、分租、出借或与他人合租。
+9.2 乙方如需对房屋进行装饰装修或设备安装，须事先取得甲方书面同意，施工不得破坏房屋安全结构。退租时按双方约定处理（恢复原状/折价补偿/无偿归甲方所有）。
+第十条 违约责任
+10.1 乙方逾期支付租金的，每逾期一日按应付未付金额的0.5‰支付违约金；逾期超过15日，甲方有权单方解除合同，押金不予退还。
+10.2 乙方擅自转租、改变用途、从事违法活动或严重违反消防/治安规定的，甲方有权立即解除合同，押金不予退还...
+2026-05-08 19:54:16,928 - contract_review - DEBUG - [pass] Prompt[0]: Human: 你是一位专业的合同审查专家，需要判断一份合同是否风险极低可以直接通过审查。
+
+请评估以下合同是否可以无需修改直接通过。判断标准：
+1. 条款逻辑清晰无矛盾
+2. 不违反任何法律法规
+3. 必要条款齐全无遗漏
+4. 权利义务合理对等
+5. 违约责任明确
+6. 无明显不利于己方的条款
+
+合同类型：labor
+合同文本：
+福州市房屋租赁合同
+合同编号：FZ-ZL-20241015-008
+签订地点：福建省福州市鼓楼区
+签订日期：2024年10月15日
+出租方（甲方）：李包租公
+身份证号码：350102198506123456
+联系电话：13800138000
+通讯地址：福州市鼓楼区鼓西路123号
+承租方（乙方）：张三
+身份证号码：350103199208051234
+联系电话：13900139000
+通讯地址：福州市仓山区金山大道88号
+根据《中华人民共和国民法典》《福州市房屋租赁管理办法》及相关法律法规，甲乙双方在平等、自愿、协商一致的基础上，就房屋租赁事宜订立本合同，以资共同遵守。
+第一条 房屋基本情况
+1.1 房屋坐落：福州市鼓楼区五四路158号嘉键大厦B栋1205室。
+1.2 建筑面积：85㎡，户型：2室2厅1卫，楼层：12/18层。
+1.3 权属证明：不动产权证号：闽(2020)福州市不动产权第0012345号。甲方保证对该房屋享有合法出租权，无权属争议、无查封、无抵押限制出租情形。
+1.4 房屋现状：按交付时现状出租，具体设施设备及装修状况详见《附件三：房屋交接清单》。
+第二条 租赁用途
+2.1 乙方承租该房屋仅作为居住使用，居住人数不超过2人。
+2.2 乙方不得将房屋用于商业经营、仓储、生产加工、群租、违法活动或改变房屋规划用途。不得违反福州市关于出租屋消防安全、治安管理、垃圾分类等规定。
+第三条 租赁期限
+3.1 租赁期共12个月，自2024年11月1日起至2025年10月31日止。
+3.2 租赁期满，乙方如需续租，应提前30日书面通知甲方。同等条件下乙方享有优先承租权，租金及条款由双方另行协商签订。
+第四条 租金及支付方式
+4.1 租金标准：人民币（大写）叁仟伍佰元整/月（¥3500.00元）。
+4.2 支付方式：押一付三。首期租金及押金于本合同签署当日支付，后续租金乙方应于每个付款周期开始前5日支付。
+4.3 收款账户：
+  户名：李包租公
+  开户行：中国工商银行福州鼓楼支行
+  账号：6222021402001234567
+4.4 甲方收款后应向乙方出具收款凭证。租赁期内甲方不得单方上调租金。
+第五条 押金
+5.1 乙方于本合同签署当日向甲方支付押金人民币（大写）叁仟伍佰元整（¥3500.00元）。
+5.2 租赁期满或合同依法解除后3个工作日内，甲方在结清乙方应付未付租金、违约金、房屋及设施损坏赔偿、欠费后，将押金余额无息退还乙方。
+5.3 正常自然损耗不构成扣减押金的理由，甲方不得以墙面自然泛黄、地板轻微磨损等为由拒绝退还押金。
+第六条 房屋交付与返还
+6.1 甲方应于2024年10月28日前将房屋按约定状态交付乙方，双方共同抄录水、电、燃气表底数并签署《附件四：表底数确认单》。
+6.2 租赁期满或合同解除后3日内，乙方应腾空私人物品，保持房屋基本清洁，将房屋及钥匙交还甲方。逾期未返还的，按日租金的2倍支付房屋占用费。
+第七条 房屋维修与保养
+7.1 甲方负责房屋主体结构、外墙、屋顶、预埋管线及交付清单内固定家电、设施的自然损坏维修。乙方通知后3日内未响应的，乙方可自行维修，合理费用从租金中抵扣或由甲方承担。
+7.2 乙方负责日常保洁、易耗品更换及因使用不当造成的损坏维修。未经甲方书面同意，不得拆改承重结构、改变房屋布局或增设隔断。
+7.3 符合《民法典》第七百一十二条、第七百一十三条之规定。
+第八条 费用承担
+8.1 租赁期内，水费、电费、燃气费、宽带费、物业管理费、有线电视费、垃圾清运费等由乙方按实际发生额或物业/公用事业部门标准承担。
+8.2 甲方承诺交付前已结清所有历史欠费，并提供缴费凭证。
+8.3 乙方应配合属地社区、派出所完成流动人口登记及网格化管理要求。
+第九条 转租、出借与改造
+9.1 未经甲方书面同意，乙方不得将房屋全部或部分转租、分租、出借或与他人合租。
+9.2 乙方如需对房屋进行装饰装修或设备安装，须事先取得甲方书面同意，施工不得破坏房屋安全结构。退租时按双方约定处理（恢复原状/折价补偿/无偿归甲方所有）。
+第十条 违约责任
+10.1 乙方逾期支付租金的，每逾期一日按应付未付金额的0.5‰支付违约金；逾期超过15日，甲方有权单方解除合同，押金不予退还。
+10.2 乙方擅自转租、改变用途、从事违法活动或严重违反消防/治安规定的，甲方有权立即解除合同，押金不予退还，并要求乙方...
+2026-05-08 19:54:29,236 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpyaj8eg5i.docx, 方法=direct, 字数=2888
+2026-05-08 19:54:30,600 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpo033g09a.docx, 方法=direct, 字数=2888
+2026-05-08 19:54:30,603 - contract_review - INFO - LangSmith已启用: project=contract-review, tracing=True
+2026-05-08 19:54:30,603 - contract_review - INFO - 开始合同审查: C:\Users\LLT\AppData\Local\Temp\tmpo033g09a.docx, 类型=lease
+2026-05-08 19:54:30,612 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpo033g09a.docx, 方法=direct, 字数=2888
+2026-05-08 19:54:30,612 - contract_review - INFO - 文件解析完成: direct, 字数=2888
+2026-05-08 19:54:30,613 - contract_review - INFO - 获取/创建collection: contract_lease
+2026-05-08 19:54:30,614 - contract_review - WARNING - 合同类型lease的知识库为空
+2026-05-08 19:54:30,615 - contract_review - WARNING - 合同类型lease的知识库为空
+2026-05-08 19:54:30,616 - contract_review - WARNING - 合同类型lease的知识库为空
+2026-05-08 19:54:30,616 - contract_review - INFO - RAG检索完成
+2026-05-08 19:54:30,616 - contract_review - INFO - 创建Chat模型: zhipu (GLM-4.5-Air)
+2026-05-08 19:54:30,616 - contract_review - INFO - 并行执行4个审查: ['logic', 'rule', 'completeness', 'pass']
+2026-05-08 19:54:30,618 - contract_review - INFO - 创建链: logic_review
+2026-05-08 19:54:30,632 - contract_review - INFO - 创建链: rule_review
+2026-05-08 19:54:30,634 - contract_review - INFO - 创建链: completeness_check
+2026-05-08 19:54:30,636 - contract_review - INFO - 创建链: pass_judgment
+2026-05-08 19:54:30,645 - contract_review - DEBUG - [completeness] LLM请求开始 | prompts数量=1 | prompt长度=3571 | tags=['seq:step:2']
+2026-05-08 19:54:30,645 - contract_review - DEBUG - [logic] LLM请求开始 | prompts数量=1 | prompt长度=3374 | tags=['seq:step:2']
+2026-05-08 19:54:30,645 - contract_review - DEBUG - [rule] LLM请求开始 | prompts数量=1 | prompt长度=3431 | tags=['seq:step:2']
+2026-05-08 19:54:30,645 - contract_review - DEBUG - [rule] Prompt[0]: Human: 你是一位专业的合同审查专家，擅长发现合同中违反法律法规和公司规定的问题。
+
+请审查以下合同文本，找出其中违反法规或公司规定的问题，包括但不限于：
+1. 违反国家法律法规的条款
+2. 违反行业监管规定的条款
+3. 违反公司内部合规要求的条款
+4. 可能导致法律风险的条款
+
+合同类型：lease
+合同文本：
+福州市房屋租赁合同
+合同编号：FZ-ZL-20241015-008
+签订地点：福建省福州市鼓楼区
+签订日期：2024年10月15日
+出租方（甲方）：李包租公
+身份证号码：350102198506123456
+联系电话：13800138000
+通讯地址：福州市鼓楼区鼓西路123号
+承租方（乙方）：张三
+身份证号码：350103199208051234
+联系电话：13900139000
+通讯地址：福州市仓山区金山大道88号
+根据《中华人民共和国民法典》《福州市房屋租赁管理办法》及相关法律法规，甲乙双方在平等、自愿、协商一致的基础上，就房屋租赁事宜订立本合同，以资共同遵守。
+第一条 房屋基本情况
+1.1 房屋坐落：福州市鼓楼区五四路158号嘉键大厦B栋1205室。
+1.2 建筑面积：85㎡，户型：2室2厅1卫，楼层：12/18层。
+1.3 权属证明：不动产权证号：闽(2020)福州市不动产权第0012345号。甲方保证对该房屋享有合法出租权，无权属争议、无查封、无抵押限制出租情形。
+1.4 房屋现状：按交付时现状出租，具体设施设备及装修状况详见《附件三：房屋交接清单》。
+第二条 租赁用途
+2.1 乙方承租该房屋仅作为居住使用，居住人数不超过2人。
+2.2 乙方不得将房屋用于商业经营、仓储、生产加工、群租、违法活动或改变房屋规划用途。不得违反福州市关于出租屋消防安全、治安管理、垃圾分类等规定。
+第三条 租赁期限
+3.1 租赁期共12个月，自2024年11月1日起至2025年10月31日止。
+3.2 租赁期满，乙方如需续租，应提前30日书面通知甲方。同等条件下乙方享有优先承租权，租金及条款由双方另行协商签订。
+第四条 租金及支付方式
+4.1 租金标准：人民币（大写）叁仟伍佰元整/月（¥3500.00元）。
+4.2 支付方式：押一付三。首期租金及押金于本合同签署当日支付，后续租金乙方应于每个付款周期开始前5日支付。
+4.3 收款账户：
+  户名：李包租公
+  开户行：中国工商银行福州鼓楼支行
+  账号：6222021402001234567
+4.4 甲方收款后应向乙方出具收款凭证。租赁期内甲方不得单方上调租金。
+第五条 押金
+5.1 乙方于本合同签署当日向甲方支付押金人民币（大写）叁仟伍佰元整（¥3500.00元）。
+5.2 租赁期满或合同依法解除后3个工作日内，甲方在结清乙方应付未付租金、违约金、房屋及设施损坏赔偿、欠费后，将押金余额无息退还乙方。
+5.3 正常自然损耗不构成扣减押金的理由，甲方不得以墙面自然泛黄、地板轻微磨损等为由拒绝退还押金。
+第六条 房屋交付与返还
+6.1 甲方应于2024年10月28日前将房屋按约定状态交付乙方，双方共同抄录水、电、燃气表底数并签署《附件四：表底数确认单》。
+6.2 租赁期满或合同解除后3日内，乙方应腾空私人物品，保持房屋基本清洁，将房屋及钥匙交还甲方。逾期未返还的，按日租金的2倍支付房屋占用费。
+第七条 房屋维修与保养
+7.1 甲方负责房屋主体结构、外墙、屋顶、预埋管线及交付清单内固定家电、设施的自然损坏维修。乙方通知后3日内未响应的，乙方可自行维修，合理费用从租金中抵扣或由甲方承担。
+7.2 乙方负责日常保洁、易耗品更换及因使用不当造成的损坏维修。未经甲方书面同意，不得拆改承重结构、改变房屋布局或增设隔断。
+7.3 符合《民法典》第七百一十二条、第七百一十三条之规定。
+第八条 费用承担
+8.1 租赁期内，水费、电费、燃气费、宽带费、物业管理费、有线电视费、垃圾清运费等由乙方按实际发生额或物业/公用事业部门标准承担。
+8.2 甲方承诺交付前已结清所有历史欠费，并提供缴费凭证。
+8.3 乙方应配合属地社区、派出所完成流动人口登记及网格化管理要求。
+第九条 转租、出借与改造
+9.1 未经甲方书面同意，乙方不得将房屋全部或部分转租、分租、出借或与他人合租。
+9.2 乙方如需对房屋进行装饰装修或设备安装，须事先取得甲方书面同意，施工不得破坏房屋安全结构。退租时按双方约定处理（恢复原状/折价补偿/无偿归甲方所有）。
+第十条 违约责任
+10.1 乙方逾期支付租金的，每逾期一日按应付未付金额的0.5‰支付违约金；逾期超过15日，甲方有权单方解除合同，押金不予退还。
+10.2 乙方擅自转租、改变用途、从事违法活动或严重违反消防/治安规定的，甲方有权立即解除合同，押金不予退还，并要求乙方赔偿全部损失...
+2026-05-08 19:54:30,645 - contract_review - DEBUG - [logic] Prompt[0]: Human: 你是一位专业的合同审查专家，擅长发现合同中的逻辑漏洞。
+
+请审查以下合同文本，找出其中的逻辑漏洞，包括但不限于：
+1. 条款之间的矛盾或冲突
+2. 逻辑不通的表述
+3. 条件缺失导致的逻辑不完整
+4. 权利义务不对等
+5. 时间线或顺序上的逻辑问题
+
+合同类型：lease
+合同文本：
+福州市房屋租赁合同
+合同编号：FZ-ZL-20241015-008
+签订地点：福建省福州市鼓楼区
+签订日期：2024年10月15日
+出租方（甲方）：李包租公
+身份证号码：350102198506123456
+联系电话：13800138000
+通讯地址：福州市鼓楼区鼓西路123号
+承租方（乙方）：张三
+身份证号码：350103199208051234
+联系电话：13900139000
+通讯地址：福州市仓山区金山大道88号
+根据《中华人民共和国民法典》《福州市房屋租赁管理办法》及相关法律法规，甲乙双方在平等、自愿、协商一致的基础上，就房屋租赁事宜订立本合同，以资共同遵守。
+第一条 房屋基本情况
+1.1 房屋坐落：福州市鼓楼区五四路158号嘉键大厦B栋1205室。
+1.2 建筑面积：85㎡，户型：2室2厅1卫，楼层：12/18层。
+1.3 权属证明：不动产权证号：闽(2020)福州市不动产权第0012345号。甲方保证对该房屋享有合法出租权，无权属争议、无查封、无抵押限制出租情形。
+1.4 房屋现状：按交付时现状出租，具体设施设备及装修状况详见《附件三：房屋交接清单》。
+第二条 租赁用途
+2.1 乙方承租该房屋仅作为居住使用，居住人数不超过2人。
+2.2 乙方不得将房屋用于商业经营、仓储、生产加工、群租、违法活动或改变房屋规划用途。不得违反福州市关于出租屋消防安全、治安管理、垃圾分类等规定。
+第三条 租赁期限
+3.1 租赁期共12个月，自2024年11月1日起至2025年10月31日止。
+3.2 租赁期满，乙方如需续租，应提前30日书面通知甲方。同等条件下乙方享有优先承租权，租金及条款由双方另行协商签订。
+第四条 租金及支付方式
+4.1 租金标准：人民币（大写）叁仟伍佰元整/月（¥3500.00元）。
+4.2 支付方式：押一付三。首期租金及押金于本合同签署当日支付，后续租金乙方应于每个付款周期开始前5日支付。
+4.3 收款账户：
+  户名：李包租公
+  开户行：中国工商银行福州鼓楼支行
+  账号：6222021402001234567
+4.4 甲方收款后应向乙方出具收款凭证。租赁期内甲方不得单方上调租金。
+第五条 押金
+5.1 乙方于本合同签署当日向甲方支付押金人民币（大写）叁仟伍佰元整（¥3500.00元）。
+5.2 租赁期满或合同依法解除后3个工作日内，甲方在结清乙方应付未付租金、违约金、房屋及设施损坏赔偿、欠费后，将押金余额无息退还乙方。
+5.3 正常自然损耗不构成扣减押金的理由，甲方不得以墙面自然泛黄、地板轻微磨损等为由拒绝退还押金。
+第六条 房屋交付与返还
+6.1 甲方应于2024年10月28日前将房屋按约定状态交付乙方，双方共同抄录水、电、燃气表底数并签署《附件四：表底数确认单》。
+6.2 租赁期满或合同解除后3日内，乙方应腾空私人物品，保持房屋基本清洁，将房屋及钥匙交还甲方。逾期未返还的，按日租金的2倍支付房屋占用费。
+第七条 房屋维修与保养
+7.1 甲方负责房屋主体结构、外墙、屋顶、预埋管线及交付清单内固定家电、设施的自然损坏维修。乙方通知后3日内未响应的，乙方可自行维修，合理费用从租金中抵扣或由甲方承担。
+7.2 乙方负责日常保洁、易耗品更换及因使用不当造成的损坏维修。未经甲方书面同意，不得拆改承重结构、改变房屋布局或增设隔断。
+7.3 符合《民法典》第七百一十二条、第七百一十三条之规定。
+第八条 费用承担
+8.1 租赁期内，水费、电费、燃气费、宽带费、物业管理费、有线电视费、垃圾清运费等由乙方按实际发生额或物业/公用事业部门标准承担。
+8.2 甲方承诺交付前已结清所有历史欠费，并提供缴费凭证。
+8.3 乙方应配合属地社区、派出所完成流动人口登记及网格化管理要求。
+第九条 转租、出借与改造
+9.1 未经甲方书面同意，乙方不得将房屋全部或部分转租、分租、出借或与他人合租。
+9.2 乙方如需对房屋进行装饰装修或设备安装，须事先取得甲方书面同意，施工不得破坏房屋安全结构。退租时按双方约定处理（恢复原状/折价补偿/无偿归甲方所有）。
+第十条 违约责任
+10.1 乙方逾期支付租金的，每逾期一日按应付未付金额的0.5‰支付违约金；逾期超过15日，甲方有权单方解除合同，押金不予退还。
+10.2 乙方擅自转租、改变用途、从事违法活动或严重违反消防/治安规定的，甲方有权立即解除合同，押金不予退还，并要求乙方赔偿全部损失。
+10.3 甲方逾...
+2026-05-08 19:54:30,645 - contract_review - DEBUG - [completeness] Prompt[0]: Human: 你是一位专业的合同审查专家，擅长发现合同中的内容缺失和遗漏。
+
+请审查以下合同文本，找出其中的内容缺失，包括但不限于：
+1. 该类型合同应包含但缺失的必要条款
+2. 关键要素的遗漏（如金额、期限、违约责任等）
+3. 重要定义或解释的缺失
+4. 附件或补充协议的引用但未附
+5. 签署要素的缺失
+
+合同类型：lease
+合同文本：
+福州市房屋租赁合同
+合同编号：FZ-ZL-20241015-008
+签订地点：福建省福州市鼓楼区
+签订日期：2024年10月15日
+出租方（甲方）：李包租公
+身份证号码：350102198506123456
+联系电话：13800138000
+通讯地址：福州市鼓楼区鼓西路123号
+承租方（乙方）：张三
+身份证号码：350103199208051234
+联系电话：13900139000
+通讯地址：福州市仓山区金山大道88号
+根据《中华人民共和国民法典》《福州市房屋租赁管理办法》及相关法律法规，甲乙双方在平等、自愿、协商一致的基础上，就房屋租赁事宜订立本合同，以资共同遵守。
+第一条 房屋基本情况
+1.1 房屋坐落：福州市鼓楼区五四路158号嘉键大厦B栋1205室。
+1.2 建筑面积：85㎡，户型：2室2厅1卫，楼层：12/18层。
+1.3 权属证明：不动产权证号：闽(2020)福州市不动产权第0012345号。甲方保证对该房屋享有合法出租权，无权属争议、无查封、无抵押限制出租情形。
+1.4 房屋现状：按交付时现状出租，具体设施设备及装修状况详见《附件三：房屋交接清单》。
+第二条 租赁用途
+2.1 乙方承租该房屋仅作为居住使用，居住人数不超过2人。
+2.2 乙方不得将房屋用于商业经营、仓储、生产加工、群租、违法活动或改变房屋规划用途。不得违反福州市关于出租屋消防安全、治安管理、垃圾分类等规定。
+第三条 租赁期限
+3.1 租赁期共12个月，自2024年11月1日起至2025年10月31日止。
+3.2 租赁期满，乙方如需续租，应提前30日书面通知甲方。同等条件下乙方享有优先承租权，租金及条款由双方另行协商签订。
+第四条 租金及支付方式
+4.1 租金标准：人民币（大写）叁仟伍佰元整/月（¥3500.00元）。
+4.2 支付方式：押一付三。首期租金及押金于本合同签署当日支付，后续租金乙方应于每个付款周期开始前5日支付。
+4.3 收款账户：
+  户名：李包租公
+  开户行：中国工商银行福州鼓楼支行
+  账号：6222021402001234567
+4.4 甲方收款后应向乙方出具收款凭证。租赁期内甲方不得单方上调租金。
+第五条 押金
+5.1 乙方于本合同签署当日向甲方支付押金人民币（大写）叁仟伍佰元整（¥3500.00元）。
+5.2 租赁期满或合同依法解除后3个工作日内，甲方在结清乙方应付未付租金、违约金、房屋及设施损坏赔偿、欠费后，将押金余额无息退还乙方。
+5.3 正常自然损耗不构成扣减押金的理由，甲方不得以墙面自然泛黄、地板轻微磨损等为由拒绝退还押金。
+第六条 房屋交付与返还
+6.1 甲方应于2024年10月28日前将房屋按约定状态交付乙方，双方共同抄录水、电、燃气表底数并签署《附件四：表底数确认单》。
+6.2 租赁期满或合同解除后3日内，乙方应腾空私人物品，保持房屋基本清洁，将房屋及钥匙交还甲方。逾期未返还的，按日租金的2倍支付房屋占用费。
+第七条 房屋维修与保养
+7.1 甲方负责房屋主体结构、外墙、屋顶、预埋管线及交付清单内固定家电、设施的自然损坏维修。乙方通知后3日内未响应的，乙方可自行维修，合理费用从租金中抵扣或由甲方承担。
+7.2 乙方负责日常保洁、易耗品更换及因使用不当造成的损坏维修。未经甲方书面同意，不得拆改承重结构、改变房屋布局或增设隔断。
+7.3 符合《民法典》第七百一十二条、第七百一十三条之规定。
+第八条 费用承担
+8.1 租赁期内，水费、电费、燃气费、宽带费、物业管理费、有线电视费、垃圾清运费等由乙方按实际发生额或物业/公用事业部门标准承担。
+8.2 甲方承诺交付前已结清所有历史欠费，并提供缴费凭证。
+8.3 乙方应配合属地社区、派出所完成流动人口登记及网格化管理要求。
+第九条 转租、出借与改造
+9.1 未经甲方书面同意，乙方不得将房屋全部或部分转租、分租、出借或与他人合租。
+9.2 乙方如需对房屋进行装饰装修或设备安装，须事先取得甲方书面同意，施工不得破坏房屋安全结构。退租时按双方约定处理（恢复原状/折价补偿/无偿归甲方所有）。
+第十条 违约责任
+10.1 乙方逾期支付租金的，每逾期一日按应付未付金额的0.5‰支付违约金；逾期超过15日，甲方有权单方解除合同，押金不予退还。
+10.2 乙方擅自转租、改变用途、从事违法活动或严重违反消防/治安规定的，甲方有权立即解除合同，押金不予退还...
+2026-05-08 19:54:30,646 - contract_review - DEBUG - [pass] LLM请求开始 | prompts数量=1 | prompt长度=3253 | tags=['seq:step:2']
+2026-05-08 19:54:30,672 - contract_review - DEBUG - [pass] Prompt[0]: Human: 你是一位专业的合同审查专家，需要判断一份合同是否风险极低可以直接通过审查。
+
+请评估以下合同是否可以无需修改直接通过。判断标准：
+1. 条款逻辑清晰无矛盾
+2. 不违反任何法律法规
+3. 必要条款齐全无遗漏
+4. 权利义务合理对等
+5. 违约责任明确
+6. 无明显不利于己方的条款
+
+合同类型：lease
+合同文本：
+福州市房屋租赁合同
+合同编号：FZ-ZL-20241015-008
+签订地点：福建省福州市鼓楼区
+签订日期：2024年10月15日
+出租方（甲方）：李包租公
+身份证号码：350102198506123456
+联系电话：13800138000
+通讯地址：福州市鼓楼区鼓西路123号
+承租方（乙方）：张三
+身份证号码：350103199208051234
+联系电话：13900139000
+通讯地址：福州市仓山区金山大道88号
+根据《中华人民共和国民法典》《福州市房屋租赁管理办法》及相关法律法规，甲乙双方在平等、自愿、协商一致的基础上，就房屋租赁事宜订立本合同，以资共同遵守。
+第一条 房屋基本情况
+1.1 房屋坐落：福州市鼓楼区五四路158号嘉键大厦B栋1205室。
+1.2 建筑面积：85㎡，户型：2室2厅1卫，楼层：12/18层。
+1.3 权属证明：不动产权证号：闽(2020)福州市不动产权第0012345号。甲方保证对该房屋享有合法出租权，无权属争议、无查封、无抵押限制出租情形。
+1.4 房屋现状：按交付时现状出租，具体设施设备及装修状况详见《附件三：房屋交接清单》。
+第二条 租赁用途
+2.1 乙方承租该房屋仅作为居住使用，居住人数不超过2人。
+2.2 乙方不得将房屋用于商业经营、仓储、生产加工、群租、违法活动或改变房屋规划用途。不得违反福州市关于出租屋消防安全、治安管理、垃圾分类等规定。
+第三条 租赁期限
+3.1 租赁期共12个月，自2024年11月1日起至2025年10月31日止。
+3.2 租赁期满，乙方如需续租，应提前30日书面通知甲方。同等条件下乙方享有优先承租权，租金及条款由双方另行协商签订。
+第四条 租金及支付方式
+4.1 租金标准：人民币（大写）叁仟伍佰元整/月（¥3500.00元）。
+4.2 支付方式：押一付三。首期租金及押金于本合同签署当日支付，后续租金乙方应于每个付款周期开始前5日支付。
+4.3 收款账户：
+  户名：李包租公
+  开户行：中国工商银行福州鼓楼支行
+  账号：6222021402001234567
+4.4 甲方收款后应向乙方出具收款凭证。租赁期内甲方不得单方上调租金。
+第五条 押金
+5.1 乙方于本合同签署当日向甲方支付押金人民币（大写）叁仟伍佰元整（¥3500.00元）。
+5.2 租赁期满或合同依法解除后3个工作日内，甲方在结清乙方应付未付租金、违约金、房屋及设施损坏赔偿、欠费后，将押金余额无息退还乙方。
+5.3 正常自然损耗不构成扣减押金的理由，甲方不得以墙面自然泛黄、地板轻微磨损等为由拒绝退还押金。
+第六条 房屋交付与返还
+6.1 甲方应于2024年10月28日前将房屋按约定状态交付乙方，双方共同抄录水、电、燃气表底数并签署《附件四：表底数确认单》。
+6.2 租赁期满或合同解除后3日内，乙方应腾空私人物品，保持房屋基本清洁，将房屋及钥匙交还甲方。逾期未返还的，按日租金的2倍支付房屋占用费。
+第七条 房屋维修与保养
+7.1 甲方负责房屋主体结构、外墙、屋顶、预埋管线及交付清单内固定家电、设施的自然损坏维修。乙方通知后3日内未响应的，乙方可自行维修，合理费用从租金中抵扣或由甲方承担。
+7.2 乙方负责日常保洁、易耗品更换及因使用不当造成的损坏维修。未经甲方书面同意，不得拆改承重结构、改变房屋布局或增设隔断。
+7.3 符合《民法典》第七百一十二条、第七百一十三条之规定。
+第八条 费用承担
+8.1 租赁期内，水费、电费、燃气费、宽带费、物业管理费、有线电视费、垃圾清运费等由乙方按实际发生额或物业/公用事业部门标准承担。
+8.2 甲方承诺交付前已结清所有历史欠费，并提供缴费凭证。
+8.3 乙方应配合属地社区、派出所完成流动人口登记及网格化管理要求。
+第九条 转租、出借与改造
+9.1 未经甲方书面同意，乙方不得将房屋全部或部分转租、分租、出借或与他人合租。
+9.2 乙方如需对房屋进行装饰装修或设备安装，须事先取得甲方书面同意，施工不得破坏房屋安全结构。退租时按双方约定处理（恢复原状/折价补偿/无偿归甲方所有）。
+第十条 违约责任
+10.1 乙方逾期支付租金的，每逾期一日按应付未付金额的0.5‰支付违约金；逾期超过15日，甲方有权单方解除合同，押金不予退还。
+10.2 乙方擅自转租、改变用途、从事违法活动或严重违反消防/治安规定的，甲方有权立即解除合同，押金不予退还，并要求乙方...
+2026-05-08 19:54:32,329 - contract_review - ERROR - [pass] LLM请求失败 | 耗时=1.68s | 错误=RateLimitError: Error code: 429 - {'error': {'code': '1302', 'message': '您的账户已达到速率限制，请您控制请求频率'}}
+2026-05-08 19:54:32,330 - contract_review - ERROR - [rule] LLM请求失败 | 耗时=1.69s | 错误=RateLimitError: Error code: 429 - {'error': {'code': '1302', 'message': '您的账户已达到速率限制，请您控制请求频率'}}
+2026-05-08 19:54:32,333 - contract_review - ERROR - 通过判断失败: Error code: 429 - {'error': {'code': '1302', 'message': '您的账户已达到速率限制，请您控制请求频率'}}
+2026-05-08 19:54:32,335 - contract_review - ERROR - 规则审查失败: Error code: 429 - {'error': {'code': '1302', 'message': '您的账户已达到速率限制，请您控制请求频率'}}
+2026-05-08 19:54:32,383 - contract_review - ERROR - [logic] LLM请求失败 | 耗时=1.74s | 错误=RateLimitError: Error code: 429 - {'error': {'code': '1302', 'message': '您的账户已达到速率限制，请您控制请求频率'}}
+2026-05-08 19:54:32,385 - contract_review - ERROR - 逻辑审查失败: Error code: 429 - {'error': {'code': '1302', 'message': '您的账户已达到速率限制，请您控制请求频率'}}
+2026-05-08 19:54:48,065 - contract_review - DEBUG - [pass] LLM请求完成 | 耗时=31.14s | prompt_tokens=2052 | completion_tokens=1639 | total_tokens=3691
+2026-05-08 19:54:48,065 - contract_review - DEBUG - [pass] Response: ```json
+{
+  "can_pass": true,
+  "confidence": 0.95,
+  "reason": "合同条款全面、逻辑清晰、符合法律规定，权利义务对等，违约责任明确，无明显不利条款。",
+  "risk_level": "low",
+  "notes": "合同附件齐全，特别是《房屋交接清单》和《水电气表底数确认单》等，有助于明确房屋交付状态，减少后续纠纷。关于宠物的约定合理，既满足了承租人需求，又保障了出租人权益。"
+}
+```
+2026-05-08 19:54:48,068 - contract_review - INFO - 通过判断完成: can_pass=True, risk_level=low
+2026-05-08 19:54:52,471 - contract_review - DEBUG - [rule] LLM请求完成 | 耗时=35.55s | prompt_tokens=2103 | completion_tokens=2412 | total_tokens=4515
+2026-05-08 19:54:52,471 - contract_review - DEBUG - [rule] Response: ```json
+{
+  "issues": [
+    {
+      "issue_type": "rule",
+      "description": "逾期支付租金的违约金比例可能过高",
+      "location": "10.1 乙方逾期支付租金的，每逾期一日按应付未付金额的0.5‰支付违约金",
+      "severity": "medium",
+      "confidence": 0.8,
+      "violated_rule": "《民法典》第五百八十五条规定的违约金过分高于造成的损失的，当事人可以请求人民法院或者仲裁机构予以适当减少",
+      "suggestion": "建议将违约金比例调整为0.3‰-0.5‰/日，或明确约定违约金总额不超过应付未付金额的30%，以避免被认定为过高"
+    },
+    {
+      "issue_type": "rule",
+      "description": "甲方逾期交付房屋的违约金比例过高",
+      "location": "10.3 甲方逾期交付房屋或无正当理由提前收回房屋的，应按日租金的2倍向乙方支付违约金",
+      "severity": "medium",
+      "confidence": 0.8,
+      "violated_rule": "《民法典》第五百八十五条规定的违约金过分高于造成的损失的，当事人可以请求人民法院或者仲裁机构予以适当减少",
+      "suggestion": "建议将违约金比例调整为与乙方逾期支付租金相同的比例（0.5‰/日），以保持双方权利义务的平衡"
+    },
+    {
+      "issue_type": "rule",
+      "description": "宠物条款不够明确，可能引发争议",
+      "location": "附件6 双方书面同意的补充约定：乙方宠物为1只已绝育且免疫齐全的英国短毛猫，需承担因宠物造成的公共区域清洁及设施损坏赔偿",
+      "severity": "medium",
+      "confidence": 0.7,
+      "violated_rule": "《民法典》第五百一十条关于合同内容约定不明确的处理规定",
+      "suggestion": "建议明确宠物损坏赔偿的具体标准和范围，例如：'因宠物造成的设施损坏，乙方应按实际维修费用赔偿，但最高不超过押金金额；公共区域清洁费用每月不超过XX元'"
+    },
+    {
+      "issue_type": "rule",
+      "description": "押金退还期限中的'工作日'定义不明确",
+      "location": "5.2 租赁期满或合同依法解除后3个工作日内，甲方在结清乙方应付未付租金、违约金、房屋及设施损坏赔偿、欠费后，将押金余额无息退还乙方",
+      "severity": "low",
+      "confidence": 0.6,
+      "violated_rule": "《民法典》第五百一十条关于合同内容约定不明确的处理规定",
+      "suggestion": "建议明确'工作日'的定义，例如：'指除法定节假日外的自然日'，或直接改为'3日内'以避免歧义"
+    },
+    {
+      "issue_type": "rule",
+      "description": "房屋维修责任中的'预埋管线'定义不明确",
+      "location": "7.1 甲方负责房屋主体结构、外墙、屋顶、预埋管线及交付清单内固定家电、设施的自然损坏维修",
+      "severity": "low",
+      "confidence": 0.6,
+      "violated_rule": "《民法典》第五百一十条关于合同内容约定不明确的处理规定",
+      "suggestion": "建议在《附件三：房屋交接清单》中明确列出属于'预埋管线'的具体项目，避免日后争议"
+    }
+  ],
+  "summary": "本合同整体符合《民法典》、《商品房屋租赁管理办法》等相关法律法规的规定，主要条款设置合理。但存在几处可能引发争议的条款，主要是违约金比例偏高、宠物赔偿标准不明确、部分术语定义不清等问题。建议对上述条款进行修改完善，以减少潜在的法律风险。"
+}
+```
+2026-05-08 19:54:52,501 - contract_review - INFO - 规则审查完成: 发现5个问题
+2026-05-08 19:54:54,997 - contract_review - DEBUG - [completeness] LLM请求完成 | 耗时=38.07s | prompt_tokens=2226 | completion_tokens=3001 | total_tokens=5227
+2026-05-08 19:54:54,997 - contract_review - DEBUG - [completeness] Response: {
+  "issues": [
+    {
+      "issue_type": "completeness",
+      "description": "缺少房屋保险和租客保险条款",
+      "location": "建议在第八条费用承担中新增或补充",
+      "severity": "high",
+      "confidence": 0.9,
+      "missing_item": "保险条款",
+      "suggestion": "增加条款规定出租方应购买房屋财产保险（覆盖火灾、水灾等风险），租方应购买租客责任保险（覆盖第三方责任），并明确保险责任范围、理赔流程及费用承担方式。"
+    },
+    {
+      "issue_type": "completeness",
+      "description": "缺少租赁税费承担条款",
+      "location": "建议在第八条费用承担中补充",
+      "severity": "medium",
+      "confidence": 0.8,
+      "missing_item": "税费承担条款",
+      "suggestion": "明确租赁过程中产生的税费（如房产税、个人所得税、增值税等）由哪方承担，规定税费缴纳的时间、方式及凭证要求，避免后续争议。"
+    },
+    {
+      "issue_type": "completeness",
+      "description": "不可抗力条款过于简略，缺少具体定义和处理方式",
+      "location": "第十一条合同解除",
+      "severity": "low",
+      "confidence": 0.7,
+      "missing_item": "详细不可抗力条款",
+      "suggestion": "扩展不可抗力条款，定义具体事件（如自然灾害、战争、疫情等），规定通知义务（如事件发生后48小时内书面通知）、损失分担原则（如租金减免比例）和合同终止条件。"
+    },
+    {
+      "issue_type": "completeness",
+      "description": "通知条款不够详细，缺少具体送达方式和时间要求",
+      "location": "第十三条其他约定",
+      "severity": "low",
+      "confidence": 0.6,
+      "missing_item": "详细通知条款",
+      "suggestion": "补充通知条款，规定通知必须以书面形式（如挂号信、快递或电子邮件），明确送达确认方式（如签收回执）和生效时间（如寄出后3日视为送达），并规定紧急通知的特殊处理。"
+    },
+    {
+      "issue_type": "completeness",
+      "description": "宠物条款仅在附件中提及，缺少正文条款",
+      "location": "建议在第二条租赁用途或新增条款",
+      "severity": "low",
+      "confidence": 0.5,
+      "missing_item": "宠物条款正文",
+      "suggestion": "在正文中增加宠物条款，明确宠物类型、数量、健康要求（如免疫证明）、责任（如公共区域清洁和设施损坏赔偿）及违约处理，并引用附件6作为补充。"
+    }
+  ],
+  "summary": "总体完整性审查摘要：该房屋租赁合同基本完整，涵盖了主要条款如房屋信息、租赁期限、租金支付、押金、维修责任等。但缺失关键要素如保险条款（房屋和租客保险）、税费承担条款，以及部分条款（如不可抗力、通知方式）不够详细。建议补充保险和税费条款以降低风险，并细化不可抗力和通知条款以增强可执行性。附件引用完整，签署要素齐全。"
+}
+2026-05-08 19:54:55,000 - contract_review - INFO - 完整性审查完成: 发现5个问题
+2026-05-08 19:54:55,182 - contract_review - DEBUG - [logic] LLM请求完成 | 耗时=38.26s | prompt_tokens=2084 | completion_tokens=2274 | total_tokens=4358
+2026-05-08 19:54:55,182 - contract_review - DEBUG - [logic] Response: ```json
+{
+  "issues": [
+    {
+      "issue_type": "logic",
+      "description": "租金支付与房屋交付时间不匹配，导致乙方提前支付租金但无法使用房屋",
+      "location": "第四条 租金及支付方式 4.2条与第六条 房屋交付与返还 6.1条",
+      "severity": "high",
+      "confidence": 0.9,
+      "suggestion": "修改4.2条，将首期租金支付时间调整为房屋交付当日或之前，或者明确约定签订日至交付日期间的租金处理方式"
+    },
+    {
+      "issue_type": "logic",
+      "description": "押金退还期限与房屋返还期限不一致，可能导致执行混乱",
+      "location": "第五条 押金 5.2条与第六条 房屋交付与返还 6.2条",
+      "severity": "medium",
+      "confidence": 0.8,
+      "suggestion": "统一押金退还期限与房屋返还期限的表述，都使用'工作日'或'日'，避免混淆"
+    },
+    {
+      "issue_type": "logic",
+      "description": "违约金标准不对等，甲方逾期交付房屋的违约金相对较轻",
+      "location": "第十条 违约责任 10.1条与10.3条",
+      "severity": "medium",
+      "confidence": 0.9,
+      "suggestion": "统一违约金计算标准，或提高甲方逾期交付房屋的违约金比例"
+    },
+    {
+      "issue_type": "logic",
+      "description": "未明确约定甲方未能按时交付房屋时乙方的解除合同权利",
+      "location": "第六条 房屋交付与返还 6.1条与第十条 违约责任 10.3条",
+      "severity": "medium",
+      "confidence": 0.8,
+      "suggestion": "在10.3条中明确约定甲方逾期交付房屋超过一定期限（如15日）时，乙方有权解除合同"
+    },
+    {
+      "issue_type": "logic",
+      "description": "未明确约定'付款周期'的具体定义",
+      "location": "第四条 租金及支付方式 4.2条",
+      "severity": "low",
+      "confidence": 0.7,
+      "suggestion": "在4.2条中明确约定'付款周期'为每月为一个周期"
+    },
+    {
+      "issue_type": "logic",
+      "description": "提前解除合同的违约金标准与其他违约金标准不一致",
+      "location": "第十一条 合同解除 11.3条与第十条 违约责任 10.1条、10.3条",
+      "severity": "low",
+      "confidence": 0.7,
+      "suggestion": "明确11.3条中的违约金与其他违约金的关系，或统一违约金计算标准"
+    },
+    {
+      "issue_type": "logic",
+      "description": "未约定一方不配合办理租赁登记备案的责任",
+      "location": "第十四条 租赁登记备案 14.1条",
+      "severity": "low",
+      "confidence": 0.8,
+      "suggestion": "在14.1条中增加不配合办理备案的违约责任条款"
+    },
+    {
+      "issue_type": "logic",
+      "description": "未明确约定双方对'欠费'金额有争议时的处理方式",
+      "location": "第五条 押金 5.2条",
+      "severity": "low",
+      "confidence": 0.7,
+      "suggestion": "在5.2条中增加关于'欠费'金额争议的解决机制，如双方协商或第三方评估"
+    },
+    {
+      "issue_ty...
+2026-05-08 19:54:55,214 - contract_review - INFO - 逻辑审查完成: 发现9个问题
+2026-05-08 19:54:55,217 - contract_review - INFO - 标注完成: 19个问题, 风险等级=high, 通过=False
+2026-05-08 19:54:55,219 - contract_review - INFO - 审查报告已保存: data\output\review_report_20260508_195455.json
+2026-05-08 19:54:55,219 - contract_review - INFO - 审查完成: 19个问题, 风险=high, 通过=False
+2026-05-08 19:56:09,711 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpmvasvx9q.docx, 方法=direct, 字数=2888
+2026-05-08 19:56:12,241 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpo7gtzizr.docx, 方法=direct, 字数=2888
+2026-05-08 19:56:17,041 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpvvm4cvdp.docx, 方法=direct, 字数=2888
+2026-05-08 19:56:19,603 - contract_review - INFO - LangSmith已启用: project=contract-review, tracing=True
+2026-05-08 19:56:19,604 - contract_review - INFO - 开始合同审查: C:\Users\LLT\AppData\Local\Temp\tmpvvm4cvdp.docx, 类型=lease
+2026-05-08 19:56:19,609 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpvvm4cvdp.docx, 方法=direct, 字数=2888
+2026-05-08 19:56:19,610 - contract_review - INFO - 文件解析完成: direct, 字数=2888
+2026-05-08 19:56:19,670 - contract_review - INFO - Chroma客户端初始化: data/chroma_db
+2026-05-08 19:56:19,671 - contract_review - INFO - 获取/创建collection: contract_lease
+2026-05-08 19:56:19,672 - contract_review - WARNING - 合同类型lease的知识库为空
+2026-05-08 19:56:19,673 - contract_review - WARNING - 合同类型lease的知识库为空
+2026-05-08 19:56:19,673 - contract_review - WARNING - 合同类型lease的知识库为空
+2026-05-08 19:56:19,673 - contract_review - INFO - RAG检索完成
+2026-05-08 19:56:19,673 - contract_review - INFO - 创建Chat模型: zhipu (GLM-4.5-Air)
+2026-05-08 19:56:24,144 - contract_review - INFO - 并行执行4个审查: ['logic', 'rule', 'completeness', 'pass']
+2026-05-08 19:56:24,146 - contract_review - INFO - 创建链: logic_review
+2026-05-08 19:56:24,225 - contract_review - INFO - 创建链: rule_review
+2026-05-08 19:56:24,226 - contract_review - INFO - 创建链: completeness_check
+2026-05-08 19:56:24,227 - contract_review - INFO - 创建链: pass_judgment
+2026-05-08 19:56:24,232 - contract_review - DEBUG - [rule] LLM请求开始 | prompts数量=1 | prompt长度=3431 | tags=['seq:step:2']
+2026-05-08 19:56:24,233 - contract_review - DEBUG - [completeness] LLM请求开始 | prompts数量=1 | prompt长度=3571 | tags=['seq:step:2']
+2026-05-08 19:56:24,233 - contract_review - DEBUG - [pass] LLM请求开始 | prompts数量=1 | prompt长度=3253 | tags=['seq:step:2']
+2026-05-08 19:56:24,233 - contract_review - DEBUG - [pass] Prompt[0]: Human: 你是一位专业的合同审查专家，需要判断一份合同是否风险极低可以直接通过审查。
+
+请评估以下合同是否可以无需修改直接通过。判断标准：
+1. 条款逻辑清晰无矛盾
+2. 不违反任何法律法规
+3. 必要条款齐全无遗漏
+4. 权利义务合理对等
+5. 违约责任明确
+6. 无明显不利于己方的条款
+
+合同类型：lease
+合同文本：
+福州市房屋租赁合同
+合同编号：FZ-ZL-20241015-008
+签订地点：福建省福州市鼓楼区
+签订日期：2024年10月15日
+出租方（甲方）：李包租公
+身份证号码：350102198506123456
+联系电话：13800138000
+通讯地址：福州市鼓楼区鼓西路123号
+承租方（乙方）：张三
+身份证号码：350103199208051234
+联系电话：13900139000
+通讯地址：福州市仓山区金山大道88号
+根据《中华人民共和国民法典》《福州市房屋租赁管理办法》及相关法律法规，甲乙双方在平等、自愿、协商一致的基础上，就房屋租赁事宜订立本合同，以资共同遵守。
+第一条 房屋基本情况
+1.1 房屋坐落：福州市鼓楼区五四路158号嘉键大厦B栋1205室。
+1.2 建筑面积：85㎡，户型：2室2厅1卫，楼层：12/18层。
+1.3 权属证明：不动产权证号：闽(2020)福州市不动产权第0012345号。甲方保证对该房屋享有合法出租权，无权属争议、无查封、无抵押限制出租情形。
+1.4 房屋现状：按交付时现状出租，具体设施设备及装修状况详见《附件三：房屋交接清单》。
+第二条 租赁用途
+2.1 乙方承租该房屋仅作为居住使用，居住人数不超过2人。
+2.2 乙方不得将房屋用于商业经营、仓储、生产加工、群租、违法活动或改变房屋规划用途。不得违反福州市关于出租屋消防安全、治安管理、垃圾分类等规定。
+第三条 租赁期限
+3.1 租赁期共12个月，自2024年11月1日起至2025年10月31日止。
+3.2 租赁期满，乙方如需续租，应提前30日书面通知甲方。同等条件下乙方享有优先承租权，租金及条款由双方另行协商签订。
+第四条 租金及支付方式
+4.1 租金标准：人民币（大写）叁仟伍佰元整/月（¥3500.00元）。
+4.2 支付方式：押一付三。首期租金及押金于本合同签署当日支付，后续租金乙方应于每个付款周期开始前5日支付。
+4.3 收款账户：
+  户名：李包租公
+  开户行：中国工商银行福州鼓楼支行
+  账号：6222021402001234567
+4.4 甲方收款后应向乙方出具收款凭证。租赁期内甲方不得单方上调租金。
+第五条 押金
+5.1 乙方于本合同签署当日向甲方支付押金人民币（大写）叁仟伍佰元整（¥3500.00元）。
+5.2 租赁期满或合同依法解除后3个工作日内，甲方在结清乙方应付未付租金、违约金、房屋及设施损坏赔偿、欠费后，将押金余额无息退还乙方。
+5.3 正常自然损耗不构成扣减押金的理由，甲方不得以墙面自然泛黄、地板轻微磨损等为由拒绝退还押金。
+第六条 房屋交付与返还
+6.1 甲方应于2024年10月28日前将房屋按约定状态交付乙方，双方共同抄录水、电、燃气表底数并签署《附件四：表底数确认单》。
+6.2 租赁期满或合同解除后3日内，乙方应腾空私人物品，保持房屋基本清洁，将房屋及钥匙交还甲方。逾期未返还的，按日租金的2倍支付房屋占用费。
+第七条 房屋维修与保养
+7.1 甲方负责房屋主体结构、外墙、屋顶、预埋管线及交付清单内固定家电、设施的自然损坏维修。乙方通知后3日内未响应的，乙方可自行维修，合理费用从租金中抵扣或由甲方承担。
+7.2 乙方负责日常保洁、易耗品更换及因使用不当造成的损坏维修。未经甲方书面同意，不得拆改承重结构、改变房屋布局或增设隔断。
+7.3 符合《民法典》第七百一十二条、第七百一十三条之规定。
+第八条 费用承担
+8.1 租赁期内，水费、电费、燃气费、宽带费、物业管理费、有线电视费、垃圾清运费等由乙方按实际发生额或物业/公用事业部门标准承担。
+8.2 甲方承诺交付前已结清所有历史欠费，并提供缴费凭证。
+8.3 乙方应配合属地社区、派出所完成流动人口登记及网格化管理要求。
+第九条 转租、出借与改造
+9.1 未经甲方书面同意，乙方不得将房屋全部或部分转租、分租、出借或与他人合租。
+9.2 乙方如需对房屋进行装饰装修或设备安装，须事先取得甲方书面同意，施工不得破坏房屋安全结构。退租时按双方约定处理（恢复原状/折价补偿/无偿归甲方所有）。
+第十条 违约责任
+10.1 乙方逾期支付租金的，每逾期一日按应付未付金额的0.5‰支付违约金；逾期超过15日，甲方有权单方解除合同，押金不予退还。
+10.2 乙方擅自转租、改变用途、从事违法活动或严重违反消防/治安规定的，甲方有权立即解除合同，押金不予退还，并要求乙方...
+2026-05-08 19:56:24,233 - contract_review - DEBUG - [rule] Prompt[0]: Human: 你是一位专业的合同审查专家，擅长发现合同中违反法律法规和公司规定的问题。
+
+请审查以下合同文本，找出其中违反法规或公司规定的问题，包括但不限于：
+1. 违反国家法律法规的条款
+2. 违反行业监管规定的条款
+3. 违反公司内部合规要求的条款
+4. 可能导致法律风险的条款
+
+合同类型：lease
+合同文本：
+福州市房屋租赁合同
+合同编号：FZ-ZL-20241015-008
+签订地点：福建省福州市鼓楼区
+签订日期：2024年10月15日
+出租方（甲方）：李包租公
+身份证号码：350102198506123456
+联系电话：13800138000
+通讯地址：福州市鼓楼区鼓西路123号
+承租方（乙方）：张三
+身份证号码：350103199208051234
+联系电话：13900139000
+通讯地址：福州市仓山区金山大道88号
+根据《中华人民共和国民法典》《福州市房屋租赁管理办法》及相关法律法规，甲乙双方在平等、自愿、协商一致的基础上，就房屋租赁事宜订立本合同，以资共同遵守。
+第一条 房屋基本情况
+1.1 房屋坐落：福州市鼓楼区五四路158号嘉键大厦B栋1205室。
+1.2 建筑面积：85㎡，户型：2室2厅1卫，楼层：12/18层。
+1.3 权属证明：不动产权证号：闽(2020)福州市不动产权第0012345号。甲方保证对该房屋享有合法出租权，无权属争议、无查封、无抵押限制出租情形。
+1.4 房屋现状：按交付时现状出租，具体设施设备及装修状况详见《附件三：房屋交接清单》。
+第二条 租赁用途
+2.1 乙方承租该房屋仅作为居住使用，居住人数不超过2人。
+2.2 乙方不得将房屋用于商业经营、仓储、生产加工、群租、违法活动或改变房屋规划用途。不得违反福州市关于出租屋消防安全、治安管理、垃圾分类等规定。
+第三条 租赁期限
+3.1 租赁期共12个月，自2024年11月1日起至2025年10月31日止。
+3.2 租赁期满，乙方如需续租，应提前30日书面通知甲方。同等条件下乙方享有优先承租权，租金及条款由双方另行协商签订。
+第四条 租金及支付方式
+4.1 租金标准：人民币（大写）叁仟伍佰元整/月（¥3500.00元）。
+4.2 支付方式：押一付三。首期租金及押金于本合同签署当日支付，后续租金乙方应于每个付款周期开始前5日支付。
+4.3 收款账户：
+  户名：李包租公
+  开户行：中国工商银行福州鼓楼支行
+  账号：6222021402001234567
+4.4 甲方收款后应向乙方出具收款凭证。租赁期内甲方不得单方上调租金。
+第五条 押金
+5.1 乙方于本合同签署当日向甲方支付押金人民币（大写）叁仟伍佰元整（¥3500.00元）。
+5.2 租赁期满或合同依法解除后3个工作日内，甲方在结清乙方应付未付租金、违约金、房屋及设施损坏赔偿、欠费后，将押金余额无息退还乙方。
+5.3 正常自然损耗不构成扣减押金的理由，甲方不得以墙面自然泛黄、地板轻微磨损等为由拒绝退还押金。
+第六条 房屋交付与返还
+6.1 甲方应于2024年10月28日前将房屋按约定状态交付乙方，双方共同抄录水、电、燃气表底数并签署《附件四：表底数确认单》。
+6.2 租赁期满或合同解除后3日内，乙方应腾空私人物品，保持房屋基本清洁，将房屋及钥匙交还甲方。逾期未返还的，按日租金的2倍支付房屋占用费。
+第七条 房屋维修与保养
+7.1 甲方负责房屋主体结构、外墙、屋顶、预埋管线及交付清单内固定家电、设施的自然损坏维修。乙方通知后3日内未响应的，乙方可自行维修，合理费用从租金中抵扣或由甲方承担。
+7.2 乙方负责日常保洁、易耗品更换及因使用不当造成的损坏维修。未经甲方书面同意，不得拆改承重结构、改变房屋布局或增设隔断。
+7.3 符合《民法典》第七百一十二条、第七百一十三条之规定。
+第八条 费用承担
+8.1 租赁期内，水费、电费、燃气费、宽带费、物业管理费、有线电视费、垃圾清运费等由乙方按实际发生额或物业/公用事业部门标准承担。
+8.2 甲方承诺交付前已结清所有历史欠费，并提供缴费凭证。
+8.3 乙方应配合属地社区、派出所完成流动人口登记及网格化管理要求。
+第九条 转租、出借与改造
+9.1 未经甲方书面同意，乙方不得将房屋全部或部分转租、分租、出借或与他人合租。
+9.2 乙方如需对房屋进行装饰装修或设备安装，须事先取得甲方书面同意，施工不得破坏房屋安全结构。退租时按双方约定处理（恢复原状/折价补偿/无偿归甲方所有）。
+第十条 违约责任
+10.1 乙方逾期支付租金的，每逾期一日按应付未付金额的0.5‰支付违约金；逾期超过15日，甲方有权单方解除合同，押金不予退还。
+10.2 乙方擅自转租、改变用途、从事违法活动或严重违反消防/治安规定的，甲方有权立即解除合同，押金不予退还，并要求乙方赔偿全部损失...
+2026-05-08 19:56:24,233 - contract_review - DEBUG - [completeness] Prompt[0]: Human: 你是一位专业的合同审查专家，擅长发现合同中的内容缺失和遗漏。
+
+请审查以下合同文本，找出其中的内容缺失，包括但不限于：
+1. 该类型合同应包含但缺失的必要条款
+2. 关键要素的遗漏（如金额、期限、违约责任等）
+3. 重要定义或解释的缺失
+4. 附件或补充协议的引用但未附
+5. 签署要素的缺失
+
+合同类型：lease
+合同文本：
+福州市房屋租赁合同
+合同编号：FZ-ZL-20241015-008
+签订地点：福建省福州市鼓楼区
+签订日期：2024年10月15日
+出租方（甲方）：李包租公
+身份证号码：350102198506123456
+联系电话：13800138000
+通讯地址：福州市鼓楼区鼓西路123号
+承租方（乙方）：张三
+身份证号码：350103199208051234
+联系电话：13900139000
+通讯地址：福州市仓山区金山大道88号
+根据《中华人民共和国民法典》《福州市房屋租赁管理办法》及相关法律法规，甲乙双方在平等、自愿、协商一致的基础上，就房屋租赁事宜订立本合同，以资共同遵守。
+第一条 房屋基本情况
+1.1 房屋坐落：福州市鼓楼区五四路158号嘉键大厦B栋1205室。
+1.2 建筑面积：85㎡，户型：2室2厅1卫，楼层：12/18层。
+1.3 权属证明：不动产权证号：闽(2020)福州市不动产权第0012345号。甲方保证对该房屋享有合法出租权，无权属争议、无查封、无抵押限制出租情形。
+1.4 房屋现状：按交付时现状出租，具体设施设备及装修状况详见《附件三：房屋交接清单》。
+第二条 租赁用途
+2.1 乙方承租该房屋仅作为居住使用，居住人数不超过2人。
+2.2 乙方不得将房屋用于商业经营、仓储、生产加工、群租、违法活动或改变房屋规划用途。不得违反福州市关于出租屋消防安全、治安管理、垃圾分类等规定。
+第三条 租赁期限
+3.1 租赁期共12个月，自2024年11月1日起至2025年10月31日止。
+3.2 租赁期满，乙方如需续租，应提前30日书面通知甲方。同等条件下乙方享有优先承租权，租金及条款由双方另行协商签订。
+第四条 租金及支付方式
+4.1 租金标准：人民币（大写）叁仟伍佰元整/月（¥3500.00元）。
+4.2 支付方式：押一付三。首期租金及押金于本合同签署当日支付，后续租金乙方应于每个付款周期开始前5日支付。
+4.3 收款账户：
+  户名：李包租公
+  开户行：中国工商银行福州鼓楼支行
+  账号：6222021402001234567
+4.4 甲方收款后应向乙方出具收款凭证。租赁期内甲方不得单方上调租金。
+第五条 押金
+5.1 乙方于本合同签署当日向甲方支付押金人民币（大写）叁仟伍佰元整（¥3500.00元）。
+5.2 租赁期满或合同依法解除后3个工作日内，甲方在结清乙方应付未付租金、违约金、房屋及设施损坏赔偿、欠费后，将押金余额无息退还乙方。
+5.3 正常自然损耗不构成扣减押金的理由，甲方不得以墙面自然泛黄、地板轻微磨损等为由拒绝退还押金。
+第六条 房屋交付与返还
+6.1 甲方应于2024年10月28日前将房屋按约定状态交付乙方，双方共同抄录水、电、燃气表底数并签署《附件四：表底数确认单》。
+6.2 租赁期满或合同解除后3日内，乙方应腾空私人物品，保持房屋基本清洁，将房屋及钥匙交还甲方。逾期未返还的，按日租金的2倍支付房屋占用费。
+第七条 房屋维修与保养
+7.1 甲方负责房屋主体结构、外墙、屋顶、预埋管线及交付清单内固定家电、设施的自然损坏维修。乙方通知后3日内未响应的，乙方可自行维修，合理费用从租金中抵扣或由甲方承担。
+7.2 乙方负责日常保洁、易耗品更换及因使用不当造成的损坏维修。未经甲方书面同意，不得拆改承重结构、改变房屋布局或增设隔断。
+7.3 符合《民法典》第七百一十二条、第七百一十三条之规定。
+第八条 费用承担
+8.1 租赁期内，水费、电费、燃气费、宽带费、物业管理费、有线电视费、垃圾清运费等由乙方按实际发生额或物业/公用事业部门标准承担。
+8.2 甲方承诺交付前已结清所有历史欠费，并提供缴费凭证。
+8.3 乙方应配合属地社区、派出所完成流动人口登记及网格化管理要求。
+第九条 转租、出借与改造
+9.1 未经甲方书面同意，乙方不得将房屋全部或部分转租、分租、出借或与他人合租。
+9.2 乙方如需对房屋进行装饰装修或设备安装，须事先取得甲方书面同意，施工不得破坏房屋安全结构。退租时按双方约定处理（恢复原状/折价补偿/无偿归甲方所有）。
+第十条 违约责任
+10.1 乙方逾期支付租金的，每逾期一日按应付未付金额的0.5‰支付违约金；逾期超过15日，甲方有权单方解除合同，押金不予退还。
+10.2 乙方擅自转租、改变用途、从事违法活动或严重违反消防/治安规定的，甲方有权立即解除合同，押金不予退还...
+2026-05-08 19:56:24,233 - contract_review - DEBUG - [logic] LLM请求开始 | prompts数量=1 | prompt长度=3374 | tags=['seq:step:2']
+2026-05-08 19:56:24,234 - contract_review - DEBUG - [logic] Prompt[0]: Human: 你是一位专业的合同审查专家，擅长发现合同中的逻辑漏洞。
+
+请审查以下合同文本，找出其中的逻辑漏洞，包括但不限于：
+1. 条款之间的矛盾或冲突
+2. 逻辑不通的表述
+3. 条件缺失导致的逻辑不完整
+4. 权利义务不对等
+5. 时间线或顺序上的逻辑问题
+
+合同类型：lease
+合同文本：
+福州市房屋租赁合同
+合同编号：FZ-ZL-20241015-008
+签订地点：福建省福州市鼓楼区
+签订日期：2024年10月15日
+出租方（甲方）：李包租公
+身份证号码：350102198506123456
+联系电话：13800138000
+通讯地址：福州市鼓楼区鼓西路123号
+承租方（乙方）：张三
+身份证号码：350103199208051234
+联系电话：13900139000
+通讯地址：福州市仓山区金山大道88号
+根据《中华人民共和国民法典》《福州市房屋租赁管理办法》及相关法律法规，甲乙双方在平等、自愿、协商一致的基础上，就房屋租赁事宜订立本合同，以资共同遵守。
+第一条 房屋基本情况
+1.1 房屋坐落：福州市鼓楼区五四路158号嘉键大厦B栋1205室。
+1.2 建筑面积：85㎡，户型：2室2厅1卫，楼层：12/18层。
+1.3 权属证明：不动产权证号：闽(2020)福州市不动产权第0012345号。甲方保证对该房屋享有合法出租权，无权属争议、无查封、无抵押限制出租情形。
+1.4 房屋现状：按交付时现状出租，具体设施设备及装修状况详见《附件三：房屋交接清单》。
+第二条 租赁用途
+2.1 乙方承租该房屋仅作为居住使用，居住人数不超过2人。
+2.2 乙方不得将房屋用于商业经营、仓储、生产加工、群租、违法活动或改变房屋规划用途。不得违反福州市关于出租屋消防安全、治安管理、垃圾分类等规定。
+第三条 租赁期限
+3.1 租赁期共12个月，自2024年11月1日起至2025年10月31日止。
+3.2 租赁期满，乙方如需续租，应提前30日书面通知甲方。同等条件下乙方享有优先承租权，租金及条款由双方另行协商签订。
+第四条 租金及支付方式
+4.1 租金标准：人民币（大写）叁仟伍佰元整/月（¥3500.00元）。
+4.2 支付方式：押一付三。首期租金及押金于本合同签署当日支付，后续租金乙方应于每个付款周期开始前5日支付。
+4.3 收款账户：
+  户名：李包租公
+  开户行：中国工商银行福州鼓楼支行
+  账号：6222021402001234567
+4.4 甲方收款后应向乙方出具收款凭证。租赁期内甲方不得单方上调租金。
+第五条 押金
+5.1 乙方于本合同签署当日向甲方支付押金人民币（大写）叁仟伍佰元整（¥3500.00元）。
+5.2 租赁期满或合同依法解除后3个工作日内，甲方在结清乙方应付未付租金、违约金、房屋及设施损坏赔偿、欠费后，将押金余额无息退还乙方。
+5.3 正常自然损耗不构成扣减押金的理由，甲方不得以墙面自然泛黄、地板轻微磨损等为由拒绝退还押金。
+第六条 房屋交付与返还
+6.1 甲方应于2024年10月28日前将房屋按约定状态交付乙方，双方共同抄录水、电、燃气表底数并签署《附件四：表底数确认单》。
+6.2 租赁期满或合同解除后3日内，乙方应腾空私人物品，保持房屋基本清洁，将房屋及钥匙交还甲方。逾期未返还的，按日租金的2倍支付房屋占用费。
+第七条 房屋维修与保养
+7.1 甲方负责房屋主体结构、外墙、屋顶、预埋管线及交付清单内固定家电、设施的自然损坏维修。乙方通知后3日内未响应的，乙方可自行维修，合理费用从租金中抵扣或由甲方承担。
+7.2 乙方负责日常保洁、易耗品更换及因使用不当造成的损坏维修。未经甲方书面同意，不得拆改承重结构、改变房屋布局或增设隔断。
+7.3 符合《民法典》第七百一十二条、第七百一十三条之规定。
+第八条 费用承担
+8.1 租赁期内，水费、电费、燃气费、宽带费、物业管理费、有线电视费、垃圾清运费等由乙方按实际发生额或物业/公用事业部门标准承担。
+8.2 甲方承诺交付前已结清所有历史欠费，并提供缴费凭证。
+8.3 乙方应配合属地社区、派出所完成流动人口登记及网格化管理要求。
+第九条 转租、出借与改造
+9.1 未经甲方书面同意，乙方不得将房屋全部或部分转租、分租、出借或与他人合租。
+9.2 乙方如需对房屋进行装饰装修或设备安装，须事先取得甲方书面同意，施工不得破坏房屋安全结构。退租时按双方约定处理（恢复原状/折价补偿/无偿归甲方所有）。
+第十条 违约责任
+10.1 乙方逾期支付租金的，每逾期一日按应付未付金额的0.5‰支付违约金；逾期超过15日，甲方有权单方解除合同，押金不予退还。
+10.2 乙方擅自转租、改变用途、从事违法活动或严重违反消防/治安规定的，甲方有权立即解除合同，押金不予退还，并要求乙方赔偿全部损失。
+10.3 甲方逾...
+2026-05-08 19:57:01,193 - contract_review - DEBUG - [pass] LLM请求完成 | 耗时=36.96s | prompt_tokens=2052 | completion_tokens=1639 | total_tokens=3691
+2026-05-08 19:57:01,193 - contract_review - DEBUG - [pass] Response: ```json
+{
+  "can_pass": true,
+  "confidence": 0.95,
+  "reason": "合同条款全面、逻辑清晰，符合法律法规要求，权利义务对等，违约责任明确，无明显不利于己方的条款。",
+  "risk_level": "low",
+  "notes": "合同附件齐全，包括身份证复印件、不动产权证书、房屋交接清单等，且明确约定了租赁登记备案义务。特别条款如允许饲养已绝育且免疫齐全的英国短毛猫，对承租方较为友好。"
+}
+```
+2026-05-08 19:57:01,196 - contract_review - INFO - 通过判断完成: can_pass=True, risk_level=low
+2026-05-08 19:57:33,102 - contract_review - DEBUG - [rule] LLM请求完成 | 耗时=68.87s | prompt_tokens=2103 | completion_tokens=3962 | total_tokens=6065
+2026-05-08 19:57:33,102 - contract_review - DEBUG - [rule] Response: ```json
+{
+  "issues": [
+    {
+      "issue_type": "rule",
+      "description": "送达地址变更通知期过短，可能导致乙方无法及时收到重要通知",
+      "location": "13.2 本合同载明的通讯地址为有效送达地址，任何一方变更需提前3日书面通知对方，否则按原地址寄送即视为送达。",
+      "severity": "medium",
+      "confidence": 0.8,
+      "violated_rule": "《中华人民共和国民法典》关于送达地址的规定",
+      "suggestion": "建议将通知期延长至7日，并明确重要通知的送达方式要求"
+    },
+    {
+      "issue_type": "rule",
+      "description": "维修响应时间未考虑紧急情况，可能存在安全隐患",
+      "location": "7.1 甲方负责房屋主体结构、外墙、屋顶、预埋管线及交付清单内固定家电、设施的自然损坏维修。乙方通知后3日内未响应的，乙方可自行维修，合理费用从租金中抵扣或由甲方承担。",
+      "severity": "high",
+      "confidence": 0.9,
+      "violated_rule": "《商品房屋租赁管理办法》关于房屋维修安全的规定",
+      "suggestion": "增加紧急维修条款，明确涉及安全问题的维修应在24小时内响应"
+    },
+    {
+      "issue_type": "rule",
+      "description": "违约金未设置上限，可能过高且不被法院支持",
+      "location": "10.1 乙方逾期支付租金的，每逾期一日按应付未付金额的0.5‰支付违约金；逾期超过15日，甲方有权单方解除合同，押金不予退还。",
+      "severity": "medium",
+      "confidence": 0.7,
+      "violated_rule": "《中华人民共和国民法典》第五百八十五条关于违约金过高的规定",
+      "suggestion": "建议设置违约金上限，例如不超过应付未付金额的30%，或参照LPR的4倍计算"
+    },
+    {
+      "issue_type": "rule",
+      "description": "装修处理方式不明确，可能导致退租时争议",
+      "location": "9.2 乙方如需对房屋进行装饰装修或设备安装，须事先取得甲方书面同意，施工不得破坏房屋安全结构。退租时按双方约定处理（恢复原状/折价补偿/无偿归甲方所有）。",
+      "severity": "medium",
+      "confidence": 0.8,
+      "violated_rule": "《中华人民共和国民法典》关于添附物的规定",
+      "suggestion": "明确装修处理的具体标准和选择方式，或约定装修折旧计算方法"
+    },
+    {
+      "issue_type": "rule",
+      "description": "转租限制存在歧义，未明确分租是否需要同意",
+      "location": "9.1 未经甲方书面同意，乙方不得将房屋全部或部分转租、分租、出借或与他人合租。",
+      "severity": "low",
+      "confidence": 0.6,
+      "violated_rule": "《中华人民共和国民法典》关于转租的规定",
+      "suggestion": "明确区分转租和分租的不同处理方式，或允许合理的分租行为"
+    },
+    {
+      "issue_type": "rule",
+      "description": "押金退还时间未明确检查程序，可能导致退还延迟",
+      "location": "5.2 租赁期满或合同依法解除后3个工作日内，甲方在结清乙方应付未付租金、违约金、房屋及设施损坏赔偿、欠费后，将押金余额无息退还乙方。",
+      "severity": "medium",
+      "confidence": 0.7,
+      "violated_rule": "《商品房屋租赁管理办法》关于押金退还的规定",
+      "suggestion": "明确双方检查房屋及设施的时间安排，并约定检查争议的解决方式"
+    },
+    {
+ ...
+2026-05-08 19:57:33,258 - contract_review - ERROR - 规则审查失败: Invalid json output: ```json
+{
+  "issues": [
+    {
+      "issue_type": "rule",
+      "description": "送达地址变更通知期过短，可能导致乙方无法及时收到重要通知",
+      "location": "13.2 本合同载明的通讯地址为有效送达地址，任何一方变更需提前3日书面通知对方，否则按原地址寄送即视为送达。",
+      "severity": "medium",
+      "confidence": 0.8,
+      "violated_rule": "《中华人民共和国民法典》关于送达地址的规定",
+      "suggestion": "建议将通知期延长至7日，并明确重要通知的送达方式要求"
+    },
+    {
+      "issue_type": "rule",
+      "description": "维修响应时间未考虑紧急情况，可能存在安全隐患",
+      "location": "7.1 甲方负责房屋主体结构、外墙、屋顶、预埋管线及交付清单内固定家电、设施的自然损坏维修。乙方通知后3日内未响应的，乙方可自行维修，合理费用从租金中抵扣或由甲方承担。",
+      "severity": "high",
+      "confidence": 0.9,
+      "violated_rule": "《商品房屋租赁管理办法》关于房屋维修安全的规定",
+      "suggestion": "增加紧急维修条款，明确涉及安全问题的维修应在24小时内响应"
+    },
+    {
+      "issue_type": "rule",
+      "description": "违约金未设置上限，可能过高且不被法院支持",
+      "location": "10.1 乙方逾期支付租金的，每逾期一日按应付未付金额的0.5‰支付违约金；逾期超过15日，甲方有权单方解除合同，押金不予退还。",
+      "severity": "medium",
+      "confidence": 0.7,
+      "violated_rule": "《中华人民共和国民法典》第五百八十五条关于违约金过高的规定",
+      "suggestion": "建议设置违约金上限，例如不超过应付未付金额的30%，或参照LPR的4倍计算"
+    },
+    {
+      "issue_type": "rule",
+      "description": "装修处理方式不明确，可能导致退租时争议",
+      "location": "9.2 乙方如需对房屋进行装饰装修或设备安装，须事先取得甲方书面同意，施工不得破坏房屋安全结构。退租时按双方约定处理（恢复原状/折价补偿/无偿归甲方所有）。",
+      "severity": "medium",
+      "confidence": 0.8,
+      "violated_rule": "《中华人民共和国民法典》关于添附物的规定",
+      "suggestion": "明确装修处理的具体标准和选择方式，或约定装修折旧计算方法"
+    },
+    {
+      "issue_type": "rule",
+      "description": "转租限制存在歧义，未明确分租是否需要同意",
+      "location": "9.1 未经甲方书面同意，乙方不得将房屋全部或部分转租、分租、出借或与他人合租。",
+      "severity": "low",
+      "confidence": 0.6,
+      "violated_rule": "《中华人民共和国民法典》关于转租的规定",
+      "suggestion": "明确区分转租和分租的不同处理方式，或允许合理的分租行为"
+    },
+    {
+      "issue_type": "rule",
+      "description": "押金退还时间未明确检查程序，可能导致退还延迟",
+      "location": "5.2 租赁期满或合同依法解除后3个工作日内，甲方在结清乙方应付未付租金、违约金、房屋及设施损坏赔偿、欠费后，将押金余额无息退还乙方。",
+      "severity": "medium",
+      "confidence": 0.7,
+      "violated_rule": "《商品房屋租赁管理办法》关于押金退还的规定",
+      "suggestion": "明确双方检查房屋及设施的时间安排，并约定检查争议的解决方式"
+    },
+    {
+      "issue_type": "rule",
+      "description": "房屋交付时间与签订时间间隔较短，可能影响乙方准备",
+      "location": "6.1 甲方应于2024年10月28日前将房屋按约定状态交付乙方，双方共同抄录水、电、燃气表底数并签署《附件四：表底数确认单》。",
+      "severity": "low",
+      "confidence": 0.5,
+      "violated_rule": "《中华人民共和国民法典》关于合同履行的规定",
+      "suggestion": "建议将交付时间延长至签订后至少7日，给予乙方充分准备时间"
+    },
+    {
+      "issue_type": "rule",
+      "description": "费用承担存在歧义，未明确网络费是否包含在宽带费内",
+      "location": "8.1 租赁期内，水费、电费、燃气费、宽带费、物业管理费、有线电视费、垃圾清运费等由乙方按实际发生额或物业/公用事业部门标准承担。",
+      "severity": "low",
+      "confidence": 0.6,
+      "violated_rule": "《中华人民共和国民法典》关于费用承担的明确性要求",
+      "suggestion": "明确区分宽带费和网络费，或约定宽带费包含的具体内容"
+    },
+    {
+      "issue_type": "rule",
+      "description": "违约责任不够全面，未提及甲方逾期交付的其他损失赔偿",
+      "location": "10.3 甲方逾期交付房屋或无正当理由提前收回房屋的，应按日租金的2倍向乙方支付违约金；逾期超过7日或导致合同目的无法实现的，乙方有权解除合同，甲方应双倍返还押金并赔偿搬迁等实际损失。",
+      "severity": "medium",
+      "confidence": 0.7,
+      "violated_rule": "《中华人民共和国民法典》关于违约责任的规定",
+      "suggestion": "明确"搬迁等实际损失"的具体范围和计算方式"
+    },
+    {
+      "issue_type": "rule",
+      "description": "租赁登记备案费用承担不明确，可能导致争议",
+      "location": "14.1 根据《福州市房屋租赁管理办法》，双方应于本合同签订后30日内，持本合同及身份证明、权属证明等材料，到房屋所在地街道办事处或区住房保障和房产管理局办理房屋租赁登记备案。",
+      "severity": "medium",
+      "confidence": 0.8,
+      "violated_rule": "《商品房屋租赁管理办法》关于租赁登记备案的规定",
+      "suggestion": "明确租赁登记备案费用的承担方，通常由出租方承担"
+    },
+    {
+      "issue_type": "rule",
+      "description": "房屋用途限制不够明确，未明确是否允许家庭办公",
+      "location": "2.1 乙方承租该房屋仅作为居住使用，居住人数不超过2人。",
+      "severity": "low",
+      "confidence": 0.6,
+      "violated_rule": "《中华人民共和国民法典》关于合同明确性的要求",
+      "suggestion": "明确是否允许家庭办公或其他轻微商业活动，或明确禁止的商业活动类型"
+    }
+  ],
+  "summary": "本合同总体上符合法律法规要求，但仍存在11处需要改进的地方，主要集中在送达地址通知期、维修响应时间、违约金上限、装修处理方式、转租限制、押金退还程序、房屋交付时间、费用承担明确性、违约责任全面性、租赁登记备案费用承担以及房屋用途限制等方面。建议对这些问题进行修改，以降低合同履行过程中的法律风险。"
+}
+```
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+2026-05-08 19:57:38,563 - contract_review - DEBUG - [logic] LLM请求完成 | 耗时=74.33s | prompt_tokens=2084 | completion_tokens=2347 | total_tokens=4431
+2026-05-08 19:57:38,563 - contract_review - DEBUG - [logic] Response: ```json
+{
+  "issues": [
+    {
+      "issue_type": "logic",
+      "description": "房屋交付日期早于租赁开始日期，但未明确这段时间的处理方式",
+      "location": "第六条 6.1：甲方应于2024年10月28日前将房屋按约定状态交付乙方，租赁期自2024年11月1日起",
+      "severity": "medium",
+      "confidence": 0.9,
+      "suggestion": "增加条款明确10月28日至10月31日期间房屋交付状态、使用权限及费用承担方式，例如：'甲方于2024年10月28日交付房屋，乙方可在交付后进行简单布置，但正式租赁期自2024年11月1日开始，期间产生的费用由双方协商确定'"
+    },
+    {
+      "issue_type": "rights_obligations_imbalance",
+      "description": "双方违约责任不对等，乙方逾期支付租金15天可解除合同且不退押金，甲方逾期交付房屋7天需双倍返还押金",
+      "location": "第十条 10.1：逾期超过15日，甲方有权单方解除合同，押金不予退还；10.3：逾期超过7日...乙方有权解除合同，甲方应双倍返还押金",
+      "severity": "high",
+      "confidence": 1.0,
+      "suggestion": "平衡双方违约责任，例如：'甲方逾期交付房屋超过15日，乙方有权解除合同，甲方应双倍返还押金并赔偿损失'，或调整乙方逾期支付租金的违约责任"
+    },
+    {
+      "issue_type": "condition_missing",
+      "description": "未明确规定房屋交付时存在质量问题的处理方式",
+      "location": "第六条 6.1：甲方应于2024年10月28日前将房屋按约定状态交付乙方",
+      "severity": "medium",
+      "confidence": 0.8,
+      "suggestion": "增加条款明确房屋交付时质量问题的处理方式，例如：'甲方交付房屋时，双方应共同检查房屋状况，如发现质量问题，甲方应在合理期限内修复，否则乙方有权要求减免相应租金或解除合同'"
+    },
+    {
+      "issue_type": "logic",
+      "description": "'自然损坏'与'使用不当造成的损坏'界限模糊，可能导致责任争议",
+      "location": "第七条 7.1：甲方负责...自然损坏维修；7.2：乙方负责...因使用不当造成的损坏维修",
+      "severity": "medium",
+      "confidence": 0.9,
+      "suggestion": "明确定义'自然损坏'和'使用不当造成的损坏'的界限，例如：'自然损坏指正常使用情况下超过合理使用年限的损耗；使用不当造成的损坏指因乙方使用方式不当、超负荷使用或违反使用说明导致的损坏'"
+    },
+    {
+      "issue_type": "condition_missing",
+      "description": "未明确规定房屋在租赁期间出现突发质量问题(如漏水、电路问题等)的快速处理机制",
+      "location": "第七条 房屋维修与保养",
+      "severity": "medium",
+      "confidence": 0.8,
+      "suggestion": "增加条款规定突发质量问题的处理机制，例如：'如房屋出现影响正常使用的突发质量问题，乙方应立即通知甲方，甲方应在24小时内响应，48小时内完成修复；逾期未修复的，乙方可自行维修并从押金中扣除相应费用'"
+    },
+    {
+      "issue_type": "logic",
+      "description": "附件6中允许养猫与第二条'仅作为居住使用'的条款存在潜在冲突",
+      "location": "第二条 2.1：乙方承租该房屋仅作为居住使用；附件6：乙方宠物为1只已绝育且免疫齐全的英国短毛猫",
+      "severity": "low",
+      "confidence": 0.7,
+      "suggestion": "在第二条中明确宠物是否属于'居住使用'的范畴，例如：'乙方承租该房屋仅作为居住使用...
+2026-05-08 19:57:38,593 - contract_review - INFO - 逻辑审查完成: 发现7个问题
+2026-05-08 19:57:55,458 - contract_review - DEBUG - [completeness] LLM请求完成 | 耗时=91.23s | prompt_tokens=2217 | completion_tokens=8433 | total_tokens=10650
+2026-05-08 19:57:55,458 - contract_review - DEBUG - [completeness] Response: ```json
+{
+  "issues": [
+    {
+      "issue_type": "completeness",
+      "description": "缺失房屋保险条款",
+      "location": "整个合同",
+      "severity": "high",
+      "confidence": 0.9,
+      "missing_item": "房屋保险条款",
+      "suggestion": "建议增加房屋保险条款，明确保险的购买方、保险范围、保险金额、保险期限以及保险事故发生后的处理方式等。"
+    },
+    {
+      "issue_type": "completeness",
+      "description": "缺失合同变更程序",
+      "location": "整个合同",
+      "severity": "medium",
+      "confidence": 0.8,
+      "missing_item": "合同变更程序",
+      "suggestion": "建议增加合同变更程序条款，明确合同变更需要满足的条件、变更的形式（如书面协议）、变更的生效时间等。"
+    },
+    {
+      "issue_type": "completeness",
+      "description": "缺失房屋损坏赔偿标准",
+      "location": "第五条押金",
+      "severity": "high",
+      "confidence": 0.9,
+      "missing_item": "房屋损坏赔偿标准",
+      "suggestion": "建议在押金条款中详细说明房屋损坏的赔偿标准，包括正常损耗与人为损坏的区分、损坏程度的评估方法、赔偿金额的计算方式等。"
+    },
+    {
+      "issue_type": "completeness",
+      "description": "房屋交付标准不明确",
+      "location": "第六条房屋交付与返还",
+      "severity": "medium",
+      "confidence": 0.8,
+      "missing_item": "房屋交付标准",
+      "suggestion": "建议在房屋交付条款中详细说明房屋的交付标准，包括房屋的清洁程度、设施设备的完好状态、房屋的装修状况等。"
+    },
+    {
+      "issue_type": "completeness",
+      "description": "费用承担明细不完整",
+      "location": "第八条费用承担",
+      "severity": "medium",
+      "confidence": 0.8,
+      "missing_item": "费用承担明细",
+      "suggestion": "建议在费用承担条款中详细列出所有可能产生的费用，包括但不限于水费、电费、燃气费、宽带费、物业管理费、有线电视费、垃圾清运费、暖气费等，并明确各费用的承担方和支付方式。"
+    },
+    {
+      "issue_type": "completeness",
+      "description": "不可抗力的具体定义缺失",
+      "location": "第十一条合同解除",
+      "severity": "medium",
+      "confidence": 0.8,
+      "missing_item": "不可抗力的具体定义",
+      "suggestion": "建议在合同解除条款中详细定义不可抗力的范围和影响，明确哪些事件属于不可抗力，以及不可抗力事件发生后的通知义务、证明义务和后果处理方式。"
+    },
+    {
+      "issue_type": "completeness",
+      "description": "租赁登记备案的法律后果缺失",
+      "location": "第十四条租赁登记备案",
+      "severity": "medium",
+      "confidence": 0.8,
+      "missing_item": "租赁登记备案的法律后果",
+      "suggestion": "建议在租赁登记备案条款中明确不备案的法律后果，包括但不限于行政处罚、合同效力影响等，以促使双方履行备案义务。"
+    },
+    {
+      "i...
+2026-05-08 19:57:55,548 - contract_review - INFO - 完整性审查完成: 发现15个问题
+2026-05-08 19:57:55,550 - contract_review - INFO - 标注完成: 22个问题, 风险等级=high, 通过=False
+2026-05-08 19:57:55,551 - contract_review - INFO - 审查报告已保存: data\output\review_report_20260508_195755.json
+2026-05-08 19:57:55,551 - contract_review - INFO - 审查完成: 22个问题, 风险=high, 通过=False
+2026-05-08 20:40:30,479 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpfnis3dqn.docx, 方法=direct, 字数=2888
+2026-05-08 20:40:32,615 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpsji1nx4k.docx, 方法=direct, 字数=2888
+2026-05-08 20:40:35,521 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpxlmckxid.docx, 方法=direct, 字数=2888
+2026-05-08 20:40:38,258 - contract_review - INFO - LangSmith已启用: project=contract-review, tracing=True
+2026-05-08 20:40:38,259 - contract_review - INFO - 开始合同审查: C:\Users\LLT\AppData\Local\Temp\tmpxlmckxid.docx, 类型=lease
+2026-05-08 20:40:38,266 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpxlmckxid.docx, 方法=direct, 字数=2888
+2026-05-08 20:40:38,266 - contract_review - INFO - 文件解析完成: direct, 字数=2888
+2026-05-08 20:40:38,335 - contract_review - INFO - Chroma客户端初始化: data/chroma_db
+2026-05-08 20:40:38,337 - contract_review - INFO - 获取/创建collection: contract_lease
+2026-05-08 20:40:38,339 - contract_review - WARNING - 合同类型lease的知识库为空
+2026-05-08 20:40:38,340 - contract_review - WARNING - 合同类型lease的知识库为空
+2026-05-08 20:40:38,341 - contract_review - WARNING - 合同类型lease的知识库为空
+2026-05-08 20:40:38,341 - contract_review - INFO - RAG检索完成
+2026-05-08 20:40:38,341 - contract_review - INFO - 创建Chat模型: zhipu (GLM-4.5-Air)
+2026-05-08 20:40:43,043 - contract_review - INFO - 并行执行4个审查: ['logic', 'rule', 'completeness', 'pass']
+2026-05-08 20:40:43,045 - contract_review - INFO - 创建链: logic_review
+2026-05-08 20:40:43,124 - contract_review - INFO - 创建链: rule_review
+2026-05-08 20:40:43,127 - contract_review - INFO - 创建链: completeness_check
+2026-05-08 20:40:43,128 - contract_review - INFO - 创建链: pass_judgment
+2026-05-08 20:41:03,912 - contract_review - INFO - 通过判断完成: can_pass=True, risk_level=low
+2026-05-08 20:41:17,446 - contract_review - INFO - 逻辑审查完成: 发现6个问题
+2026-05-08 20:41:34,483 - contract_review - INFO - 规则审查完成: 发现8个问题
+2026-05-08 20:42:03,587 - contract_review - INFO - 完整性审查完成: 发现8个问题
+2026-05-08 20:42:03,589 - contract_review - INFO - 标注完成: 22个问题, 风险等级=high, 通过=False
+2026-05-08 20:42:03,590 - contract_review - INFO - 审查报告已保存: data\output\review_report_20260508_204203.json
+2026-05-08 20:42:03,590 - contract_review - INFO - 审查完成: 22个问题, 风险=high, 通过=False
+2026-05-08 21:09:14,445 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpc70iiev0.docx, 方法=direct, 字数=2888
+2026-05-08 21:09:39,184 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpz7gs55yr.docx, 方法=direct, 字数=2888
+2026-05-08 21:09:39,820 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmp9y5g46w2.docx, 方法=direct, 字数=2888
+2026-05-08 21:09:40,658 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmptnsahq1p.docx, 方法=direct, 字数=2888
+2026-05-08 21:09:43,939 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmp4v_obbzb.docx, 方法=direct, 字数=2888
+2026-05-08 21:09:46,500 - contract_review - INFO - LangSmith已启用: project=contract-review, tracing=True
+2026-05-08 21:09:46,501 - contract_review - INFO - 开始合同审查: C:\Users\LLT\AppData\Local\Temp\tmp4v_obbzb.docx, 类型=labor
+2026-05-08 21:09:46,506 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmp4v_obbzb.docx, 方法=direct, 字数=2888
+2026-05-08 21:09:46,507 - contract_review - INFO - 文件解析完成: direct, 字数=2888
+2026-05-08 21:09:46,579 - contract_review - INFO - Chroma客户端初始化: data/chroma_db
+2026-05-08 21:09:46,580 - contract_review - INFO - 获取/创建collection: contract_labor
+2026-05-08 21:09:46,582 - contract_review - WARNING - 合同类型labor的知识库为空
+2026-05-08 21:09:46,583 - contract_review - WARNING - 合同类型labor的知识库为空
+2026-05-08 21:09:46,584 - contract_review - WARNING - 合同类型labor的知识库为空
+2026-05-08 21:09:46,584 - contract_review - INFO - RAG检索完成
+2026-05-08 21:09:46,584 - contract_review - INFO - 创建Chat模型: zhipu (GLM-4.5-Air)
+2026-05-08 21:09:51,226 - contract_review - INFO - 并行执行1个审查: ['logic']
+2026-05-08 21:09:51,228 - contract_review - INFO - 创建链: logic_review
+2026-05-08 21:09:55,048 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpi0y4okkf.docx, 方法=direct, 字数=2888
+2026-05-08 21:10:49,844 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmp2qu255wq.docx, 方法=direct, 字数=2888
+2026-05-08 21:10:52,756 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmp7eq5q1dv.docx, 方法=direct, 字数=2888
+2026-05-08 21:10:53,727 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpb6lhdcs8.docx, 方法=direct, 字数=2888
+2026-05-08 21:10:54,125 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpncari05t.docx, 方法=direct, 字数=2888
+2026-05-08 21:10:54,884 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpmw06jnjz.docx, 方法=direct, 字数=2888
+2026-05-08 21:10:57,409 - contract_review - INFO - LangSmith已启用: project=contract-review, tracing=True
+2026-05-08 21:10:57,410 - contract_review - INFO - 开始合同审查: C:\Users\LLT\AppData\Local\Temp\tmpmw06jnjz.docx, 类型=lease
+2026-05-08 21:10:57,415 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpmw06jnjz.docx, 方法=direct, 字数=2888
+2026-05-08 21:10:57,416 - contract_review - INFO - 文件解析完成: direct, 字数=2888
+2026-05-08 21:10:57,476 - contract_review - INFO - Chroma客户端初始化: data/chroma_db
+2026-05-08 21:10:57,477 - contract_review - INFO - 获取/创建collection: contract_lease
+2026-05-08 21:10:57,479 - contract_review - WARNING - 合同类型lease的知识库为空
+2026-05-08 21:10:57,479 - contract_review - WARNING - 合同类型lease的知识库为空
+2026-05-08 21:10:57,480 - contract_review - WARNING - 合同类型lease的知识库为空
+2026-05-08 21:10:57,480 - contract_review - INFO - RAG检索完成
+2026-05-08 21:10:57,480 - contract_review - INFO - 创建Chat模型: zhipu (GLM-4.5-Air)
+2026-05-08 21:11:01,896 - contract_review - INFO - 并行执行1个审查: ['logic']
+2026-05-08 21:11:01,898 - contract_review - INFO - 创建链: logic_review
+2026-05-08 21:11:40,629 - contract_review - INFO - 逻辑审查完成: 发现8个问题
+2026-05-08 21:11:40,630 - contract_review - INFO - 标注完成: 8个问题, 风险等级=high, 通过=False
+2026-05-08 21:11:40,631 - contract_review - INFO - 审查报告已保存: data\output\review_report_20260508_211140.json
+2026-05-08 21:11:40,631 - contract_review - INFO - 审查完成: 8个问题, 风险=high, 通过=False
+2026-05-08 21:46:02,050 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpc27oblx3.docx, 方法=direct, 字数=2888
+2026-05-08 21:46:06,892 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmp6inw5y_k.docx, 方法=direct, 字数=2888
+2026-05-08 21:46:08,061 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpzpuqd2li.docx, 方法=direct, 字数=2888
+2026-05-08 21:46:10,742 - contract_review - INFO - LangSmith已启用: project=contract-review, tracing=True
+2026-05-08 21:46:10,743 - contract_review - INFO - 开始合同审查: C:\Users\LLT\AppData\Local\Temp\tmpzpuqd2li.docx, 类型=lease
+2026-05-08 21:46:10,750 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpzpuqd2li.docx, 方法=direct, 字数=2888
+2026-05-08 21:46:10,750 - contract_review - INFO - 文件解析完成: direct, 字数=2888
+2026-05-08 21:46:10,817 - contract_review - INFO - Chroma客户端初始化: data/chroma_db
+2026-05-08 21:46:10,819 - contract_review - INFO - 获取/创建collection: contract_lease
+2026-05-08 21:46:10,821 - contract_review - WARNING - 合同类型lease的知识库为空
+2026-05-08 21:46:10,822 - contract_review - WARNING - 合同类型lease的知识库为空
+2026-05-08 21:46:10,822 - contract_review - WARNING - 合同类型lease的知识库为空
+2026-05-08 21:46:10,822 - contract_review - INFO - RAG检索完成
+2026-05-08 21:46:10,823 - contract_review - INFO - 创建Chat模型: zhipu (GLM-4.5-Air)
+2026-05-08 21:46:15,365 - contract_review - INFO - 并行执行1个审查: ['logic']
+2026-05-08 21:46:15,367 - contract_review - INFO - 创建链: logic_review
+2026-05-08 21:47:16,517 - contract_review - ERROR - 逻辑审查失败: Invalid json output: ```json
+{
+  "issues": [
+    {
+      "issue_type": "logic",
+      "description": "房屋返还与押金退还时间安排不合理",
+      "location": "第六条6.2与第五条5.2",
+      "severity": "high",
+      "confidence": 0.9,
+      "suggestion": "修改第六条6.2，将乙方返还房屋的时间延长至租赁期满或合同解除后5日内，或修改第五条5.2，将甲方退还押金的时间延长至7个工作日内，确保甲方有足够时间检查房屋状况并处理押金退还事宜。"
+    },
+    {
+      "issue_type": "logic",
+      "description": "附件编号不一致",
+      "location": "第六条6.1与附件清单",
+      "severity": "medium",
+      "confidence": 1.0,
+      "suggestion": "统一附件编号，将合同中提到的《附件四：表底数确认单》在附件清单中明确标注为附件4，或修改合同中的引用为《水、电、燃气表底数确认单》而不使用编号。"
+    },
+    {
+      "issue_type": "logic",
+      "description": "押金金额与逾期房屋占用费可能不匹配",
+      "location": "第五条5.1与第六条6.2",
+      "severity": "medium",
+      "confidence": 0.8,
+      "suggestion": "增加条款明确说明如果逾期房屋占用费超过押金金额的处理方式，例如乙方需额外支付超出部分，或适当提高押金金额以覆盖可能的长期占用费用。"
+    },
+    {
+      "issue_type": "logic",
+      "description": "提前支付租金但延迟交付房屋",
+      "location": "第四条4.2与第六条6.1",
+      "severity": "medium",
+      "confidence": 0.9,
+      "suggestion": "修改第四条4.2，将首期租金支付时间调整为房屋交付当日或之前，或在合同中增加条款规定从支付租金到房屋交付期间的利息补偿。"
+    },
+    {
+      "issue_type": "logic",
+      "description": "解除合同的权利义务不对等",
+      "location": "第十条10.3与第十一条11.3",
+      "severity": "high",
+      "confidence": 0.9,
+      "suggestion": "统一解除合同的违约责任标准，例如规定任何一方因对方违约而解除合同时，违约方应支付相当于一个月租金的违约金；或双方提前解除合同时，均需支付一个月租金的违约金。"
+    },
+    {
+      "issue_type": "logic",
+      "description": "违约责任条款不完整",
+      "location": "第十一条11.3与第十条10.4",
+      "severity": "medium",
+      "confidence": 0.8,
+      "suggestion": "修改第十一条11.3，明确提前解除合同的违约金是否包含守约方为实现债权而产生的合理费用，或规定在特定情况下（如诉讼）违约金可额外覆盖律师费等费用。"
+    },
+    {
+      "issue_type": "logic",
+      "description": "宠物条款与租赁用途条款不匹配",
+      "location": "第二条2.1与附件6",
+      "severity": "low",
+      "confidence": 0.7,
+      "suggestion": "在第二条2.1中增加关于宠物饲养的条款，明确允许或限制宠物饲养，与附件6中的宠物规定保持一致。"
+    },
+    {
+      "issue_type": "logic",
+      "description": "租赁登记备案的责任不明确",
+      "location": "第十四条14.1",
+      "severity": "medium",
+      "confidence": 0.8,
+      "suggestion": "增加条款明确不配合办理租赁登记备案的责任，例如规定任何一方无正当理由拒绝配合的，应向对方支付一定金额的违约金。"
+    },
+    {
+      "issue_type": "logic",
+      "description": "'改变用途'的范围不明确",
+      "location": "第十条10.2",
+      "severity": "low",
+      "confidence": 0.7,
+      "suggestion": "在第十条10.2中明确"改变用途"的具体范围，例如将居住用途改为商业用途、办公用途等，避免后续争议。"
+    },
+    {
+      "issue_type": "logic",
+      "description": "民法典条款引用不完整",
+      "location": "第七条7.3",
+      "severity": "low",
+      "confidence": 0.6,
+      "suggestion": "在第七条7.3中简要说明《民法典》第七百一十二条、第七百一十三条的主要内容，或增加条款规定双方可查阅相关条款以明确维修责任。"
+    }
+  ],
+  "summary": "本合同存在多处逻辑漏洞，主要集中在时间安排不合理、权利义务不对等方面。最严重的问题是房屋返还与押金退还的时间冲突，以及解除合同的权利义务不对等。此外，附件编号不一致、押金与逾期费用不匹配、提前支付租金但延迟交付等问题也需要关注。建议对这些问题进行修改，以确保合同逻辑严密、权利义务平衡。"
+}
+```
+For troubleshooting, visit: https://docs.langchain.com/oss/python/langchain/errors/OUTPUT_PARSING_FAILURE 
+2026-05-08 21:47:16,517 - contract_review - INFO - 标注完成: 0个问题, 风险等级=low, 通过=True
+2026-05-08 21:47:16,518 - contract_review - INFO - 审查报告已保存: data\output\review_report_20260508_214716.json
+2026-05-08 21:47:16,518 - contract_review - INFO - 审查完成: 0个问题, 风险=low, 通过=True
+2026-05-08 22:16:19,457 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpuitvu5zt.docx, 方法=direct, 字数=2888
+2026-05-08 22:16:21,937 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpby5ltnvh.docx, 方法=direct, 字数=2888
+2026-05-08 22:16:24,050 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpkulpt7mr.docx, 方法=direct, 字数=2888
+2026-05-08 22:16:26,613 - contract_review - INFO - LangSmith已启用: project=contract-review, tracing=True
+2026-05-08 22:16:26,613 - contract_review - INFO - 开始合同审查: C:\Users\LLT\AppData\Local\Temp\tmpkulpt7mr.docx, 类型=lease
+2026-05-08 22:16:26,619 - contract_review - INFO - 文件解析完成: C:\Users\LLT\AppData\Local\Temp\tmpkulpt7mr.docx, 方法=direct, 字数=2888
+2026-05-08 22:16:26,619 - contract_review - INFO - 文件解析完成: direct, 字数=2888
+2026-05-08 22:16:26,680 - contract_review - INFO - Chroma客户端初始化: E:\AI\AW\data\chroma_db
+2026-05-08 22:16:26,681 - contract_review - INFO - 获取/创建collection: contract_lease
+2026-05-08 22:16:30,976 - contract_review - INFO - 创建Embedding模型: mxbai-embed-large (Ollama)
+2026-05-08 22:16:31,719 - contract_review - INFO - 检索lease知识: query='福州市房屋租赁合同
+合同编号：FZ-ZL-20241015-...', 返回3条
+2026-05-08 22:16:31,757 - contract_review - INFO - 检索lease知识: query='，水费、电费、燃气费、宽带费、物业管理费、有线电视费、垃圾清...', 返回3条
+2026-05-08 22:16:31,787 - contract_review - INFO - 检索lease知识: query='福州市房屋租赁合同
+合同编号：FZ-ZL-20241015-...', 返回3条
+2026-05-08 22:16:31,787 - contract_review - INFO - RAG检索完成: 1227字
+2026-05-08 22:16:31,787 - contract_review - INFO - 创建Chat模型: zhipu (GLM-4.5-Air)
+2026-05-08 22:16:36,316 - contract_review - INFO - 并行执行1个审查: ['logic']
+2026-05-08 22:16:36,318 - contract_review - INFO - 创建链: logic_review
+2026-05-08 22:17:07,557 - contract_review - INFO - 逻辑审查完成: 发现7个问题
+2026-05-08 22:17:07,558 - contract_review - INFO - 标注完成: 7个问题, 风险等级=high, 通过=False
+2026-05-08 22:17:07,559 - contract_review - INFO - 审查报告已保存: data\output\review_report_20260508_221707.json
+2026-05-08 22:17:07,559 - contract_review - INFO - 审查完成: 7个问题, 风险=high, 通过=False
+2026-05-10 17:15:12,940 - contract_review - INFO - 从 HuggingFace 加载数据集: FreedomIntelligence/Huatuo26M-Lite
+2026-05-10 17:16:42,143 - contract_review - INFO - LangSmith已启用: project=medtrust-rag, tracing=True
+2026-05-10 17:16:42,144 - contract_review - INFO - MedQA pipeline start: '糖尿病会死吗？...'
+2026-05-10 17:16:42,203 - contract_review - INFO - Chroma客户端初始化: E:\AI\AW\data\chroma_db
+2026-05-10 17:16:42,626 - contract_review - INFO - BM25 索引构建完成: med_all, 100 个文档, 分词方式: jieba
+2026-05-10 17:16:42,626 - contract_review - WARNING - LLM 子查询生成失败，降级为规则: 模型 deepseek 的 api_key 未配置。请在 config/settings.yaml 中设置 api_key 或配置环境变量。
+2026-05-10 17:16:46,644 - contract_review - INFO - 创建Embedding模型: bge-m3 (Ollama)
+2026-05-10 17:16:50,619 - contract_review - INFO - 混合检索: query='糖尿病会死吗？...', BM25=20条, 向量=10条, 融合后=10条
+2026-05-10 17:16:50,809 - contract_review - INFO - 混合检索: query='糖尿病会死吗...', BM25=20条, 向量=10条, 融合后=10条
+2026-05-10 17:16:51,010 - contract_review - INFO - 加载 Reranker 模型: BAAI/bge-reranker-base
+2026-05-10 17:18:31,613 - contract_review - INFO - Reranker 模型加载完成
+2026-05-10 17:18:31,629 - contract_review - ERROR - Reranker 打分失败: XLMRobertaTokenizer has no attribute prepare_for_model
+2026-05-10 17:18:31,629 - contract_review - INFO - RetrieverAgent: query='糖尿病会死吗？...', sub_queries=2, candidates=10, final=5
+2026-05-10 17:18:31,629 - contract_review - INFO -   [1/4] Retriever: 5 chunks
+2026-05-10 17:18:31,629 - contract_review - ERROR - ResponderAgent 失败: 模型 deepseek 的 api_key 未配置。请在 config/settings.yaml 中设置 api_key 或配置环境变量。
+2026-05-10 17:18:31,630 - contract_review - INFO -   [2/4] Responder: confidence=0.00
+2026-05-10 17:18:31,630 - contract_review - ERROR - SafetyChecker 失败: 模型 deepseek 的 api_key 未配置。请在 config/settings.yaml 中设置 api_key 或配置环境变量。
+2026-05-10 17:18:31,630 - contract_review - INFO -   [3/4] Safety: risk=safe
+2026-05-10 17:18:31,630 - contract_review - ERROR - Synthesizer 失败: 模型 deepseek 的 api_key 未配置。请在 config/settings.yaml 中设置 api_key 或配置环境变量。
+2026-05-10 17:18:31,630 - contract_review - INFO -   [4/4] Synthesizer: confidence=0.00
+2026-05-10 17:20:12,010 - contract_review - INFO - MedQA pipeline start: '糖尿病会死吗？...'
+2026-05-10 17:20:12,010 - contract_review - WARNING - LLM 子查询生成失败，降级为规则: 模型 deepseek 的 api_key 未配置。请在 config/settings.yaml 中设置 api_key 或配置环境变量。
+2026-05-10 17:20:12,171 - contract_review - INFO - 混合检索: query='糖尿病会死吗？...', BM25=20条, 向量=10条, 融合后=10条
+2026-05-10 17:20:12,317 - contract_review - INFO - 混合检索: query='糖尿病会死吗...', BM25=20条, 向量=10条, 融合后=10条
+2026-05-10 17:20:12,322 - contract_review - ERROR - Reranker 打分失败: XLMRobertaTokenizer has no attribute prepare_for_model
+2026-05-10 17:20:12,322 - contract_review - INFO - RetrieverAgent: query='糖尿病会死吗？...', sub_queries=2, candidates=10, final=5
+2026-05-10 17:20:12,322 - contract_review - INFO -   [1/4] Retriever: 5 chunks
+2026-05-10 17:20:12,323 - contract_review - INFO - 创建模型: zhipu (GLM-4.5-Air)
+2026-05-10 17:20:20,611 - contract_review - INFO - 创建链: responder
+2026-05-10 17:20:24,477 - contract_review - INFO - ResponderAgent: query='糖尿病会死吗？...', confidence=0.00, citations=0
+2026-05-10 17:20:24,477 - contract_review - INFO -   [2/4] Responder: confidence=0.00
+2026-05-10 17:20:24,477 - contract_review - INFO - 创建模型: zhipu (GLM-4.5-Air)
+2026-05-10 17:20:24,478 - contract_review - INFO - 创建链: safety_checker
+2026-05-10 17:20:44,355 - contract_review - INFO - SafetyChecker: risk=caution, flagged=1, contradictions=0
+2026-05-10 17:20:44,356 - contract_review - INFO -   [3/4] Safety: risk=caution
+2026-05-10 17:20:44,356 - contract_review - INFO - 创建模型: zhipu (GLM-4.5-Air)
+2026-05-10 17:20:44,357 - contract_review - INFO - 创建链: synthesizer
+2026-05-10 17:20:57,779 - contract_review - INFO - Synthesizer: risk=caution, confidence=0.60
+2026-05-10 17:20:57,779 - contract_review - INFO -   [4/4] Synthesizer: confidence=0.60
+2026-05-11 10:22:31,426 - contract_review - INFO - 从 HuggingFace 加载数据集: FreedomIntelligence/Huatuo26M-Lite
+2026-05-11 10:22:37,311 - contract_review - INFO - 从 HuggingFace 加载数据集: FreedomIntelligence/Huatuo26M-Lite
+2026-05-11 10:23:39,627 - contract_review - INFO - LangSmith已启用: project=medtrust-rag, tracing=True
+2026-05-11 10:23:39,627 - contract_review - INFO - MedQA pipeline start: '糖尿病可以根治吗？...'
+2026-05-11 10:23:43,727 - contract_review - INFO - 创建Embedding模型: bge-m3 (Ollama)
+2026-05-11 10:23:43,853 - contract_review - INFO - Chroma客户端初始化: E:\AI\AW\data\chroma_db
+2026-05-11 10:25:16,021 - contract_review - INFO - BM25 索引构建完成: med_all, 177703 个文档, 分词方式: jieba
+2026-05-11 10:25:16,027 - contract_review - INFO - 创建模型: zhipu (GLM-4.5-Air)
+2026-05-11 10:25:32,213 - contract_review - INFO - 混合检索: query='糖尿病可以根治吗？...', BM25=20条, 向量=10条, 融合后=15条
