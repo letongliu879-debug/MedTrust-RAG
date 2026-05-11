@@ -7,7 +7,7 @@ from pathlib import Path
 from src.utils.config_loader import config
 
 
-def setup_logger(name: str = "contract_review") -> logging.Logger:
+def setup_logger(name: str = "medqa") -> logging.Logger:
     """初始化日志器"""
     logger = logging.getLogger(name)
 
@@ -40,7 +40,7 @@ def setup_logger(name: str = "contract_review") -> logging.Logger:
 
 def get_llm_logger() -> logging.Logger:
     """获取LLM详细日志器（独立日志文件，避免淹没主日志）"""
-    llm_logger = logging.getLogger("contract_review.llm")
+    llm_logger = logging.getLogger("medqa.llm")
 
     if llm_logger.handlers:
         return llm_logger

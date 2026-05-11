@@ -1,49 +1,25 @@
 """重排序器：用 BGE-Reranker 对检索结果做精细排序
 
-======================== 面试话术（核心亮点，必须能讲清楚） ========================
+======================== 医疗可信问答场景 ========================
 
 ### 为什么检索后还要重排序？
-回答模板：
-"我们用的是两阶段检索：
+两阶段检索：
+第一阶段（粗排）：混合检索（BM25 + 向量）快速召回 top 20-50 个候选。
+第二阶段（精排）：用交叉编码器对 top 20 个候选逐一打分。
 
-第一阶段（粗排）：混合检索（BM25 + 向量），用双塔模型（bi-encoder）快速从几千个
-chunk 里召回 top 20-50 个候选。bi-encoder 的问题是查询和文档各自独立编码，
-交互只在最后的点积——丢失了细粒度的语义匹配。
-
-第二阶段（精排）：用交叉编码器（cross-encoder）对 top 20 个候选逐一打分。
-cross-encoder 把查询和文档拼接成一对输入，所有 token 之间做全注意力交互，
-所以能捕捉到"查询里的 xxx 在文档里的哪一部分被提到了"这种细节。
-
-代价是计算量大了 N 倍（N = 候选数），所以只对粗排后的 20 个做精排。"
+bi-encoder（粗排）的缺点是查询和文档各自独立编码，交互只在最后的点积。
+cross-encoder（精排）把查询和文档拼接成一对输入，所有 token 之间做全注意力交互，
+能捕捉到"查询里的症状在文档的哪一部分被提到了"这种细节。
 
 ### 为什么选 BGE-Reranker？
-- BGE 系列是 BAAI（北京智源）出品，中文表现好
+- BGE 系列是 BAAI（北京智源）出品，中文医学文本表现好
 - BGE-Reranker-v2-m3 支持多语言，中英混合场景适用
 - 开源免费，不需要 API key
 - 部署简单：pip install FlagEmbedding，一行加载
 
-### 定量化的面试陈述（有评测数据支撑更好）
-"集成 reranker 之后，检索 top-5 的精确率从 XX% 提升到 XX%。具体来说：
-- 原来向量检索第一名经常返回一个语义相关但法条不匹配的 chunk
-- reranker 能识别查询里的'第X条'需要精确匹配，把正确 chunk 排到前面
-"
-
-======================== 技术细节（面试可能追问） ========================
-
-### bi-encoder vs cross-encoder
-- bi-encoder：query 和 doc 各自独立过 encoder，输出向量 → 点积/余弦
-  优点：可以预计算文档向量存向量库，检索时只算 query 向量，O(1) 文档侧
-  缺点：query 和 doc 之间没有 token 级别的交互
-- cross-encoder：query + doc 拼接后一起输入模型 → 一个分数
-  优点：全注意力交互，能捕捉精确的语义匹配关系
-  缺点：每对 (query, doc) 都要过一遍模型，O(N)
-
-所以标准的做法就是：bi-encoder 粗排 → cross-encoder 精排。
-
 ### 阈值过滤
-reranker 打出的分数范围通常在 [-10, 10] 或 [0, 1]，取决于模型。我们设一个
-阈值（比如 -3 或 0），分数低于阈值的直接丢弃——这些是粗排召回来的噪声，
-cross-encoder 确认它们跟查询不相关。
+reranker 打出的分数范围通常在 [0, 1]（归一化后），分数低于阈值的直接丢弃——
+这些是粗排召回来的噪声，cross-encoder 确认它们跟查询不相关。
 """
 
 from langsmith import traceable
@@ -260,14 +236,13 @@ class Reranker:
 
     def rerank_text(self, query: str, docs: list[dict], top_k: int = 5) -> str:
         """
-        重排序并格式化为文本，直接对接 review pipeline。
+        重排序并格式化为文本，直接对接 QA pipeline。
 
-        这是给 contract_pipeline 用的便捷接口——
-        把 reranker 的输出格式化成 reviewer 能消费的文本。
+        把 reranker 的输出格式化成可读的文本。
         """
         reranked = self.rerank(query, docs, top_k=top_k)
         if not reranked:
-            return "暂无相关法规参考"
+            return "暂无相关医学参考"
 
         lines = []
         for i, doc in enumerate(reranked, 1):

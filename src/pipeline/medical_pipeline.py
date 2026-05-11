@@ -3,8 +3,8 @@
 串联 4 Agent：Retriever → Responder → Safety Checker → Synthesizer
 
 面试话术：
-"管线是串行的——安全校验强依赖答案先生成，不能像旧合同审查系统那样
-并行跑多个 reviewer。但每个 agent 内部都是异步的，retriever 的多路子查询
+"管线是串行的——安全校验强依赖答案先生成，每个 agent
+内部都是异步的，retriever 的多路子查询也是并行检索的，
 也是并行检索的，整体延迟控制在 5-8 秒。"
 """
 

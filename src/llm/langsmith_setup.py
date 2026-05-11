@@ -13,7 +13,7 @@ def setup_langsmith():
         return
 
     api_key = langsmith_config.get("api_key", "")
-    project = langsmith_config.get("project", "contract-review")
+    project = langsmith_config.get("project", "medqa")
     tracing = langsmith_config.get("tracing", True)
 
     if api_key:

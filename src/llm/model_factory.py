@@ -5,13 +5,16 @@ from langchain_openai import ChatOpenAI
 from src.utils.config_loader import config
 from src.utils.logger import logger
 
+# 模型实例缓存
+_model_cache: dict[str, ChatOpenAI] = {}
+
 
 class ModelFactory:
-    """LLM模型工厂，根据配置创建不同模型实例"""
+    """LLM模型工厂，根据配置创建不同模型实例（带实例缓存）"""
 
     @staticmethod
     def create_chat_model(model_key: str = None, **kwargs) -> ChatOpenAI:
-        """创建Chat模型实例"""
+        """创建Chat模型实例（相同配置复用实例）"""
         return ModelFactory._create_model("llm", model_key, **kwargs)
 
     @staticmethod
@@ -21,7 +24,7 @@ class ModelFactory:
 
     @staticmethod
     def _create_model(config_key: str, model_key: str = None, **kwargs) -> ChatOpenAI:
-        """通用模型创建"""
+        """通用模型创建（带缓存）"""
         if model_key is None:
             model_key = config.get(f"{config_key}.default_model", "deepseek")
 
@@ -44,11 +47,16 @@ class ModelFactory:
             "base_url": model_cfg.get("api_base"),
             "temperature": model_cfg.get("temperature", 0.1),
             "max_tokens": model_cfg.get("max_tokens", 4096),
+            "request_timeout": model_cfg.get("request_timeout", 60),
         }
         params.update(kwargs)
 
-        logger.info(f"创建模型: {model_key} ({params['model']})")
-        return ChatOpenAI(**params)
+        # 生成缓存 key（基于不可变参数）
+        cache_key = f"{config_key}:{model_key}"
+        if cache_key not in _model_cache:
+            logger.info(f"创建模型: {model_key} ({params['model']})")
+            _model_cache[cache_key] = ChatOpenAI(**params)
+        return _model_cache[cache_key]
 
     @staticmethod
     def list_available_models() -> dict:

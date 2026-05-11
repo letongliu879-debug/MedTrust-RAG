@@ -1,42 +1,29 @@
 """混合检索器：BM25（关键词） + 向量（语义） + RRF 融合
 
-======================== 面试话术（核心亮点，必须能讲清楚） ========================
+======================== 医疗可信问答场景 ========================
 
 ### 为什么不能用纯向量检索？
-法律/合同文本的关键特点是术语精确匹配很重要。比如"违约金"和"违约赔偿金"
-在语义向量空间里余弦相似度很高（都是 0.9+），但在法律实务中这两个词
-对应的法条可能完全不同。纯向量检索会导致：
-
-1. 召回偏差——只召回语义相似但法条不匹配的内容
-2. 稀有词丢失——"第 X 条"、"不得"、"应当"这类法律关键词在嵌入模型中被稀释
+医疗文本的专业术语精确匹配很重要。比如"糖尿病"和"高血糖"在语义
+向量空间里相似度很高，但对应的诊疗指南、检查项目可能不同。纯向量
+检索会导致：
+1. 术语混淆——相近症状但完全不同的疾病被混淆
+2. 专业词丢失——"空腹血糖"、"糖化血红蛋白"等专业术语被稀释
 
 ### BM25 解决什么问题？
 BM25 是经典的词频-逆文档频率算法，它：
-- **精确匹配关键词**——"违约金"只匹配"违约金"，不会混淆"违约赔偿金"
-- **对法律条文ID敏感**——"第563条"、"民法典"这类精确匹配
+- **精确匹配关键词**——"糖尿病"只匹配"糖尿病"，不会混淆"高血糖"
+- **对医学条文ID敏感**——"第108条"、"诊疗指南"这类精确匹配
 - **与向量检索互补**——一个看语义，一个看关键词
 
 ### RRF（Reciprocal Rank Fusion）为什么比加权求和好？
 两种检索结果的分数不在同一量纲：
-- 向量检索：余弦相似度，范围 [-1, 1] 或 [0, 1]
+- 向量检索：余弦相似度，范围 [0, 1]
 - BM25：词频加权和，范围 [0, +∞)，与文档长度相关
 
-直接加权求和需要做分数归一化（min-max 或 z-score），但归一化依赖于
-"假设返回结果里有足够多样本"——如果某次检索只返回了 3 个相关结果，
-归一化后分数差异会失真。
-
+直接加权求和需要做分数归一化，但归一化依赖样本多样性。
 RRF 绕开这个问题：不管原始分数，只看排名。
     RRF_score(d) = Σ 1 / (k + rank_i(d))
-    其中 k=60（经验值），rank_i 是文档在第 i 个检索器中的排名
-
-这样做的好处：
-- 不需要关心原始分数的量纲
-- 对异常值不敏感
-- k=60 的物理意义：排名第 61 的文档贡献约等于 0
-
-### 面试中可以主动提到的延伸
-"如果资源允许，还可以加第三路检索——基于知识图谱的实体检索，
-用合同中的当事人/标的/金额做实体链接，找到相关判例。"
+其中 k=60（经验值），rank_i 是文档在第 i 个检索器中的排名
 """
 
 from langsmith import traceable
@@ -51,12 +38,6 @@ from src.utils.exec_log import get_log
 class HybridRetriever:
     """
     混合检索器：BM25 + 向量，RRF 融合。
-
-    使用方式：
-        retriever = HybridRetriever()
-        # 为指定合同类型构建 BM25 索引（从 ChromaDB 加载文档）
-        retriever._ensure_bm25_index("labor")
-        results = retriever.retrieve("labor", "违约金怎么算", top_k=10)
     """
 
     # RRF 常数。k=60 是学术界通用值，来自 TREC 实验的最佳实践。
@@ -79,17 +60,7 @@ class HybridRetriever:
 
     # ============ BM25 索引管理 ============
 
-    def _ensure_bm25_index(self, contract_type: str):
-        """
-        确保 BM25 索引已构建（惰性加载）—— 合同审查旧接口，保留兼容。
-
-        从 ChromaDB 中读取该合同类型的所有文档 chunk，
-        用 jieba 分词后构建 BM25 索引。
-        """
-        collection_name = f"contract_{contract_type}"
-        self._ensure_bm25_index_by_collection(collection_name)
-
-    def _ensure_bm25_index_by_collection(self, collection_name: str):
+    def _ensure_bm25_index(self, collection_name: str):
         """
         确保 BM25 索引已构建 —— 通用接口，直接传 ChromaDB collection 名。
 
@@ -170,32 +141,26 @@ class HybridRetriever:
     )
     def retrieve(
         self,
-        contract_type: str = None,
-        query: str = None,
+        query: str,
+        collection_name: str,
         top_k: int = None,
-        collection_name: str = None,
         department: str = None,
     ) -> list[dict]:
         """
         混合检索：BM25 + 向量 → RRF 融合。
 
-        支持两种调用方式：
-        - 旧：retrieve(contract_type, query) → collection = f"contract_{contract_type}"
-        - 新：retrieve(query=..., collection_name="med_all", department="心血管内科")
-
-        传 department 时只检索该科室的 chunk（metadata 过滤）。
+        支持科室过滤：传 department 时只检索该科室的 chunk（metadata 过滤）。
 
         Returns:
             [{"text": ..., "metadata": ..., "score": RRF分数, "sources": [...]}, ...]
         """
         k = top_k or self._top_k
-        coll = collection_name or f"contract_{contract_type}"
 
         # 1. BM25 检索
-        bm25_results = self._bm25_search(coll, query, self._bm25_top_k, department)
+        bm25_results = self._bm25_search(collection_name, query, self._bm25_top_k, department)
 
         # 2. 向量检索
-        vector_results = self._vector_search(coll, query, self._vector_top_k, department)
+        vector_results = self._vector_search(collection_name, query, self._vector_top_k, department)
 
         # 3. RRF 融合
         fused = self._rrf_fuse(bm25_results, vector_results, k)
@@ -237,47 +202,6 @@ class HybridRetriever:
                 ],
             }
         return fused
-
-    def retrieve_for_review(self, contract_type: str, contract_text: str) -> str:
-        """
-        为审查准备检索结果。
-
-        用合同文本生成多个查询 → 各查询混合检索 → 去重 → 格式化。
-        """
-        # 先确保 BM25 索引就绪
-        self._ensure_bm25_index(contract_type)
-
-        queries = self._generate_queries(contract_text)
-        all_results = []
-
-        for query in queries:
-            results = self.retrieve(contract_type, query, top_k=5)
-            all_results.extend(results)
-
-        # 去重
-        seen = set()
-        unique_results = []
-        for r in all_results:
-            key = r["text"][:100]
-            if key not in seen:
-                seen.add(key)
-                unique_results.append(r)
-
-        if not unique_results:
-            return "暂无相关法规参考"
-
-        # 按 RRF 分数排序
-        unique_results.sort(key=lambda r: r.get("score", 0), reverse=True)
-
-        formatted = []
-        for i, r in enumerate(unique_results[:10], 1):
-            source = r["metadata"].get("file_name", "未知来源")
-            retrieval_sources = "+".join(r.get("sources", ["unknown"]))
-            formatted.append(
-                f"[{i}] 来源: {source} (检索: {retrieval_sources})\n{r['text']}"
-            )
-
-        return "\n\n".join(formatted)
 
     # ============ BM25 检索 ============
 
@@ -480,7 +404,6 @@ class HybridRetriever:
         面试重点：
         - 为什么不直接加权求和？因为 BM25 分数和余弦距离量纲不同
         - 为什么 k=60？学术界的经验值，让排名差异平滑，不会过度奖励排名第 1
-        - 为什么不用学习排序（LTR）？LTR 需要标注数据，法律领域标注成本高
         """
         # 用文档文本的 MD5 前 100 字符做去重 key
         def make_key(text: str) -> str:
@@ -576,32 +499,6 @@ class HybridRetriever:
             # 降级：2-gram
             chars = [c for c in query if c.strip()]
             return [chars[i:i + 2] for i in range(len(chars) - 1)] or chars
-
-    @staticmethod
-    def _generate_queries(contract_text: str) -> list[str]:
-        """
-        从合同文本生成多路查询。
-
-        为什么要多路查询？
-        只用合同全文当查询词，embedding 模型的上下文窗口不够（bge-m3 最大 8192 token），
-        而且全文的语义信息被稀释。用合同的不同部分各查一次，能覆盖更多相关法规。
-        """
-        queries = []
-        text_len = len(contract_text)
-
-        # 开头（合同的标的/双方信息最密集）
-        queries.append(contract_text[:100] if text_len > 100 else contract_text)
-
-        # 中间部分（条款主体）
-        if text_len > 500:
-            mid = text_len // 2
-            queries.append(contract_text[mid:mid + 100])
-
-        # 标题/开头几行（合同类型信号）
-        first_lines = contract_text.split("\n")[:3]
-        queries.append("\n".join(first_lines))
-
-        return queries
 
 
 # 全局实例

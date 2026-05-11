@@ -41,13 +41,11 @@ class VectorStore:
             self._embeddings = create_embeddings()
         return self._embeddings
 
-    def get_or_create_collection(self, contract_type: str):
-        """获取或创建指定合同类型的collection"""
-        collection_name = f"contract_{contract_type}"
+    def get_or_create_collection(self, collection_name: str):
+        """获取或创建指定名称的collection"""
         if collection_name not in self._collections:
             self._collections[collection_name] = self.client.get_or_create_collection(
                 name=collection_name,
-                metadata={"contract_type": contract_type},
             )
             logger.info(f"获取/创建collection: {collection_name}")
         return self._collections[collection_name]
@@ -56,9 +54,8 @@ class VectorStore:
         """列出所有collection"""
         return [c.name for c in self.client.list_collections()]
 
-    def delete_collection(self, contract_type: str):
-        """删除指定合同类型的collection"""
-        collection_name = f"contract_{contract_type}"
+    def delete_collection(self, collection_name: str):
+        """删除指定名称的collection"""
         self.client.delete_collection(collection_name)
         self._collections.pop(collection_name, None)
         logger.info(f"删除collection: {collection_name}")

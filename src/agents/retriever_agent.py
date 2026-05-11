@@ -46,7 +46,7 @@ class RetrieverAgent(BaseAgent):
         k = top_k or config.get("rag.retrieval_top_k", 5)
 
         # 1. 确保 BM25 索引就绪
-        hybrid_retriever._ensure_bm25_index_by_collection(self._collection_name)
+        hybrid_retriever._ensure_bm25_index(self._collection_name)
 
         # 2. 判断检索策略：简单问题单路检索，多跳问题拆子查询
         trace_ctx = get_trace()
@@ -239,6 +239,9 @@ class RetrieverAgent(BaseAgent):
 
             return False, [query]
 
+        except TimeoutError:
+            logger.warning(f"子查询生成 LLM 超时（60s），降级为规则分解")
+            return False, [query]
         except Exception as e:
             logger.warning(f"分类+子查询生成失败，降级单路检索: {e}")
             return False, [query]
@@ -251,7 +254,7 @@ class RetrieverAgent(BaseAgent):
         关键词规则判断是否为简单查询。
 
         简单查询特征：
-        - 问单一疾病的单一维度（病因/治疗/症状/预防）
+        - 问单一疾病的单一维度（病因/治疗/症状/预防/药物）
         - 不含药物名+疾病名、不含多种疾病
         - 不含比较词（"和"、"与"、"对比"、"区别"）
 
@@ -263,10 +266,12 @@ class RetrieverAgent(BaseAgent):
             "同时", "合并", "伴有", "伴随", "还有",
         ]
         # 简单问题模式词（问单一维度的）
+        # 注意："药"太泛，放在最后且只匹配明确提问药物的问题
         simple_patterns = [
             "是什么", "什么是", "怎么治", "如何治疗", "治疗方法",
             "症状", "表现", "病因", "原因", "预防", "注意事项",
             "饮食", "护理", "诊断", "检查",
+            "吃什么药", "用什么药", "吃啥药", "药物推荐",
         ]
 
         has_multi_connector = any(p in query for p in multi_entity_patterns)
