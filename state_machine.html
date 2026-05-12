@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MedTrust-RAG — LangGraph State Machine</title>
+<style>
+  :root {
+    --bg: #0d1117;
+    --surface: #161b22;
+    --border: #30363d;
+    --text: #c9d1d9;
+    --text-dim: #8b949e;
+    --text-faint: #6e7681;
+    --blue: #58a6ff;
+    --green: #3fb950;
+    --red: #f85149;
+    --orange: #d29922;
+    --purple: #6e40c9;
+    --cyan: #1a9eb2;
+    --teal: #238636;
+    --pink: #bc4c00;
+    --yellow: #9e6a03;
+    --danger: #da3633;
+    --code: #79c0ff;
+    --code2: #f0883e;
+    --node-start: #238636;
+    --node-retrieve: #6e40c9;
+    --node-generate: #1f6feb;
+    --node-verify: #bc4c00;
+    --node-regenerate: #9e6a03;
+    --node-synth: #1a9eb2;
+    --node-conv: #444c56;
+    --node-error: #da3633;
+    --node-end: #8b949e;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--bg);
+    color: var(--text);
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 1300px;
+    padding: 24px 20px 48px;
+  }
+
+  header {
+    text-align: center;
+    margin-bottom: 28px;
+  }
+  header h1 {
+    font-size: 22px;
+    font-weight: 700;
+    color: #fff;
+  }
+  header .subtitle {
+    font-size: 13px;
+    color: var(--text-dim);
+    margin-top: 4px;
+  }
+
+  /* ── SVG diagram ─────────────────────────────────────── */
+  .diagram-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 12px 12px;
+    margin-bottom: 24px;
+    overflow-x: auto;
+  }
+  svg { display: block; margin: 0 auto; }
+
+  /* node hover */
+  .node-group { cursor: pointer; transition: opacity 0.2s; }
+  .node-group:hover { opacity: 0.88; }
+  .node-group:hover rect.node-bg { stroke: #fff; stroke-width: 2; }
+
+  /* edges */
+  .edge-label {
+    font-size: 11px;
+    font-weight: 700;
+    pointer-events: none;
+  }
+  .edge-label-bg {
+    fill: var(--bg);
+    fill-opacity: 0.78;
+    stroke: none;
+  }
+
+  /* tooltip on node hover */
+  .node-tooltip {
+    display: none;
+    font-size: 11px;
+    fill: var(--text-dim);
+  }
+  .node-group:hover .node-tooltip { display: block; }
+
+  /* ── Panels row ──────────────────────────────────────── */
+  .panels {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 24px;
+  }
+  @media (max-width: 900px) { .panels { grid-template-columns: 1fr; } }
+
+  .panel {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 16px;
+  }
+  .panel h3 {
+    font-size: 13px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 10px;
+  }
+
+  .schema-row {
+    display: flex;
+    align-items: baseline;
+    gap: 8px;
+    font-size: 12px;
+    padding: 3px 0;
+    line-height: 1.5;
+  }
+  .schema-row .field { color: var(--code); font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; min-width: 100px; }
+  .schema-row .type  { color: var(--text-dim); font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 11px; min-width: 80px; }
+  .schema-row .desc  { color: var(--text-faint); font-size: 11px; }
+  .panel.safety .field { color: var(--code2); }
+
+  /* iteration badge */
+  .iter-row {
+    display: flex;
+    gap: 10px;
+    font-size: 12px;
+    padding: 2px 0;
+  }
+  .iter-row .k { color: var(--code); font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; min-width: 80px; }
+  .iter-row .v { color: var(--text-dim); font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace; font-size: 11px; min-width: 50px; }
+  .iter-row .d { color: var(--text-faint); font-size: 11px; }
+
+  /* ── Legend & notes ──────────────────────────────────── */
+  .legend-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    margin-bottom: 16px;
+    font-size: 12px;
+    align-items: center;
+  }
+  .legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+  }
+  .legend-swatch {
+    width: 24px;
+    height: 3px;
+    border-radius: 2px;
+  }
+  .notes {
+    font-size: 11px;
+    color: var(--text-faint);
+    line-height: 1.8;
+  }
+  .notes code {
+    font-family: 'SF Mono', 'Fira Code', 'Consolas', monospace;
+    color: var(--code);
+    font-size: 10px;
+  }
+</style>
+</head>
+<body>
+<div class="container">
+
+<header>
+  <h1>MedTrust-RAG — LangGraph State Machine</h1>
+  <p class="subtitle">3-Round + Convergence Verify &nbsp;|&nbsp; Fixed Evidence &nbsp;|&nbsp; Structured Feedback &nbsp;|&nbsp; Error Handling as First-Class Node</p>
+</header>
+
+<!-- ── SVG Diagram ─────────────────────────────────────── -->
+<div class="diagram-wrap">
+<svg viewBox="0 0 1300 740" xmlns="http://www.w3.org/2000/svg">
+
+  <defs>
+    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
+    </filter>
+    <marker id="arrow-green" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#3fb950"/>
+    </marker>
+    <marker id="arrow-red" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#f85149"/>
+    </marker>
+    <marker id="arrow-blue" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#58a6ff"/>
+    </marker>
+    <marker id="arrow-cyan" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#8b949e"/>
+    </marker>
+    <marker id="arrow-orange" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#d29922"/>
+    </marker>
+    <marker id="arrow-danger" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 1 L 9 5 L 0 9 z" fill="#da3633"/>
+    </marker>
+  </defs>
+
+  <!-- ═══ EDGES (draw first, below nodes) ═══ -->
+
+  <!-- Main flow: START → RETRIEVE -->
+  <line x1="108" y1="295" x2="178" y2="295" stroke="#58a6ff" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- RETRIEVE → GENERATE -->
+  <line x1="315" y1="295" x2="382" y2="295" stroke="#58a6ff" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- GENERATE → VERIFY -->
+  <line x1="515" y1="295" x2="582" y2="295" stroke="#58a6ff" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- VERIFY → CONV CHECK -->
+  <line x1="723" y1="295" x2="788" y2="295" stroke="#58a6ff" stroke-width="2" marker-end="url(#arrow-blue)"/>
+
+  <!-- CONV CHECK → SYNTH (right, safe+conv) -->
+  <path d="M 950 295 Q 985 295 1000 310 Q 1015 325 1015 340 L 1040 340 L 1015 355 L 990 340" stroke="#3fb950" stroke-width="2.2" fill="none" marker-end="url(#arrow-green)"/>
+  <rect x="977" y="316" width="64" height="18" rx="4" class="edge-label-bg"/>
+  <text x="1009" y="329" text-anchor="middle" class="edge-label" fill="#3fb950">safe+conv</text>
+
+  <!-- CONV CHECK → CONVERGED? (down) -->
+  <line x1="890" y1="340" x2="890" y2="430" stroke="#8b949e" stroke-width="2" marker-end="url(#arrow-cyan)"/>
+
+  <!-- CONVERGED? → REGENERATE (left, unsafe/!conv) -->
+  <path d="M 790 455 Q 755 470 730 455 L 720 455" stroke="#f85149" stroke-width="2.2" fill="none" marker-end="url(#arrow-red)"/>
+  <rect x="716" y="458" width="82" height="18" rx="4" class="edge-label-bg"/>
+  <text x="757" y="471" text-anchor="middle" class="edge-label" fill="#f85149">unsafe / !conv</text>
+
+  <!-- CONVERGED? → END (right, safe+conv) -->
+  <path d="M 900 495 L 900 550 Q 900 565 915 565 L 1020 565 Q 1035 565 1045 550 L 1045 425" stroke="#3fb950" stroke-width="2.2" fill="none" marker-end="url(#arrow-green)"/>
+  <rect x="885" y="540" width="64" height="18" rx="4" class="edge-label-bg"/>
+  <text x="917" y="553" text-anchor="middle" class="edge-label" fill="#3fb950">safe+conv</text>
+
+  <!-- REGENERATE → VERIFY (loop up-right) -->
+  <path d="M 740 455 Q 720 420 700 380 Q 680 340 690 310 L 700 295" stroke="#d29922" stroke-width="2.2" fill="none" marker-end="url(#arrow-orange)"/>
+  <rect x="666" y="370" width="52" height="30" rx="4" class="edge-label-bg"/>
+  <text x="692" y="382" text-anchor="middle" class="edge-label" fill="#d29922">iter+1</text>
+  <text x="692" y="394" text-anchor="middle" class="edge-label" fill="#d29922">feedback</text>
+
+  <!-- VERIFY → ERROR (exception) -->
+  <path d="M 640 340 Q 620 400 590 440 L 570 470" stroke="#da3633" stroke-width="1.8" fill="none" marker-end="url(#arrow-danger)"/>
+  <rect x="588" y="388" width="58" height="18" rx="4" class="edge-label-bg"/>
+  <text x="617" y="401" text-anchor="middle" class="edge-label" fill="#da3633">exception</text>
+
+  <!-- REGENERATE → ERROR (exception) -->
+  <line x1="720" y1="500" x2="685" y2="525" stroke="#da3633" stroke-width="1.8" marker-end="url(#arrow-danger)"/>
+  <rect x="668" y="508" width="58" height="18" rx="4" class="edge-label-bg"/>
+  <text x="697" y="521" text-anchor="middle" class="edge-label" fill="#da3633">exception</text>
+
+  <!-- ERROR → END -->
+  <line x1="625" y1="560" x2="955" y2="560" stroke="#58a6ff" stroke-width="1.8" marker-end="url(#arrow-blue)"/>
+  <rect x="735" y="544" width="86" height="18" rx="4" class="edge-label-bg"/>
+  <text x="778" y="557" text-anchor="middle" class="edge-label" fill="#58a6ff">fallback answer</text>
+
+  <!-- ═══ NODES ═══ -->
+
+  <!-- START -->
+  <g class="node-group" transform="translate(28, 265)">
+    <rect class="node-bg" x="0" y="0" width="80" height="60" rx="10" fill="#238636" stroke="none" opacity="0.93"/>
+    <text x="40" y="34" text-anchor="middle" fill="#fff" font-size="14" font-weight="700">START</text>
+  </g>
+
+  <!-- ① RETRIEVE -->
+  <g class="node-group" transform="translate(180, 256)">
+    <rect class="node-bg" x="0" y="0" width="135" height="78" rx="10" fill="#6e40c9" stroke="none" opacity="0.93"/>
+    <text x="67" y="30" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">1 RETRIEVE</text>
+    <text x="67" y="52" text-anchor="middle" fill="#c9d1d9" font-size="10" font-style="italic">BM25+Vec · RRF · Rerank</text>
+  </g>
+
+  <!-- ② GENERATE -->
+  <g class="node-group" transform="translate(384, 256)">
+    <rect class="node-bg" x="0" y="0" width="132" height="78" rx="10" fill="#1f6feb" stroke="none" opacity="0.93"/>
+    <text x="66" y="30" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">2 GENERATE</text>
+    <text x="66" y="52" text-anchor="middle" fill="#c9d1d9" font-size="10" font-style="italic">ResponderAgent (Round-1)</text>
+  </g>
+
+  <!-- ③ VERIFY -->
+  <g class="node-group" transform="translate(584, 252)">
+    <rect class="node-bg" x="0" y="0" width="140" height="86" rx="10" fill="#bc4c00" stroke="none" opacity="0.93"/>
+    <text x="70" y="30" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">3 VERIFY</text>
+    <text x="70" y="50" text-anchor="middle" fill="#c9d1d9" font-size="10" font-style="italic">SafetyCheckerAgent</text>
+    <text x="70" y="66" text-anchor="middle" fill="#c9d1d9" font-size="10" font-style="italic">(Round-N)</text>
+  </g>
+
+  <!-- CONV CHECK -->
+  <g class="node-group" transform="translate(830, 265)">
+    <rect class="node-bg" x="0" y="0" width="120" height="60" rx="10" fill="#444c56" stroke="none" opacity="0.93"/>
+    <text x="60" y="28" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">CONV CHECK</text>
+    <text x="60" y="46" text-anchor="middle" fill="#c9d1d9" font-size="10" font-style="italic">Convergence Gate</text>
+  </g>
+
+  <!-- ⑤ SYNTHESIZE -->
+  <g class="node-group" transform="translate(1060, 260)">
+    <rect class="node-bg" x="0" y="0" width="125" height="70" rx="10" fill="#1a9eb2" stroke="none" opacity="0.93"/>
+    <text x="62" y="30" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">5 SYNTH</text>
+    <text x="62" y="50" text-anchor="middle" fill="#c9d1d9" font-size="10" font-style="italic">SynthesizerAgent</text>
+  </g>
+
+  <!-- ④ REGENERATE -->
+  <g class="node-group" transform="translate(570, 430)">
+    <rect class="node-bg" x="0" y="0" width="177" height="70" rx="10" fill="#9e6a03" stroke="none" opacity="0.93"/>
+    <text x="88" y="28" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">4 REGENERATE</text>
+    <text x="88" y="48" text-anchor="middle" fill="#c9d1d9" font-size="9" font-style="italic">"Seg[N] claim Y but evidence Z"</text>
+  </g>
+
+  <!-- CONVERGED? -->
+  <g class="node-group" transform="translate(830, 435)">
+    <rect class="node-bg" x="0" y="0" width="120" height="60" rx="10" fill="#444c56" stroke="none" opacity="0.93"/>
+    <text x="60" y="26" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">CONVERGED?</text>
+    <text x="60" y="46" text-anchor="middle" fill="#c9d1d9" font-size="10" font-style="italic">Convergence Check</text>
+  </g>
+
+  <!-- ERROR -->
+  <g class="node-group" transform="translate(520, 535)">
+    <rect class="node-bg" x="0" y="0" width="110" height="50" rx="10" fill="#da3633" stroke="none" opacity="0.93"/>
+    <text x="55" y="30" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">ERROR</text>
+  </g>
+
+  <!-- END -->
+  <g class="node-group" transform="translate(955, 535)">
+    <rect class="node-bg" x="0" y="0" width="75" height="50" rx="10" fill="#8b949e" stroke="none" opacity="0.93"/>
+    <text x="37" y="30" text-anchor="middle" fill="#fff" font-size="13" font-weight="700">END</text>
+  </g>
+
+  <!-- ═══ SCHEMA PANEL (left overlay) ═══ -->
+  <rect x="14" y="60" width="270" height="190" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1" opacity="0.96"/>
+  <text x="149" y="82" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">VerificationState</text>
+
+  <g font-family="'SF Mono','Fira Code','Consolas',monospace" font-size="10">
+    <text x="24" y="100" fill="#79c0ff">query</text>
+    <text x="120" y="100" fill="#8b949e">str</text>
+    <text x="175" y="100" fill="#6e7681" font-size="9">User question</text>
+
+    <text x="24" y="117" fill="#79c0ff">evidence_chunks</text>
+    <text x="120" y="117" fill="#8b949e">List[Chunk]</text>
+    <text x="175" y="117" fill="#6e7681" font-size="9">Fixed (not re-retrieve)</text>
+
+    <text x="24" y="134" fill="#79c0ff">draft_answer</text>
+    <text x="120" y="134" fill="#8b949e">str | None</text>
+    <text x="175" y="134" fill="#6e7681" font-size="9">Current round answer</text>
+
+    <text x="24" y="151" fill="#79c0ff">safety_report</text>
+    <text x="120" y="151" fill="#8b949e">SafetyReport | None</text>
+    <text x="175" y="151" fill="#6e7681" font-size="9">Current check result</text>
+
+    <text x="24" y="168" fill="#79c0ff">iteration</text>
+    <text x="120" y="168" fill="#8b949e">int</text>
+    <text x="175" y="168" fill="#6e7681" font-size="9">Round [0..3]</text>
+
+    <text x="24" y="185" fill="#79c0ff">feedback_history</text>
+    <text x="120" y="185" fill="#8b949e">List[str]</text>
+    <text x="175" y="185" fill="#6e7681" font-size="9">Correction reasons</text>
+
+    <text x="24" y="202" fill="#79c0ff">final_answer</text>
+    <text x="120" y="202" fill="#8b949e">str | None</text>
+    <text x="175" y="202" fill="#6e7681" font-size="9">Written on convergence</text>
+  </g>
+
+  <!-- ═══ ITERATION RULES (top overlay) ═══ -->
+  <rect x="330" y="14" width="300" height="105" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1" opacity="0.96"/>
+  <text x="480" y="34" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">Iteration Rules</text>
+
+  <g font-family="'SF Mono','Fira Code','Consolas',monospace" font-size="10">
+    <text x="340" y="52" fill="#79c0ff">iteration</text>
+    <text x="440" y="52" fill="#8b949e">int</text>
+    <text x="510" y="52" fill="#6e7681" font-size="9">Current round [0..3]</text>
+
+    <text x="340" y="68" fill="#79c0ff">MAX_ITERS</text>
+    <text x="440" y="68" fill="#8b949e">= 3</text>
+    <text x="510" y="68" fill="#6e7681" font-size="9">Hard stop</text>
+
+    <text x="340" y="84" fill="#79c0ff">converged</text>
+    <text x="440" y="84" fill="#8b949e">bool</text>
+    <text x="510" y="84" fill="#6e7681" font-size="9">prev ≥ curr flagged</text>
+
+    <text x="340" y="100" fill="#79c0ff">feedback_history</text>
+    <text x="440" y="100" fill="#8b949e">list[str]</text>
+    <text x="510" y="100" fill="#6e7681" font-size="9">Accumulated reasons</text>
+  </g>
+
+  <!-- ═══ SAFETY REPORT (bottom-left overlay) ═══ -->
+  <rect x="14" y="410" width="270" height="155" rx="8" fill="#161b22" stroke="#30363d" stroke-width="1" opacity="0.96"/>
+  <text x="149" y="432" text-anchor="middle" fill="#fff" font-size="12" font-weight="700">SafetyReport</text>
+
+  <g font-family="'SF Mono','Fira Code','Consolas',monospace" font-size="10">
+    <text x="24" y="450" fill="#f0883e">risk_level</text>
+    <text x="125" y="450" fill="#8b949e">safe / caution / unsafe</text>
+    <text x="40" y="465" fill="#6e7681" font-size="9">Verification outcome</text>
+
+    <text x="24" y="484" fill="#f0883e">flagged_segments</text>
+    <text x="125" y="484" fill="#8b949e">List[Seg[N], claim, evid.]</text>
+    <text x="40" y="499" fill="#6e7681" font-size="9">Problematic parts</text>
+
+    <text x="24" y="518" fill="#f0883e">contradictions</text>
+    <text x="125" y="518" fill="#8b949e">List[conflict pairs]</text>
+    <text x="40" y="533" fill="#6e7681" font-size="9">Evidence conflicts</text>
+
+    <text x="24" y="552" fill="#f0883e">suggestions</text>
+    <text x="125" y="552" fill="#8b949e">List[str]</text>
+    <text x="40" y="567" fill="#6e7681" font-size="9">Correction hints</text>
+  </g>
+
+</svg>
+</div>
+
+<!-- ── LEGEND ─────────────────────────────────────────── -->
+<div class="legend-row">
+  <span style="color:#fff;font-weight:700;font-size:13px;">LEGEND</span>
+  <div class="legend-item"><div class="legend-swatch" style="background:#6e40c9;"></div> Node: Agent execution</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#58a6ff;"></div> Normal flow</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#3fb950;"></div> safe / converged</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#f85149;"></div> unsafe / !converged</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#d29922;"></div> Regenerate loop</div>
+  <div class="legend-item"><div class="legend-swatch" style="background:#da3633;"></div> Exception edge</div>
+</div>
+
+<!-- ── 3 PANELS ───────────────────────────────────────── -->
+<div class="panels">
+  <!-- VerificationState -->
+  <div class="panel">
+    <h3>VerificationState</h3>
+    <div class="schema-row"><span class="field">query</span><span class="type">str</span><span class="desc">User question</span></div>
+    <div class="schema-row"><span class="field">evidence_chunks</span><span class="type">List[Chunk]</span><span class="desc">Fixed (not re-retrieved)</span></div>
+    <div class="schema-row"><span class="field">draft_answer</span><span class="type">str | None</span><span class="desc">Current round answer</span></div>
+    <div class="schema-row"><span class="field">safety_report</span><span class="type">SafetyReport | None</span><span class="desc">Current check result</span></div>
+    <div class="schema-row"><span class="field">iteration</span><span class="type">int</span><span class="desc">Round counter [0..3]</span></div>
+    <div class="schema-row"><span class="field">feedback_history</span><span class="type">List[str]</span><span class="desc">Correction reasons</span></div>
+    <div class="schema-row"><span class="field">final_answer</span><span class="type">str | None</span><span class="desc">Written on convergence</span></div>
+  </div>
+
+  <!-- Iteration Rules -->
+  <div class="panel">
+    <h3>Iteration Rules</h3>
+    <div class="iter-row"><span class="k">iteration</span><span class="v">int</span><span class="d">Current round [0..3]</span></div>
+    <div class="iter-row"><span class="k">MAX_ITERS</span><span class="v">= 3</span><span class="d">Hard stop after 3 rounds</span></div>
+    <div class="iter-row"><span class="k">converged</span><span class="v">bool</span><span class="d">prev_flagged ≥ curr_flagged</span></div>
+    <div class="iter-row"><span class="k">feedback_history</span><span class="v">list[str]</span><span class="d">Accumulated correction reasons</span></div>
+  </div>
+
+  <!-- SafetyReport -->
+  <div class="panel safety">
+    <h3>SafetyReport</h3>
+    <div class="schema-row"><span class="field">risk_level</span><span class="type">safe / caution / unsafe</span><span class="desc">Verification outcome</span></div>
+    <div class="schema-row"><span class="field">flagged_segments</span><span class="type">List[Seg[N], claim, evid.]</span><span class="desc">Problematic parts</span></div>
+    <div class="schema-row"><span class="field">contradictions</span><span class="type">List[conflict pairs]</span><span class="desc">Evidence conflicts</span></div>
+    <div class="schema-row"><span class="field">suggestions</span><span class="type">List[str]</span><span class="desc">Correction hints</span></div>
+  </div>
+</div>
+
+<!-- ── KEY NOTES ──────────────────────────────────────── -->
+<div class="notes">
+  <strong style="color:#fff;">Key Notes</strong><br>
+  <strong>1 RETRIEVE:</strong> BM25 + vector dual-track → RRF fusion → BGE-Reranker top-K<br>
+  <strong>3 VERIFY:</strong> risk_level {safe / caution / unsafe} + flagged_segments + contradictions<br>
+  <strong>4 REGENERATE:</strong> Structured instruction — "Segment[N] claims Y, but evidence shows Z — please correct"<br>
+  <strong>CONVERGENCE:</strong> flagged_segments NOT increasing OR iteration ≥ 3
+</div>
+
+</div>
+</body>
+</html>
