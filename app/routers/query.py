@@ -7,7 +7,7 @@ project_root = Path(__file__).parent.parent.parent
 if str(project_root) not in sys.path:
     sys.path.insert(0, str(project_root))
 
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 
 from app.schemas import (
     QueryRequest,
@@ -17,7 +17,7 @@ from app.schemas import (
     ModelInfo,
     DepartmentInfo,
 )
-from src.pipeline.medical_pipeline import pipeline
+from src.pipeline.langgraph_pipeline import langgraph_pipeline as pipeline
 from src.utils.config_loader import config
 from src.rag.hybrid_retriever import hybrid_retriever
 
@@ -88,6 +88,14 @@ async def health():
 
 @router.post("/query", response_model=QueryResponse)
 async def query(req: QueryRequest):
+    # 空查询校验
+    if not req.query or not req.query.strip():
+        raise HTTPException(status_code=422, detail="查询内容不能为空")
+
+    # 无效模型校验
+    if req.model and req.model not in get_available_models():
+        raise HTTPException(status_code=400, detail=f"不支持的模型: {req.model}，可选: {get_available_models()}")
+
     # 模型选择
     default_model = config.get("llm.default_model", "zhipu")
     model_key = req.model if req.model in get_available_models() else default_model
@@ -95,8 +103,8 @@ async def query(req: QueryRequest):
     # 科室
     dept = req.department if req.department and req.department != "全部科室" else None
 
-    # 执行 pipeline
-    report = pipeline.run(
+    # 执行 pipeline（async，避免 asyncio.run 冲突）
+    report = await pipeline.arun(
         query=req.query.strip(),
         department=dept,
         model_key=model_key,
@@ -109,7 +117,7 @@ async def query(req: QueryRequest):
             citations.append(Citation(
                 text=c.get("text", ""),
                 department=c.get("metadata", {}).get("department"),
-                source_id=c.get("metadata", {}).get("source_id"),
+                source_id=str(c.get("metadata", {}).get("source_id", "")) or None,
             ))
         else:
             citations.append(Citation(text=str(c)))

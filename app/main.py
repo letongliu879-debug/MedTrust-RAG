@@ -1,7 +1,11 @@
 """MedTrust-RAG FastAPI 入口"""
 
 import sys
+import os
 from pathlib import Path
+
+# 强制 HuggingFace 使用本地缓存，跳过联网检查（reranker 模型已缓存）
+os.environ["HF_HUB_OFFLINE"] = "1"
 
 project_root = Path(__file__).parent.parent
 if str(project_root) not in sys.path:

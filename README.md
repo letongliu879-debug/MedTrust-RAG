@@ -8,7 +8,7 @@
 - **BM25 三级加载**：内存缓存 → 磁盘 pickle 缓存 → ChromaDB tokens 预分词字段（跳过 jieba）→ 全量 jieba 分词降级，冷启动从 ~196s 降至 ~1-2s
 - **智能子查询**：LLM 自动判断多跳问题，并行生成多个检索子查询
 - **BGE-Reranker 精排**：交叉编码器重排序，提升相关文档召回
-- **四 Agent 管线**：Retriever → Responder → SafetyChecker → Synthesizer 串行校验，带实时进度反馈
+- **LangGraph 三重验证循环**：RETRIEVE → GENERATE → VERIFY → 收敛检查，不收敛则 REGENERATE（最多3轮），确保答案安全可靠
 - **医疗安全校验**：幻觉检测 + 危险建议识别 + 证据交叉验证
 
 ## 架构
@@ -18,7 +18,7 @@
   │
   ▼
 ┌─────────────────────────────┐
-│   RetrieverAgent            │
+│   RETRIEVE                  │
 │  ┌─────────────────────────┐│
 │  │ 多跳判断 + 子查询生成    ││
 │  └─────────────────────────┘│
@@ -33,19 +33,27 @@
   │
   ▼
 ┌─────────────────────────────┐
-│   ResponderAgent            │
+│   GENERATE                  │
 │   基于证据生成答案 + 引用    │
 └─────────────────────────────┘
   │
   ▼
 ┌─────────────────────────────┐
-│   SafetyCheckerAgent        │
-│   幻觉检测 + 安全校验       │
-└─────────────────────────────┘
-  │
-  ▼
+│   VERIFY                    │
+│   SafetyChecker 幻觉+安全   │
+└──────────────┬──────────────┘
+               │
+        收敛？──┴── 否 ──┐
+          │              │
+         是        ┌─────▼──────┐
+          │        │ REGENERATE │
+          │        │ 基于反馈修正│
+          │        └─────┬──────┘
+          │              │
+          │              └──→ VERIFY (循环，最多3轮)
+          ▼
 ┌─────────────────────────────┐
-│   SynthesizerAgent          │
+│   SYNTHESIZE                │
 │   风险分级 + 答案精炼       │
 └─────────────────────────────┘
   │
@@ -115,7 +123,7 @@ python main.py query "全身酸痛是不是流感"
 | `rag.retrieval_top_k` | 最终召回数量 | 5 |
 | `rag.hybrid.bm25_top_k` | BM25 召回数 | 20 |
 | `rag.hybrid.vector_top_k` | 向量召回数 | 10 |
-| `rag.hybrid.vector_similarity_threshold` | 向量相似度阈值 | 0.4 |
+| `rag.hybrid.vector_similarity_threshold` | 向量相似度阈值 | 0.5 |
 | `rag.reranker.threshold` | Reranker 过滤阈值 | 0.3 |
 
 ## 项目结构
@@ -143,6 +151,7 @@ python main.py query "全身酸痛是不是流感"
 │   ├── evaluation/        # 评测模块
 │   ├── llm/               # LLM 模型 & Chain 封装
 │   ├── pipeline/          # 主流程编排
+│   │   └── langgraph_pipeline.py  # LangGraph 三重验证状态机
 │   ├── rag/               # 检索核心
 │   │   ├── hybrid_retriever.py   # 混合检索（BM25+向量+RRF）
 │   │   ├── reranker.py           # BGE-Reranker 精排
@@ -155,6 +164,6 @@ python main.py query "全身酸痛是不是流感"
 
 ## 评测体系
 
-- **检索**：Recall@K、MRR、NDCG@5
-- **答案质量**：BLEU-4、ROUGE-L、BERTScore
-- **LLM 裁判**：忠实度 / 安全性 / 相关性 / 完整性
+- **检索**：Recall@K(召回率)、MRR(平均倒数排名)、NDCG@5(归一化折损累积增益)
+- **答案质量**：BLEU-4(用词重合度)、ROUGE-L(句子结构相似度)、BERTScore(语义相似度)
+- **LLM 裁判**：RetrieverAgent/ ResponderAgent/ SafetyCheckerAgent / SynthesizerAgent

@@ -132,8 +132,10 @@ class RetrieverAgent(BaseAgent):
             final_chunks = unique[:k]
 
         # 6. 检索质量门控：精排后 top rerank 分数过低 → 判定检索失败
+        # 仅在 reranker 已启用且实际打过分时检查（reranker 禁用时 chunks 无 rerank_score）
         min_quality = config.get("rag.reranker.min_quality_score", 0.1)
-        if final_chunks:
+        has_rerank_scores = final_chunks and "rerank_score" in final_chunks[0]
+        if has_rerank_scores and final_chunks:
             top_score = final_chunks[0].get("rerank_score", 0)
             if top_score < min_quality:
                 logger.warning(

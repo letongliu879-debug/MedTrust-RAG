@@ -35,7 +35,7 @@ def cmd_index(args):
 
 
 def cmd_query(args):
-    from src.pipeline.medical_pipeline import pipeline
+    from src.pipeline.langgraph_pipeline import langgraph_pipeline as pipeline
 
     report = pipeline.run(
         query=args.query,
@@ -106,7 +106,7 @@ def cmd_eval(args):
     print("=" * 50)
 
     def generate_fn(query):
-        from src.pipeline.medical_pipeline import pipeline
+        from src.pipeline.langgraph_pipeline import langgraph_pipeline as pipeline
         return pipeline.run(query=query).answer
 
     from src.evaluation.answer_quality import AnswerQualityEvaluator
