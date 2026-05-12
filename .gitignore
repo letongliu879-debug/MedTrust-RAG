@@ -1,5 +1,6 @@
 # Editor
 .claude/
+.codebuddy/
 
 # Python
 .venv/
