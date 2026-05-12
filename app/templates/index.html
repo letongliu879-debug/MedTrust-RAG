@@ -4,155 +4,242 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>MedTrust-RAG — 医疗问答</title>
+  <script src="https://cdn.tailwindcss.com"></script>
   <style>
     * { box-sizing: border-box; }
     body {
-      max-width: 860px;
-      margin: 0 auto;
-      padding: 40px 20px;
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       background: #fafafa;
       color: #222;
     }
-    h1 { font-size: 24px; margin-bottom: 8px; }
-    .subtitle { color: #888; font-size: 14px; margin-bottom: 30px; }
 
-    .query-box {
-      background: white;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      margin-bottom: 16px;
-    }
-    textarea {
-      width: 100%;
-      height: 80px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      padding: 10px;
-      font-size: 15px;
-      resize: vertical;
-      outline: none;
-    }
-    textarea:focus { border-color: #4a90d9; }
-
-    .controls {
-      display: flex;
-      gap: 12px;
-      align-items: center;
-      margin-top: 12px;
-    }
-    select {
-      padding: 6px 10px;
-      border: 1px solid #ddd;
-      border-radius: 6px;
-      font-size: 14px;
-      outline: none;
-    }
-    button {
-      padding: 8px 28px;
-      background: #4a90d9;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      font-size: 15px;
-      cursor: pointer;
-    }
-    button:hover { background: #3a7fc8; }
-    button:disabled { background: #aaa; cursor: not-allowed; }
-
-    .status {
+    /* 脉冲进度条 */
+    .pulse-progress {
+      display: none;
+      position: relative;
+      height: 6px;
+      background: #e0e0e0;
+      border-radius: 3px;
+      overflow: hidden;
       margin: 12px 0;
-      font-size: 14px;
-      color: #666;
     }
-    .status .risk-safe { color: #27ae60; font-weight: bold; }
-    .status .risk-caution { color: #e67e22; font-weight: bold; }
-    .status .risk-danger { color: #c0392b; font-weight: bold; }
+    .pulse-progress.active { display: block; }
+    .pulse-progress::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        90deg,
+        #ff6b6b, #feca57, #48dbfb, #ff9ff3, #1dd1a1, #ff6b6b
+      );
+      background-size: 600% 100%;
+      animation: rainbow-pulse 2s linear infinite;
+      border-radius: 3px;
+    }
+    @keyframes rainbow-pulse {
+      0% { background-position: 0% 50%; }
+      100% { background-position: 600% 50%; }
+    }
 
-    .result-box {
-      background: white;
-      border-radius: 8px;
-      padding: 20px;
-      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-      margin-top: 16px;
+    /* 耗时条 */
+    .timing-bar-container {
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
     }
-    .result-text {
-      line-height: 1.7;
-      font-size: 15px;
-      white-space: pre-wrap;
+    .timing-bar-container.visible {
+      opacity: 1;
+      transform: translateX(0);
     }
-    .citations {
-      margin-top: 16px;
-      border-top: 1px solid #eee;
-      padding-top: 12px;
-    }
-    .citation {
-      background: #f8f8f8;
-      padding: 8px 12px;
-      margin: 6px 0;
-      border-radius: 4px;
-      font-size: 13px;
-      color: #555;
-    }
-    .citation span { color: #888; font-size: 12px; }
-
-    .example-queries {
-      margin-top: 30px;
-    }
-    .example-queries h3 { font-size: 14px; color: #888; margin-bottom: 10px; }
-    .examples { display: flex; flex-wrap: wrap; gap: 8px; }
-    .examples button {
-      padding: 5px 14px;
-      background: #f0f0f0;
-      color: #333;
-      font-size: 13px;
-      border: 1px solid #ddd;
-    }
-    .examples button:hover { background: #e0e0e0; }
-
-    .footer {
-      margin-top: 40px;
+    .timing-bar {
+      height: 28px;
+      border-radius: 6px;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      padding: 0 10px;
       font-size: 12px;
-      color: #bbb;
-      text-align: center;
+      font-weight: 500;
+      color: white;
+      text-shadow: 0 1px 2px rgba(0,0,0,0.3);
+      transition: width 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .timing-bar-fill {
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      border-radius: 6px;
+      opacity: 0.85;
+    }
+    .timing-label {
+      position: relative;
+      z-index: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+    .timing-duration {
+      position: relative;
+      z-index: 1;
+      margin-left: auto;
+      padding-left: 8px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    /* Tooltip */
+    .timing-row {
+      position: relative;
+    }
+    .timing-tooltip {
+      display: none;
+      position: absolute;
+      right: 0;
+      top: 100%;
+      z-index: 50;
+      background: #1a1a2e;
+      color: #eee;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      min-width: 180px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+      margin-top: 4px;
+    }
+    .timing-row:hover .timing-tooltip {
+      display: block;
+    }
+    .timing-tooltip::before {
+      content: '';
+      position: absolute;
+      top: -4px;
+      right: 12px;
+      width: 8px;
+      height: 8px;
+      background: #1a1a2e;
+      transform: rotate(45deg);
+    }
+    .tooltip-meta {
+      margin-top: 6px;
+      padding-top: 6px;
+      border-top: 1px solid #444;
+      font-size: 11px;
+      color: #aaa;
+    }
+    .tooltip-meta div {
+      display: flex;
+      justify-content: space-between;
+      margin: 2px 0;
+    }
+    .tooltip-meta span:last-child { color: #fff; }
+
+    /* 阶段颜色 */
+    .step-build { background: linear-gradient(135deg, #667eea, #764ba2); }
+    .step-retrieval { background: linear-gradient(135deg, #11998e, #38ef7d); }
+    .step-embed { background: linear-gradient(135deg, #fc4a1a, #f7b733); }
+    .step-rerank { background: linear-gradient(135deg, #c471ed, #f64f59); }
+    .step-default { background: linear-gradient(135deg, #4a90d9, #67b26f); }
+
+    /* 响应式 */
+    @media (max-width: 900px) {
+      .desktop-layout { flex-direction: column !important; }
+      .right-panel { width: 100% !important; border-left: none !important; border-top: 1px solid #e5e7eb; margin-top: 16px; }
+      .right-panel.collapsed { display: none; }
+    }
+    .collapse-btn {
+      display: none;
+    }
+    @media (max-width: 900px) {
+      .collapse-btn { display: flex; }
     }
   </style>
 </head>
 <body>
 
-<h1>🏥 MedTrust-RAG</h1>
-<p class="subtitle">基于 Huatuo26M-Lite · 混合检索 · 多 Agent 校验</p>
-
-<div class="query-box">
-  <textarea id="queryInput" placeholder="输入健康问题，如：高血压患者饮食注意什么？"></textarea>
-  <div class="controls">
-    <select id="deptSelect">
-      <option value="">全部科室</option>
-    </select>
-    <button onclick="ask()" id="askBtn">查询</button>
+<div class="max-w-6xl mx-auto px-5 py-8">
+  <!-- Header -->
+  <div class="mb-6">
+    <h1 class="text-2xl font-bold text-gray-800">🏥 MedTrust-RAG</h1>
+    <p class="text-sm text-gray-500 mt-1">基于 Huatuo26M-Lite · 混合检索 · 多 Agent 校验</p>
   </div>
-</div>
 
-<div class="status" id="statusBar"></div>
-<div id="resultArea"></div>
+  <!-- Two-column layout -->
+  <div class="desktop-layout flex gap-6">
 
-<div class="example-queries">
-  <h3>示例问题</h3>
-  <div class="examples">
-    <button onclick="setQuery(this)">高血压患者饮食注意什么？</button>
-    <button onclick="setQuery(this)">婴儿发烧38度怎么处理？</button>
-    <button onclick="setQuery(this)">糖尿病可以根治吗？</button>
-    <button onclick="setQuery(this)">颈椎病怎么缓解？</button>
-    <button onclick="setQuery(this)">怀孕初期腹痛正常吗？</button>
+    <!-- Left column: Query + Results -->
+    <div class="flex-1 min-w-0">
+      <div class="bg-white rounded-lg p-5 shadow-sm mb-4">
+        <textarea
+          id="queryInput"
+          placeholder="输入健康问题，如：高血压患者饮食注意什么？"
+          class="w-full h-20 border border-gray-200 rounded-md px-3 py-2 text-sm resize-y outline-none focus:border-blue-400"
+        ></textarea>
+        <div class="flex gap-3 items-center mt-3">
+          <select id="deptSelect" class="px-3 py-1.5 border border-gray-200 rounded-md text-sm outline-none">
+            <option value="">全部科室</option>
+          </select>
+          <button onclick="ask()" id="askBtn" class="px-6 py-1.5 bg-blue-500 text-white rounded-md text-sm font-medium hover:bg-blue-600 disabled:bg-gray-300 disabled:cursor-not-allowed transition-colors">
+            查询
+          </button>
+        </div>
+        <!-- 脉冲进度条 -->
+        <div class="pulse-progress" id="pulseProgress"></div>
+      </div>
+
+      <div class="status text-sm text-gray-600 mb-3" id="statusBar"></div>
+      <div id="resultArea"></div>
+
+      <!-- Example queries -->
+      <div class="mt-8">
+        <h3 class="text-xs text-gray-400 uppercase tracking-wide mb-3">示例问题</h3>
+        <div class="flex flex-wrap gap-2">
+          <button onclick="setQuery(this)" class="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-md text-xs border border-gray-200 hover:bg-gray-200 transition-colors">高血压患者饮食注意什么？</button>
+          <button onclick="setQuery(this)" class="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-md text-xs border border-gray-200 hover:bg-gray-200 transition-colors">婴儿发烧38度怎么处理？</button>
+          <button onclick="setQuery(this)" class="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-md text-xs border border-gray-200 hover:bg-gray-200 transition-colors">糖尿病可以根治吗？</button>
+          <button onclick="setQuery(this)" class="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-md text-xs border border-gray-200 hover:bg-gray-200 transition-colors">颈椎病怎么缓解？</button>
+          <button onclick="setQuery(this)" class="px-3 py-1.5 bg-gray-100 text-gray-700 rounded-md text-xs border border-gray-200 hover:bg-gray-200 transition-colors">怀孕初期腹痛正常吗？</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right column: Timing Panel -->
+    <div class="right-panel w-80 border-l border-gray-200 pl-6 collapsed" id="rightPanel">
+      <div class="flex items-center justify-between mb-4">
+        <h2 class="text-sm font-semibold text-gray-700">⏱️ 耗时追踪</h2>
+        <button onclick="togglePanel()" class="collapse-btn text-gray-400 hover:text-gray-600">
+          <svg id="collapseIcon" class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </button>
+      </div>
+      <div id="timingPanel">
+        <p class="text-xs text-gray-400 italic" id="timingPlaceholder">查询后将显示各阶段耗时</p>
+      </div>
+      <div id="timingBars"></div>
+    </div>
+
   </div>
-</div>
 
-<div class="footer">
-  本回答由 AI 生成，仅供参考，不构成医疗诊断或治疗建议
+  <!-- Footer -->
+  <div class="mt-10 text-center text-xs text-gray-300">
+    本回答由 AI 生成，仅供参考，不构成医疗诊断或治疗建议
+  </div>
 </div>
 
 <script>
+  // 面板折叠
+  function togglePanel() {
+    const panel = document.getElementById('rightPanel');
+    const icon = document.getElementById('collapseIcon');
+    panel.classList.toggle('collapsed');
+    if (panel.classList.contains('collapsed')) {
+      icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>';
+    } else {
+      icon.innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>';
+    }
+  }
+
   // 加载初始化数据
   async function init() {
     const [healthRes, deptsRes] = await Promise.all([
@@ -181,6 +268,101 @@
     document.getElementById('queryInput').value = btn.textContent;
   }
 
+  // 获取阶段颜色类
+  function getStepClass(name) {
+    const n = name.toLowerCase();
+    if (n.includes('build') || n.includes('index')) return 'step-build';
+    if (n.includes('retrieval') || n.includes('retrieve')) return 'step-retrieval';
+    if (n.includes('embed')) return 'step-embed';
+    if (n.includes('rerank')) return 'step-rerank';
+    return 'step-default';
+  }
+
+  // 格式化耗时
+  function formatDuration(ms) {
+    if (ms < 1000) return ms.toFixed(0) + 'ms';
+    return (ms / 1000).toFixed(1) + 's';
+  }
+
+  // 阶段中文名
+  function getStepLabel(name) {
+    const labels = {
+      '1a_bm25_index_build': 'BM25索引构建',
+      '1b_retrieval': '向量检索',
+      '1b0_embed': 'Embedding生成',
+      '1c_rerank': 'Rerank重排',
+      '2_retrieval': '检索',
+      '3_rerank': '重排',
+      '4_safety': '安全校验',
+      '5_generate': '生成回答',
+    };
+    return labels[name] || name.replace(/_/g, ' ');
+  }
+
+  // 渲染耗时条
+  function renderTimingBars(steps) {
+    const container = document.getElementById('timingBars');
+    container.innerHTML = '';
+
+    const maxDuration = Math.max(...steps.map(s => s.duration_ms));
+
+    steps.forEach((step, i) => {
+      const percentage = (step.duration_ms / maxDuration) * 100;
+      const stepClass = getStepClass(step.name);
+
+      const row = document.createElement('div');
+      row.className = 'timing-bar-container';
+      row.style.transitionDelay = (i * 120) + 'ms';
+
+      // 构建 metadata tooltip
+      let tooltipHtml = '';
+      if (step.metadata) {
+        tooltipHtml = '<div class="tooltip-meta">';
+        for (const [key, value] of Object.entries(step.metadata)) {
+          const keyLabel = {
+            'collection': '集合',
+            'doc_count': '文档数',
+            'status': '状态',
+            'raw_results': '原始结果',
+            'embedding_dim': '向量维度',
+            'candidates': '候选数',
+            'final': '最终数量'
+          }[key] || key;
+          tooltipHtml += `<div><span>${keyLabel}</span><span>${value}</span></div>`;
+        }
+        tooltipHtml += '</div>';
+      }
+
+      row.innerHTML = `
+        <div class="timing-row">
+          <div class="timing-bar" style="width: ${percentage}%">
+            <div class="timing-bar-fill ${stepClass}"></div>
+            <span class="timing-label">${getStepLabel(step.name)}</span>
+            <span class="timing-duration">${formatDuration(step.duration_ms)}</span>
+          </div>
+          <div class="timing-tooltip">${tooltipHtml}</div>
+        </div>
+      `;
+
+      container.appendChild(row);
+
+      // 触发动画
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          row.classList.add('visible');
+        });
+      });
+    });
+
+    document.getElementById('timingPlaceholder').style.display = 'none';
+
+    // 展开右侧面板（如果窄屏）
+    const panel = document.getElementById('rightPanel');
+    if (panel.classList.contains('collapsed')) {
+      // 窄屏下不自动展开
+    }
+  }
+
   async function ask() {
     const q = document.getElementById('queryInput').value.trim();
     if (!q) return;
@@ -188,10 +370,21 @@
     const btn = document.getElementById('askBtn');
     const status = document.getElementById('statusBar');
     const result = document.getElementById('resultArea');
+    const pulseProgress = document.getElementById('pulseProgress');
 
     btn.disabled = true;
     status.innerHTML = '处理中...';
     result.innerHTML = '';
+    pulseProgress.classList.add('active');
+
+    // 清空耗时条
+    document.getElementById('timingBars').innerHTML = '';
+    document.getElementById('timingPlaceholder').textContent = '处理中...';
+    document.getElementById('timingPlaceholder').style.display = 'block';
+
+    // 展开右侧面板
+    document.getElementById('rightPanel').classList.remove('collapsed');
+    document.getElementById('collapseIcon').innerHTML = '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>';
 
     try {
       const res = await fetch('/query', {
@@ -206,19 +399,25 @@
       if (!res.ok) throw new Error('请求失败: ' + res.status);
       const data = await res.json();
 
+      // 渲染耗时条
+      if (data.trace && data.trace.steps) {
+        renderTimingBars(data.trace.steps);
+      }
+
       const risk = data.safety?.risk_level || 'safe';
-      const riskClass = risk === 'safe' ? 'risk-safe' : risk === 'caution' ? 'risk-caution' : 'risk-danger';
+      const riskClass = risk === 'safe' ? 'text-green-600' : risk === 'caution' ? 'text-orange-500' : 'text-red-600';
       const riskLabel = risk === 'safe' ? '✅ 可信' : risk === 'caution' ? '⚠️ 需注意' : '🚨 有风险';
 
-      status.innerHTML = `安全: <span class="${riskClass}">${riskLabel}</span> &nbsp;|&nbsp; 置信度: <b>${(data.confidence * 100).toFixed(0)}%</b> &nbsp;|&nbsp; 模型: ${data.model_used}`;
+      status.innerHTML = `安全: <span class="${riskClass} font-semibold">${riskLabel}</span> &nbsp;|&nbsp; 置信度: <b>${(data.confidence * 100).toFixed(0)}%</b> &nbsp;|&nbsp; 模型: ${data.model_used}`;
 
-      let html = '<div class="result-box">';
-      html += `<div class="result-text">${escapeHtml(data.answer)}</div>`;
+      let html = '<div class="bg-white rounded-lg p-5 shadow-sm mt-4">';
+      html += `<div class="text-sm leading-relaxed whitespace-pre-wrap">${escapeHtml(data.answer)}</div>`;
 
       if (data.citations && data.citations.length > 0) {
-        html += '<div class="citations"><b>引用来源</b>';
+        html += '<div class="border-t border-gray-100 mt-4 pt-4">';
+        html += '<b class="text-sm text-gray-600">引用来源</b>';
         data.citations.slice(0, 5).forEach((c, i) => {
-          html += `<div class="citation"><span>[${i+1}]</span> ${escapeHtml(c.text || '')}</div>`;
+          html += `<div class="mt-2 p-2 bg-gray-50 rounded text-xs text-gray-600"><span class="text-gray-400">[${i+1}]</span> ${escapeHtml(c.text || '')}</div>`;
         });
         html += '</div>';
       }
@@ -226,9 +425,10 @@
       result.innerHTML = html;
 
     } catch (err) {
-      status.innerHTML = '<span style="color:#c0392b">错误: ' + err.message + '</span>';
+      status.innerHTML = '<span class="text-red-600">错误: ' + err.message + '</span>';
     } finally {
       btn.disabled = false;
+      pulseProgress.classList.remove('active');
     }
   }
 

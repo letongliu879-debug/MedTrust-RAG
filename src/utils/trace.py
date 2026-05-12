@@ -28,6 +28,67 @@ from src.utils.logger import logger
 
 TRACE_DIR = Path(__file__).parent.parent.parent / "data" / "traces"
 
+# Stage → bar_color mapping (used by frontend for rendering)
+STAGE_COLORS = {
+    "safety": "#EF4444",     # red
+    "retrieve": "#3B82F6",   # blue
+    "rerank": "#8B5CF6",     # purple
+    "respond": "#10B981",    # green
+    "synthesize": "#F59E0B", # amber
+    "index": "#06B6D4",      # cyan
+    "search": "#EC4899",     # pink
+}
+
+# Stage display names
+STAGE_LABELS = {
+    "safety": "安全检查",
+    "retrieve": "检索",
+    "rerank": "重排序",
+    "respond": "生成回复",
+    "synthesize": "综合",
+    "index": "索引构建",
+    "search": "搜索",
+}
+
+
+def _parse_stage_from_name(name: str) -> tuple[str, str]:
+    """Parse stage and color from step name.
+
+    Returns (stage, bar_color) tuple.
+    Stage is extracted from name suffixes like:
+      - "safety_check" → "safety"
+      - "retrieve" → "retrieve"
+      - "rerank" → "rerank"
+      - "responder" / "respond" → "respond"
+      - "synthesize" → "synthesize"
+      - "bm25_index_build" / "index_build" → "index"
+      - "bm25_search" / "vector_search" / "search" → "search"
+    """
+    name_lower = name.lower()
+
+    # Direct stage keywords
+    for stage in STAGE_COLORS:
+        if stage in name_lower:
+            return stage, STAGE_COLORS[stage]
+
+    # Fallback: check common patterns
+    if "safety" in name_lower:
+        return "safety", STAGE_COLORS["safety"]
+    if "retrieve" in name_lower or "retrieval" in name_lower:
+        return "retrieve", STAGE_COLORS["retrieve"]
+    if "rerank" in name_lower:
+        return "rerank", STAGE_COLORS["rerank"]
+    if "respond" in name_lower or "responder" in name_lower:
+        return "respond", STAGE_COLORS["respond"]
+    if "synthesize" in name_lower:
+        return "synthesize", STAGE_COLORS["synthesize"]
+    if "index" in name_lower:
+        return "index", STAGE_COLORS["index"]
+    if "search" in name_lower:
+        return "search", STAGE_COLORS["search"]
+
+    return "unknown", "#6B7280"  # gray default
+
 
 @dataclass
 class StepRecord:
@@ -35,6 +96,9 @@ class StepRecord:
     duration_ms: float = 0.0
     metadata: dict = field(default_factory=dict)
     extra: dict = field(default_factory=dict)
+    stage: str = ""       # 分组标识，如 "retrieve", "rerank", "respond", "safety"
+    color: str = ""       # 渲染颜色（供前端使用）
+    bar_color: str = ""   # 条形图颜色（供前端使用）
 
 
 class TraceCollector:
@@ -49,9 +113,28 @@ class TraceCollector:
         self._step_start: float = 0.0
 
     @contextmanager
-    def step(self, name: str, metadata: dict = None, extra: dict = None):
-        """上下文管理器：计录一个步骤的耗时"""
-        step = StepRecord(name=name, metadata=metadata or {}, extra=extra or {})
+    def step(self, name: str, metadata: dict = None, extra: dict = None,
+             stage: str = None, color: str = None, bar_color: str = None):
+        """上下文管理器：计录一个步骤的耗时
+
+        Args:
+            name: 步骤名称，如 "1a_bm25_index_build"
+            metadata: 额外元数据
+            extra: 扩展数据
+            stage: 阶段分组，不传则自动从 name 解析
+            color: 渲染颜色，不传则自动从 stage 匹配
+            bar_color: 条形图颜色，不传则自动从 stage 匹配
+        """
+        # Auto-assign stage/color/bar_color from name if not provided
+        _stage, _bar_color = _parse_stage_from_name(name)
+        step = StepRecord(
+            name=name,
+            metadata=metadata or {},
+            extra=extra or {},
+            stage=stage or _stage,
+            color=color or _bar_color,   # color defaults to bar_color
+            bar_color=bar_color or _bar_color,
+        )
         self.steps.append(step)
         t0 = time.perf_counter()
         try:
@@ -93,6 +176,9 @@ class TraceCollector:
                 {
                     "name": s.name,
                     "duration_ms": s.duration_ms,
+                    "stage": s.stage,
+                    "color": s.color,
+                    "bar_color": s.bar_color,
                     "metadata": s.metadata,
                     "extra": s.extra,
                 }
