@@ -10,6 +10,8 @@
 - **BGE-Reranker 精排**：交叉编码器重排序，提升相关文档召回
 - **LangGraph 三重验证循环**：RETRIEVE → GENERATE → VERIFY → 收敛检查，不收敛则 REGENERATE（最多3轮），确保答案安全可靠
 - **医疗安全校验**：幻觉检测 + 危险建议识别 + 证据交叉验证
+- **前端耗时追踪**：实时展示各阶段耗时（retrieve/generate/verify/synth），支持阶段耗时条可视化
+- **状态机可视化**：`state_machine.html` 可视化 LangGraph 状态机流程（节点、边、状态Schema）
 
 ## 架构
 
@@ -110,6 +112,9 @@ python main.py query "全身酸痛是不是流感"
 # Web UI（FastAPI）
 .venv/Scripts/python -m uvicorn app.main:app --host 0.0.0.0 --port 8501
 # 访问 http://localhost:8501
+
+# 状态机可视化（浏览器打开）
+open state_machine.html
 ```
 
 ## 配置
@@ -135,11 +140,12 @@ python main.py query "全身酸痛是不是流感"
 │   ├── routers/            # API 路由
 │   │   └── query.py
 │   └── templates/           # HTML 模板
-│       └── index.html
+│       └── index.html      # 前端耗时追踪面板
 ├── config/                 # 配置文件 & Prompt 模板
 │   ├── settings.yaml
 │   └── prompts.yaml
 ├── data/                   # ChromaDB 持久化 & 日志
+├── debug_logs/              # 调试日志（详细执行轨迹）
 ├── scripts/                # 工具脚本（索引构建等）
 ├── src/
 │   ├── agents/            # 4 个 Agent 实现
@@ -159,6 +165,7 @@ python main.py query "全身酸痛是不是流感"
 │   │   └── embeddings.py         # Embedding 模型
 │   └── utils/             # 工具函数
 ├── main.py                # CLI 入口
+├── state_machine.html     # LangGraph 状态机可视化
 └── requirements.txt
 ```
 
